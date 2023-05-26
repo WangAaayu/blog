@@ -16,16 +16,16 @@
   <meta name="author" content="WangAaayu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Input EmbeddingOne-Hot Encoding将输入单词用one-hot形式编码成序列向量，向量长度就是预定义的词汇表中拥有的词汇量，向量在这一维中的值只有一个位置是1，其余都是0，1对应的位置就是词汇表中表示这个单词的地方 劣势：稀疏；长 Word Embedding设计一个可学习的权重矩阵W，将one-hot词向量与这个矩阵进行点乘，得到新的表示结果 优势：降维 P">
+    <meta name="description" content="Transformer笔记      Input EmbeddingOne-Hot Encoding将输入单词用one-hot形式编码成序列向量，向量长度就是预定义的词汇表中拥有的词汇量，向量在这一维中的值只有一个位置是1，其余都是0，1对应的位置就是词汇表中表示这个单词的地方 劣势：稀疏；长 Word Embedding设计一个可学习的权重矩阵W，将one-hot词向量与这个矩阵进行点乘，得到新">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Transformer笔记">
 <meta property="og:url" content="https://wangaaayu.github.io/blog/2022/11/11/Transformer%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="WangAaayu">
-<meta property="og:description" content="Input EmbeddingOne-Hot Encoding将输入单词用one-hot形式编码成序列向量，向量长度就是预定义的词汇表中拥有的词汇量，向量在这一维中的值只有一个位置是1，其余都是0，1对应的位置就是词汇表中表示这个单词的地方 劣势：稀疏；长 Word Embedding设计一个可学习的权重矩阵W，将one-hot词向量与这个矩阵进行点乘，得到新的表示结果 优势：降维 P">
+<meta property="og:description" content="Transformer笔记      Input EmbeddingOne-Hot Encoding将输入单词用one-hot形式编码成序列向量，向量长度就是预定义的词汇表中拥有的词汇量，向量在这一维中的值只有一个位置是1，其余都是0，1对应的位置就是词汇表中表示这个单词的地方 劣势：稀疏；长 Word Embedding设计一个可学习的权重矩阵W，将one-hot词向量与这个矩阵进行点乘，得到新">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://wangaaayu.github.io/blog/2022/11/11/Transformer%E7%AC%94%E8%AE%B0/transformer_model.jpg">
 <meta property="article:published_time" content="2022-11-11T08:57:18.000Z">
-<meta property="article:modified_time" content="2023-05-26T08:44:54.811Z">
+<meta property="article:modified_time" content="2023-05-26T15:16:08.948Z">
 <meta property="article:author" content="WangAaayu">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary_large_image">
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          1.9k 字
         
       </span>
     
@@ -247,7 +247,7 @@
       <span class="post-meta ">
         
           
-            本文最后更新于：2023年5月26日 下午
+            本文最后更新于：2023年5月26日 晚上
           
         
       </span>
@@ -288,17 +288,17 @@
             
               <div class="markdown-body">
                 
-                <p>     <img src="/blog/2022/11/11/Transformer%E7%AC%94%E8%AE%B0/transformer_model.jpg" srcset="/blog/img/loading.gif" lazyload></p>
-<h1 id="Input-Embedding"><a href="#Input-Embedding" class="headerlink" title="Input Embedding"></a>Input Embedding</h1><h2 id="One-Hot-Encoding"><a href="#One-Hot-Encoding" class="headerlink" title="One-Hot Encoding"></a>One-Hot Encoding</h2><p>将输入单词用one-hot形式编码成序列向量，向量长度就是预定义的词汇表中拥有的词汇量，向量在这一维中的值只有一个位置是1，其余都是0，1对应的位置就是词汇表中表示这个单词的地方</p>
+                <h1 id="Transformer笔记"><a href="#Transformer笔记" class="headerlink" title="Transformer笔记"></a>Transformer笔记</h1><p>     <img src="/blog/2022/11/11/Transformer%E7%AC%94%E8%AE%B0/transformer_model.jpg" srcset="/blog/img/loading.gif" lazyload></p>
+<h2 id="Input-Embedding"><a href="#Input-Embedding" class="headerlink" title="Input Embedding"></a>Input Embedding</h2><h3 id="One-Hot-Encoding"><a href="#One-Hot-Encoding" class="headerlink" title="One-Hot Encoding"></a>One-Hot Encoding</h3><p>将输入单词用one-hot形式编码成序列向量，向量长度就是预定义的词汇表中拥有的词汇量，向量在这一维中的值只有一个位置是1，其余都是0，1对应的位置就是词汇表中表示这个单词的地方</p>
 <p>劣势：稀疏；长</p>
-<h2 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h2><p>设计一个可学习的权重矩阵W，将one-hot词向量与这个矩阵进行点乘，得到新的表示结果</p>
+<h3 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h3><p>设计一个可学习的权重矩阵W，将one-hot词向量与这个矩阵进行点乘，得到新的表示结果</p>
 <p>优势：降维</p>
-<h2 id="Position-Encoding"><a href="#Position-Encoding" class="headerlink" title="Position Encoding"></a>Position Encoding</h2><p>预定义函数，通过函数计算出位置信息<br>$PE_{(pos,2i)}=sin(pos/10000^{2i/d})$</p>
+<h3 id="Position-Encoding"><a href="#Position-Encoding" class="headerlink" title="Position Encoding"></a>Position Encoding</h3><p>预定义函数，通过函数计算出位置信息<br>$PE_{(pos,2i)}=sin(pos/10000^{2i/d})$</p>
 <p>$PE_{(pos,2i+1)}=cos(pos/10000^{2i/d})$<br>这种编码方式保证了不同位置在所有维度上不会被编码到完全一样的值</p>
-<h2 id="Transformer对输入的操作概括"><a href="#Transformer对输入的操作概括" class="headerlink" title="Transformer对输入的操作概括"></a>Transformer对输入的操作概括</h2><p>word embedding + position embedding = final representation</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e6b5b463cf7b">Transformer 修炼之道（一）、Input Embedding</a></p>
-<h1 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h1><p>Encoder由多个（通常6个）层组成，每个层内部都有<strong>残差连接</strong>和<strong>归一化操作</strong>，主要内容包括<strong>多头自注意力层</strong>（Multi-Head Self-Attention）和<strong>前向反馈网络层</strong>（Feed Forward Network），前者用于捕捉特征之间的关系，后者是进一步编码学习，实质上等同于MLP（Multi-Layer Perception）</p>
-<h2 id="Multi-Head-Self-Attention"><a href="#Multi-Head-Self-Attention" class="headerlink" title="Multi-Head Self-Attention"></a>Multi-Head Self-Attention</h2><p>多头（多个，通常为8）</p>
+<h3 id="Transformer对输入的操作概括"><a href="#Transformer对输入的操作概括" class="headerlink" title="Transformer对输入的操作概括"></a>Transformer对输入的操作概括</h3><p>word embedding + position embedding = final representation</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e6b5b463cf7b">Transformer 修炼之道（一）、Input Embedding</a></p>
+<h2 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h2><p>Encoder由多个（通常6个）层组成，每个层内部都有<strong>残差连接</strong>和<strong>归一化操作</strong>，主要内容包括<strong>多头自注意力层</strong>（Multi-Head Self-Attention）和<strong>前向反馈网络层</strong>（Feed Forward Network），前者用于捕捉特征之间的关系，后者是进一步编码学习，实质上等同于MLP（Multi-Layer Perception）</p>
+<h3 id="Multi-Head-Self-Attention"><a href="#Multi-Head-Self-Attention" class="headerlink" title="Multi-Head Self-Attention"></a>Multi-Head Self-Attention</h3><p>多头（多个，通常为8）</p>
 <ol>
 <li><p>对输入做不同的线性变换生成<strong>Q（Query）、K（Key）、V（Value）</strong></p>
 </li>
@@ -309,24 +309,24 @@
 <li><p>将多个自注意力的输出拼接起来，再进行线性变换</p>
 </li>
 </ol>
-<h2 id="Feed-Forward-Network（FFN）"><a href="#Feed-Forward-Network（FFN）" class="headerlink" title="Feed Forward Network（FFN）"></a>Feed Forward Network（FFN）</h2><p>两个全连接层，其中一个带ReLU激活，两层中间有Dropout<br>$FFN(x)=max(0,xW_1+b_1)W_2+b_2$</p>
-<h2 id="Add-amp-Norm"><a href="#Add-amp-Norm" class="headerlink" title="Add &amp; Norm"></a>Add &amp; Norm</h2><p>$$<br>LayerNorm(X+MultiHeadAttention(X)) \<br>LayerNorm(X+FeedForward(X))<br>$$</p>
+<h3 id="Feed-Forward-Network（FFN）"><a href="#Feed-Forward-Network（FFN）" class="headerlink" title="Feed Forward Network（FFN）"></a>Feed Forward Network（FFN）</h3><p>两个全连接层，其中一个带ReLU激活，两层中间有Dropout<br>$FFN(x)=max(0,xW_1+b_1)W_2+b_2$</p>
+<h3 id="Add-amp-Norm"><a href="#Add-amp-Norm" class="headerlink" title="Add &amp; Norm"></a>Add &amp; Norm</h3><p>$$<br>LayerNorm(X+MultiHeadAttention(X)) \<br>LayerNorm(X+FeedForward(X))<br>$$</p>
 <p>Add：输入加输出（残差连接）</p>
 <p>Norm：Layer Normalization，通常为$\frac{x-\mu}{\sigma}$，$\mu$表示均值$\sigma$表示标准差</p>
-<h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/81901d3d3f8e">Transformer 修炼之道（二）、Encoder</a></p>
-<h1 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h1><h2 id="Multi-Head-Attention-with-Mask"><a href="#Multi-Head-Attention-with-Mask" class="headerlink" title="Multi-Head Attention with Mask"></a>Multi-Head Attention with Mask</h2><p>mask：忽略某些位置（要预测的之后的内容），不计算与其相关的注意力权重（下三角矩阵，以极大负值代替0，从而使得其经过softmax后生成的概率趋近于0，相当于不计算这些位置的注意力权重）</p>
-<h2 id="Encoder-Decoder-Attention"><a href="#Encoder-Decoder-Attention" class="headerlink" title="Encoder-Decoder Attention"></a>Encoder-Decoder Attention</h2><p>其实是多头自注意力，K和V来自Encoder的输出，Q：如果是Decoder的第一层，则使用（已解码的）输入序列（最开始则是起始字符）；如果是后面的层，则是前面层的输出</p>
-<h2 id="Output-Generator"><a href="#Output-Generator" class="headerlink" title="Output Generator"></a>Output Generator</h2><p>实质是线性层，将解码的序列映射回原来的空间维度，然后经过softmax（或log-softmax）生成预测概率</p>
-<h2 id="参考-2"><a href="#参考-2" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2ee8a87bcd29">Transformer 修炼之道（三）、Decoder</a></p>
-<h1 id="Transformer总结"><a href="#Transformer总结" class="headerlink" title="Transformer总结"></a>Transformer总结</h1><ul>
+<h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/81901d3d3f8e">Transformer 修炼之道（二）、Encoder</a></p>
+<h2 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h2><h3 id="Multi-Head-Attention-with-Mask"><a href="#Multi-Head-Attention-with-Mask" class="headerlink" title="Multi-Head Attention with Mask"></a>Multi-Head Attention with Mask</h3><p>mask：忽略某些位置（要预测的之后的内容），不计算与其相关的注意力权重（下三角矩阵，以极大负值代替0，从而使得其经过softmax后生成的概率趋近于0，相当于不计算这些位置的注意力权重）</p>
+<h3 id="Encoder-Decoder-Attention"><a href="#Encoder-Decoder-Attention" class="headerlink" title="Encoder-Decoder Attention"></a>Encoder-Decoder Attention</h3><p>其实是多头自注意力，K和V来自Encoder的输出，Q：如果是Decoder的第一层，则使用（已解码的）输入序列（最开始则是起始字符）；如果是后面的层，则是前面层的输出</p>
+<h3 id="Output-Generator"><a href="#Output-Generator" class="headerlink" title="Output Generator"></a>Output Generator</h3><p>实质是线性层，将解码的序列映射回原来的空间维度，然后经过softmax（或log-softmax）生成预测概率</p>
+<h3 id="参考-2"><a href="#参考-2" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2ee8a87bcd29">Transformer 修炼之道（三）、Decoder</a></p>
+<h2 id="Transformer总结"><a href="#Transformer总结" class="headerlink" title="Transformer总结"></a>Transformer总结</h2><ul>
 <li>Transformer 与 RNN 不同，可以比较好地并行训练</li>
 <li>Transformer 本身是不能利用单词的顺序信息的，因此需要在输入中添加位置 Embedding，否则 Transformer 就是一个词袋模型了</li>
 <li>Transformer 的重点是 Self-Attention 结构，其中用到的 Q, K, V矩阵通过输出进行线性变换得到</li>
 <li>Transformer 中 Multi-Head Attention 中有多个 Self-Attention，可以捕获单词之间多种维度上的相关系数 attention score</li>
 </ul>
-<h1 id="整体可参考"><a href="#整体可参考" class="headerlink" title="整体可参考"></a>整体可参考</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/338817680">Transformer模型详解（图解最完整版）</a></p>
-<h1 id="变种"><a href="#变种" class="headerlink" title="变种"></a>变种</h1><h2 id="Sandwich-Transformer"><a href="#Sandwich-Transformer" class="headerlink" title="Sandwich Transformer"></a>Sandwich Transformer</h2><p>变换了self-attention和FFN的顺序</p>
-<h2 id="Universal-Transformer"><a href="#Universal-Transformer" class="headerlink" title="Universal Transformer"></a>Universal Transformer</h2><p>在深度上加上循环，增加通用性</p>
+<h2 id="整体可参考"><a href="#整体可参考" class="headerlink" title="整体可参考"></a>整体可参考</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/338817680">Transformer模型详解（图解最完整版）</a></p>
+<h2 id="变种"><a href="#变种" class="headerlink" title="变种"></a>变种</h2><h3 id="Sandwich-Transformer"><a href="#Sandwich-Transformer" class="headerlink" title="Sandwich Transformer"></a>Sandwich Transformer</h3><p>变换了self-attention和FFN的顺序</p>
+<h3 id="Universal-Transformer"><a href="#Universal-Transformer" class="headerlink" title="Universal Transformer"></a>Universal Transformer</h3><p>在深度上加上循环，增加通用性</p>
 
                 
               </div>
@@ -388,6 +388,11 @@
           <div>2022年11月11日</div>
         </div>
       
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年5月26日</div>
+        </div>
       
       
         <div class="license-meta-item">
