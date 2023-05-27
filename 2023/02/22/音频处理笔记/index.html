@@ -16,12 +16,12 @@
   <meta name="author" content="WangAaayu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="音频处理1 介绍声音声音由空气压力的变化而产生。声音信号通常由不同频率的信号组合而成。 为了能够将声音输入模型中，我们需要将声波数字化，即将信号转换为一系列的数字。这是通过以固定时间间隔测量声音的振幅来完成的，即采样。采样率是每秒采样出的样本数，常见的采样率约为每秒44100个样本。  音频数据处理方式过去的音频机器学习应用程序依赖于传统的数字信号处理技术来提取特征。例如，用语音学概念分析音频信号">
+    <meta name="description" content="音频处理笔记1 介绍声音声音由空气压力的变化而产生。声音信号通常由不同频率的信号组合而成。 为了能够将声音输入模型中，我们需要将声波数字化，即将信号转换为一系列的数字。这是通过以固定时间间隔测量声音的振幅来完成的，即采样。采样率是每秒采样出的样本数，常见的采样率约为每秒44100个样本。  音频数据处理方式过去的音频机器学习应用程序依赖于传统的数字信号处理技术来提取特征。例如，用语音学概念分析音频">
 <meta property="og:type" content="article">
 <meta property="og:title" content="音频处理笔记">
 <meta property="og:url" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="WangAaayu">
-<meta property="og:description" content="音频处理1 介绍声音声音由空气压力的变化而产生。声音信号通常由不同频率的信号组合而成。 为了能够将声音输入模型中，我们需要将声波数字化，即将信号转换为一系列的数字。这是通过以固定时间间隔测量声音的振幅来完成的，即采样。采样率是每秒采样出的样本数，常见的采样率约为每秒44100个样本。  音频数据处理方式过去的音频机器学习应用程序依赖于传统的数字信号处理技术来提取特征。例如，用语音学概念分析音频信号">
+<meta property="og:description" content="音频处理笔记1 介绍声音声音由空气压力的变化而产生。声音信号通常由不同频率的信号组合而成。 为了能够将声音输入模型中，我们需要将声波数字化，即将信号转换为一系列的数字。这是通过以固定时间间隔测量声音的振幅来完成的，即采样。采样率是每秒采样出的样本数，常见的采样率约为每秒44100个样本。  音频数据处理方式过去的音频机器学习应用程序依赖于传统的数字信号处理技术来提取特征。例如，用语音学概念分析音频">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/%E4%BF%A1%E5%8F%B7%E9%87%87%E6%A0%B7.png">
 <meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/Spectrum.gif">
@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/STFT.png">
 <meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/mfcc.png">
 <meta property="article:published_time" content="2023-02-22T06:39:32.000Z">
-<meta property="article:modified_time" content="2023-05-26T08:44:54.817Z">
+<meta property="article:modified_time" content="2023-05-26T15:16:37.962Z">
 <meta property="article:author" content="WangAaayu">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary_large_image">
@@ -258,7 +258,7 @@
       <span class="post-meta ">
         
           
-            本文最后更新于：2023年5月26日 下午
+            本文最后更新于：2023年5月26日 晚上
           
         
       </span>
@@ -299,7 +299,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="音频处理"><a href="#音频处理" class="headerlink" title="音频处理"></a>音频处理</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h2><h3 id="声音"><a href="#声音" class="headerlink" title="声音"></a>声音</h3><p>声音由空气压力的变化而产生。声音信号通常由不同频率的信号组合而成。</p>
+                <h1 id="音频处理笔记"><a href="#音频处理笔记" class="headerlink" title="音频处理笔记"></a>音频处理笔记</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h2><h3 id="声音"><a href="#声音" class="headerlink" title="声音"></a>声音</h3><p>声音由空气压力的变化而产生。声音信号通常由不同频率的信号组合而成。</p>
 <p>为了能够将声音输入模型中，我们需要将声波数字化，即将信号转换为一系列的数字。这是通过以固定时间间隔测量声音的振幅来完成的，即采样。采样率是每秒采样出的样本数，常见的采样率约为每秒44100个样本。</p>
 <p><img src="/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/%E4%BF%A1%E5%8F%B7%E9%87%87%E6%A0%B7.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h3 id="音频数据处理方式"><a href="#音频数据处理方式" class="headerlink" title="音频数据处理方式"></a>音频数据处理方式</h3><p>过去的音频机器学习应用程序依赖于传统的数字信号处理技术来提取特征。例如，用语音学概念分析音频信号以提取音素等元素。所有这些方法都大量特定领域的专业知识。</p>
@@ -458,6 +458,11 @@
           <div>2023年2月22日</div>
         </div>
       
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年5月26日</div>
+        </div>
       
       
         <div class="license-meta-item">

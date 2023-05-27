@@ -597,7 +597,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/" target="_self">
         <div>
-          音频处理1 介绍声音声音由空气压力的变化而产生。声音信号通常由不同频率的信号组合而成。 为了能够将声音输入模型中，我们需要将声波数字化，即将信号转换为一系列的数字。这是通过以固定时间间隔测量声音的振幅来完成的，即采样。采样率是每秒采样出的样本数，常见的采样率约为每秒44100个样本。  音频数据处理方式过去的音频机器学习应用程序依赖于传统的数字信号处理技术来提取特征。例如，用语音学概念分析音频信号
+          音频处理笔记1 介绍声音声音由空气压力的变化而产生。声音信号通常由不同频率的信号组合而成。 为了能够将声音输入模型中，我们需要将声波数字化，即将信号转换为一系列的数字。这是通过以固定时间间隔测量声音的振幅来完成的，即采样。采样率是每秒采样出的样本数，常见的采样率约为每秒44100个样本。  音频数据处理方式过去的音频机器学习应用程序依赖于传统的数字信号处理技术来提取特征。例如，用语音学概念分析音频
         </div>
       </a>
 
@@ -658,7 +658,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/blog/2023/02/02/Diffusion-Model%E7%AC%94%E8%AE%B0/" target="_self">
         <div>
-          扩散模型（diffusion model）扩散过程对初始数据分布$x_0$~q(x)，不断添加高斯噪声，最终使数据分布$X_T$变成各项独立的高斯分布。  前向扩散过程的定义 $q(x_t|x_{t-1})=N(x_t;\sqrt{1-\beta_t}x_{t-1},\beta_tI)$ $q(x_{1:T}|x_0)=\prod_{t=1}^Tq(x_t|x_{t-1})$（马尔科夫链过程）
+          Diffusion Model笔记扩散过程对初始数据分布$x_0$~q(x)，不断添加高斯噪声，最终使数据分布$X_T$变成各项独立的高斯分布。  前向扩散过程的定义 $q(x_t|x_{t-1})=N(x_t;\sqrt{1-\beta_t}x_{t-1},\beta_tI)$ $q(x_{1:T}|x_0)=\prod_{t=1}^Tq(x_t|x_{t-1})$（马尔科夫链过程）  通过重参
         </div>
       </a>
 
@@ -719,7 +719,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/blog/2022/11/11/GitHub+Hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
         <div>
-          图片无法正常加载Hexo网页无法正常加载图片 解决方法：  _config.yml和主题的_config.theme.yml里的post_asset_folder设置为true（这样每篇文章都会有对应同名的文件夹，图片就放在这里面）  npm install https://github.com/CodeFalling/hexo-asset-image --save（一定要有前面的网址，不能只有h
+          GitHub+Hexo博客网站搭建（二）图片无法正常加载Hexo网页无法正常加载图片 解决方法：  _config.yml和主题的_config.theme.yml里的post_asset_folder设置为true（这样每篇文章都会有对应同名的文件夹，图片就放在这里面）  npm install https://github.com/CodeFalling/hexo-asset-image --
         </div>
       </a>
 
@@ -780,7 +780,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/blog/2022/11/11/Transformer%E7%AC%94%E8%AE%B0/" target="_self">
         <div>
-          Input EmbeddingOne-Hot Encoding将输入单词用one-hot形式编码成序列向量，向量长度就是预定义的词汇表中拥有的词汇量，向量在这一维中的值只有一个位置是1，其余都是0，1对应的位置就是词汇表中表示这个单词的地方 劣势：稀疏；长 Word Embedding设计一个可学习的权重矩阵W，将one-hot词向量与这个矩阵进行点乘，得到新的表示结果 优势：降维 P
+          Transformer笔记      Input EmbeddingOne-Hot Encoding将输入单词用one-hot形式编码成序列向量，向量长度就是预定义的词汇表中拥有的词汇量，向量在这一维中的值只有一个位置是1，其余都是0，1对应的位置就是词汇表中表示这个单词的地方 劣势：稀疏；长 Word Embedding设计一个可学习的权重矩阵W，将one-hot词向量与这个矩阵进行点乘，得到新
         </div>
       </a>
 
