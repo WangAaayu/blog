@@ -1,0 +1,154 @@
+# 一些例子
+# 注册
+@csrf_exempt
+def create_user(request):
+    body = json.loads(request.body)
+    if(User.objects.filter(user_name=body['user_name'])):
+        return HttpResponse("用户名已存在", status=400)
+    user = User(user_name=body['user_name'], user_password=body['user_password'], user_phone=body['user_phone'])
+    user.save()
+    return HttpResponse("注册成功")
+
+# 登录
+@csrf_exempt
+def login(request):
+    body = json.loads(request.body)
+    user_name = body['user_name']
+    user_password = body['user_password']
+    if user_name and user_password:
+        isexsit = User.objects.filter(user_name=user_name, user_password=user_password).count()
+        if isexsit:
+            user = User.objects.get(user_name=user_name)
+            return JsonResponse("登录成功")
+        else:
+            return HttpResponse("账号密码错误", status=400)
+    else:
+        return HttpResponse("请重新输入", status=400)
+
+# 随机获取用户没标过的一首歌，歌的打分次数小于2
+@csrf_exempt
+def get_a_song_random(request):
+    body = json.loads(request.body)
+    user_id = body['user_id']
+    marked_music = MarkedScore.objects.filter(user_id=user_id).values('music_id')
+    # 打分次数小于2
+    songs = Music.objects.filter(marked_number__lt=2).exclude(music_id__in=marked_music)
+    # 不限制打分次数
+    # songs = Music.objects.exclude(music_id__in=marked_music)
+    number = songs.count() - 1
+    if(number < 0):
+        return HttpResponse("没有需要标注的歌曲")
+    index = random.randint(0, number)
+    song = songs[index]
+    info = {}
+    info['music_id'] = song.music_id
+    info['music_name'] = song.music_name
+    info['singer'] = song.singer
+    info['marked_number'] = song.marked_number
+    data = json.dumps(info)
+    return HttpResponse(data, content_type="application/json")
+
+# 获取一页的用户评分
+@csrf_exempt
+def get_user_page_scores(request):
+    body = json.loads(request.body)
+    user_id = body['user_id']
+    current_page = body['current_page']
+    page_size = body['page_size']
+    scores = MarkedScore.objects.filter(user_id=user_id).values()
+    scores = list(scores[((current_page-1)*page_size):(current_page*page_size)])
+    infos = []
+    for score in scores:
+        music = Music.objects.filter(music_id=score['music_id_id']).values()
+        music = list(music[:])
+        info = {}
+        info['score_id'] = score['score_id']
+        info['music_id'] = music[0]['music_id']
+        info['music_name'] = music[0]['music_name']
+        info['singer'] = music[0]['singer']
+        info['score'] = score['score']
+        info['mark_time'] = score['mark_time']
+        infos.append(info)
+    data = json.dumps(infos, cls=MyEncoder)
+    return HttpResponse(data, content_type="application/json")
+
+# 根据歌名查询用户的评分记录
+@csrf_exempt
+def get_marked_scores_by_query(request):
+    body = json.loads(request.body)
+    user_id = body['user_id']
+    query = body['query']
+    user_scores = MarkedScore.objects.filter(user_id=user_id)
+    music_name_scores = user_scores.filter(music_id__music_name__contains=query)
+    singer_scores = user_scores.filter(music_id__singer__contains=query)
+    score_scores = user_scores.filter(score__contains=query)
+    scores = score_scores.union(music_name_scores, singer_scores)
+    # 无记录时返回查询不到？
+    scores = scores.values()
+    scores = list(scores[:])
+    infos = []
+    for score in scores:
+        music = Music.objects.filter(music_id=score['music_id_id']).values()
+        music = list(music[:])
+        info = {}
+        info['score_id'] = score['score_id']
+        info['music_id'] = score['music_id_id']
+        info['music_name'] = music[0]['music_name']
+        info['singer'] = music[0]['singer']
+        info['score'] = score['score']
+        info['mark_time'] = score['mark_time']
+        infos.append(info)
+    data = json.dumps(infos, cls=MyEncoder)
+    return HttpResponse(data, content_type="application/json")
+
+# 创建新评分，若存在则覆盖
+@csrf_exempt
+def create_marked_score(request):
+    body = json.loads(request.body)
+    user = User.objects.get(user_id=body['user_id'])
+    music = Music.objects.get(music_id=body['music_id'])
+    if(MarkedScore.objects.filter(user_id=user, music_id=music).count()!=0):
+        marked_score = MarkedScore.objects.get(user_id=user, music_id=music)
+        marked_score.score = body['score']
+        marked_score.mark_time = timezone.now()
+        marked_score.save()
+    else:
+        marked_score = MarkedScore(user_id=user, music_id=music, score=body['score'])
+        marked_score.save()
+    music_id = body['music_id']
+    marked_number = MarkedScore.objects.filter(music_id=music_id).count()
+    Music.objects.filter(music_id=music_id).update(marked_number=marked_number)
+    return HttpResponse("success")
+
+# 修改单条评分
+@csrf_exempt
+def update_marked_score(request):
+    body = json.loads(request.body)
+    score_id = body['score_id']
+    new_score = body['new_score']
+    try:
+        marked_score = MarkedScore.objects.get(score_id=score_id)
+    except MarkedScore.DoesNotExist:
+        return HttpResponse("该记录不存在", status=400)
+    marked_score.score = new_score
+    marked_score.mark_time = timezone.now()
+    marked_score.save()
+    return HttpResponse("success")
+
+# 删除单条评分，并删除该评分相关的片段
+@csrf_exempt
+def delete_marked_score(request):
+    body = json.loads(request.body)
+    score_id = body['score_id']
+    try:
+        marked_score = MarkedScore.objects.get(score_id=score_id)
+    except MarkedScore.DoesNotExist:
+        return HttpResponse("该记录不存在", status=400)
+    user_id = marked_score.user_id
+    music_id = marked_score.music_id
+    dimension_scores = MarkedDimensionScore.objects.filter(user_id=user_id, music_id=music_id)
+    marked_score.delete()
+    dimension_scores.delete()
+    marked_number = MarkedScore.objects.filter(music_id=music_id.music_id).count()
+    Music.objects.filter(music_id=music_id.music_id).update(marked_number=marked_number)
+    return HttpResponse("success")
