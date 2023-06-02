@@ -16,28 +16,26 @@
   <meta name="author" content="WangAaayu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="GitHub+Hexo博客网站搭建（三）不想将wangaaayu.github.io作为博客的地址，想多加一级，用wangaaayu.github.io&#x2F;blog访问博客 创建新博客仓库新建仓库，名字取为blog，顺便把添加README.md选项点上 在README.md中随便写点东西 在设置中的Pages选项中，将Branch由None改为main，文件夹默认为&#x2F;(root)即可 稍等一段时间，">
+    <meta name="description" content="vue测试后端api接口简易模板大多数vue项目都把页面放在src&#x2F;views&#x2F;目录下，并且有src&#x2F;router&#x2F;index.js做路由。本项目是vue2版本，主要用于后端开发过程中测试api，只用到api模块。项目结构如图：  src&#x2F;main.js12345678import Vue from &amp;#x27;vue&amp;#x27;import App from &amp;#x27;.&#x2F;App.vue&amp;#x">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GitHub+Hexo博客网站搭建（三）">
-<meta property="og:url" content="https://wangaaayu.github.io/blog/2023/05/26/GitHub+Hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89/index.html">
+<meta property="og:title" content="vue测试后端api接口简易模板">
+<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/2628a59d/index.html">
 <meta property="og:site_name" content="WangAaayu">
-<meta property="og:description" content="GitHub+Hexo博客网站搭建（三）不想将wangaaayu.github.io作为博客的地址，想多加一级，用wangaaayu.github.io&#x2F;blog访问博客 创建新博客仓库新建仓库，名字取为blog，顺便把添加README.md选项点上 在README.md中随便写点东西 在设置中的Pages选项中，将Branch由None改为main，文件夹默认为&#x2F;(root)即可 稍等一段时间，">
+<meta property="og:description" content="vue测试后端api接口简易模板大多数vue项目都把页面放在src&#x2F;views&#x2F;目录下，并且有src&#x2F;router&#x2F;index.js做路由。本项目是vue2版本，主要用于后端开发过程中测试api，只用到api模块。项目结构如图：  src&#x2F;main.js12345678import Vue from &amp;#x27;vue&amp;#x27;import App from &amp;#x27;.&#x2F;App.vue&amp;#x">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/05/26/GitHub+Hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89/%E5%8D%9A%E5%AE%A2%E9%A1%B5%E9%9D%A2%E8%AE%BE%E7%BD%AE.png">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/05/26/GitHub+Hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89/hexo%E4%BA%8C%E7%BA%A7%E7%9B%AE%E5%BD%95%E8%AE%BE%E7%BD%AE.png">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/05/26/GitHub+Hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89/%E6%8F%92%E4%BB%B6%E4%BF%AE%E6%94%B9.png">
-<meta property="article:published_time" content="2023-05-26T08:55:15.000Z">
-<meta property="article:modified_time" content="2023-05-26T13:12:50.386Z">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/2628a59d/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png">
+<meta property="article:published_time" content="2023-05-25T11:58:31.000Z">
+<meta property="article:modified_time" content="2023-05-26T13:14:58.546Z">
 <meta property="article:author" content="WangAaayu">
-<meta property="article:tag" content="教程">
+<meta property="article:tag" content="代码">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangaaayu.github.io/blog/2023/05/26/GitHub+Hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89/%E5%8D%9A%E5%AE%A2%E9%A1%B5%E9%9D%A2%E8%AE%BE%E7%BD%AE.png">
+<meta name="twitter:image" content="https://wangaaayu.github.io/blog/posts/2628a59d/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>GitHub+Hexo博客网站搭建（三） - WangAaayu</title>
+  <title>vue测试后端api接口简易模板 - WangAaayu</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="GitHub+Hexo博客网站搭建（三）"></span>
+            <span id="subtitle" data-typed-text="vue测试后端api接口简易模板"></span>
           
         </div>
 
@@ -213,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-26 16:55" pubdate>
-          2023年5月26日 下午
+        <time datetime="2023-05-25 19:58" pubdate>
+          2023年5月25日 晚上
         </time>
       </span>
     
@@ -225,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.9k 字
         
       </span>
     
@@ -236,12 +234,20 @@
         
         
         
-          17 分钟
+          25 分钟
         
       </span>
     
 
     
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
     
   </div>
 
@@ -287,56 +293,22 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">GitHub+Hexo博客网站搭建（三）</h1>
+            <h1 style="display: none">vue测试后端api接口简易模板</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="GitHub-Hexo博客网站搭建（三）"><a href="#GitHub-Hexo博客网站搭建（三）" class="headerlink" title="GitHub+Hexo博客网站搭建（三）"></a>GitHub+Hexo博客网站搭建（三）</h1><p>不想将wangaaayu.github.io作为博客的地址，想多加一级，用wangaaayu.github.io/blog访问博客</p>
-<h2 id="创建新博客仓库"><a href="#创建新博客仓库" class="headerlink" title="创建新博客仓库"></a>创建新博客仓库</h2><p>新建仓库，名字取为blog，顺便把添加README.md选项点上</p>
-<p>在README.md中随便写点东西</p>
-<p>在设置中的Pages选项中，将Branch由None改为main，文件夹默认为/(root)即可</p>
-<p>稍等一段时间，就可以访问wangaaayu.github.io/blog，看到README.md中的内容</p>
-<p><img src="/blog/2023/05/26/GitHub+Hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89/%E5%8D%9A%E5%AE%A2%E9%A1%B5%E9%9D%A2%E8%AE%BE%E7%BD%AE.png" srcset="/blog/img/loading.gif" lazyload></p>
-<h2 id="博客迁移"><a href="#博客迁移" class="headerlink" title="博客迁移"></a>博客迁移</h2><p>之前博客都备份在了io.dev私有仓库中，现在将该私有仓库重命名为blog.dev</p>
-<p>clone该blog.dev仓库到本地，或者用命令【git remote set-url origin 新地址】修改之前本地仓库的git远程仓库地址，同时将本地仓库改名</p>
-<p>修改本地仓库根目录下的_config.yml和_config.主题.yml（如果有的话）文件</p>
-<ol>
-<li><p>修改url。url修改为访问地址，即在原来的后面加上/blog</p>
-</li>
-<li><p>在url下添加root。root值为/blog/（官方建议<a target="_blank" rel="noopener" href="https://hexo.io/docs/configuration">Configuration | Hexo</a>）</p>
-</li>
-<li><p>修改deploy:repo。deploy:repo修改为新的blog远程仓库的地址（注意分支branch也要正确）</p>
-</li>
-</ol>
-<p><img src="/blog/2023/05/26/GitHub+Hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89/hexo%E4%BA%8C%E7%BA%A7%E7%9B%AE%E5%BD%95%E8%AE%BE%E7%BD%AE.png" srcset="/blog/img/loading.gif" lazyload></p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-comment"># ...</span><br><span class="hljs-attr">url:</span> <span class="hljs-string">https://WangAaayu.github.io/blog</span><br><span class="hljs-attr">root:</span> <span class="hljs-string">/blog/</span><br><span class="hljs-comment"># ...</span><br><span class="hljs-attr">deploy:</span><br>  <span class="hljs-attr">type:</span>  <span class="hljs-string">git</span><br>  <span class="hljs-attr">repo:</span>  <span class="hljs-string">git@github.com:WangAaayu/blog.git</span><br>  <span class="hljs-attr">branch:</span>  <span class="hljs-string">main</span><br></code></pre></td></tr></table></figure>
+                <h1 id="vue测试后端api接口简易模板"><a href="#vue测试后端api接口简易模板" class="headerlink" title="vue测试后端api接口简易模板"></a>vue测试后端api接口简易模板</h1><p>大多数vue项目都把页面放在src/views/目录下，并且有src/router/index.js做路由。本项目是<strong>vue2</strong>版本，主要用于后端开发过程中测试api，只用到api模块。项目结构如图：</p>
+<p><img src="/blog/posts/2628a59d/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png" srcset="/blog/img/loading.gif" lazyload></p>
+<h2 id="src-main-js"><a href="#src-main-js" class="headerlink" title="src/main.js"></a>src/main.js</h2><figure class="highlight v"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs v"><span class="hljs-keyword">import</span> Vue from &#x27;vue&#x27;<br><span class="hljs-keyword">import</span> App from &#x27;./App<span class="hljs-variable">.vue</span>&#x27;<br><br>Vue<span class="hljs-variable">.config</span><span class="hljs-variable">.productionTip</span> = false<br><br><span class="hljs-keyword">new</span> Vue(&#123;<br>  render: h =&gt; h(App),<br>&#125;).$mount(&#x27;#app&#x27;)<br></code></pre></td></tr></table></figure>
 
-<p>最后执行命令hexo g以及hexo d，发布博客</p>
-<p>稍等一段时间，访问新的博客网站就可以看到发布的博客</p>
-<h2 id="图片无法加载"><a href="#图片无法加载" class="headerlink" title="图片无法加载"></a>图片无法加载</h2><p>新的博客网站图片都加载不出来，原因是图片的请求路径不对</p>
-<p>之前提到用这个命令下载插件能解决图片不显示的问题</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">npm install https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/CodeFalling/</span>hexo-asset-image --save<br></code></pre></td></tr></table></figure>
+<h2 id="src-App-vue"><a href="#src-App-vue" class="headerlink" title="src/App.vue"></a>src/App.vue</h2><figure class="highlight v"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs v">&lt;template&gt;<br>  &lt;div id=<span class="hljs-string">&quot;app&quot;</span>&gt;<br>    &lt;img alt=<span class="hljs-string">&quot;Vue logo&quot;</span> src=<span class="hljs-string">&quot;./assets/logo.png&quot;</span>&gt;<br>    &lt;HelloWorld msg=<span class="hljs-string">&quot;Welcome to Your Vue.js App&quot;</span>/&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br><span class="hljs-keyword">import</span> HelloWorld from &#x27;./components/HelloWorld<span class="hljs-variable">.vue</span>&#x27;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  name: &#x27;App&#x27;,<br>  components: &#123;<br>    HelloWorld<br>  &#125;<br>&#125;<br>&lt;/script&gt;<br><br>&lt;style&gt;<br>#app &#123;<br>  font-family: Avenir, Helvetica, Arial, sans-serif;<br>  -webkit-font-smoothing: antialiased;<br>  -moz-osx-font-smoothing: grayscale;<br>  text-align: center;<br>  color: #<span class="hljs-number">2</span>c3e50;<br>  margin-top: <span class="hljs-number">60</span>px;<br>&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
 
-<p>现在图片加载不出来，说明这个插件也解决不了</p>
-<p>试着重新下载hexo-asset-image插件，用github上点赞更多的</p>
-<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs maxima">npm uninstall hexo-asset-<span class="hljs-built_in">image</span><br>npm install hexo-asset-<span class="hljs-built_in">image</span> --<span class="hljs-built_in">save</span><br></code></pre></td></tr></table></figure>
+<h2 id="src-api-index-js"><a href="#src-api-index-js" class="headerlink" title="src/api/index.js"></a>src/api/index.js</h2><figure class="highlight v"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs v"><span class="hljs-keyword">import</span> Vue from &#x27;vue&#x27;<br><span class="hljs-keyword">import</span> Axios from &#x27;axios&#x27;<br><br><span class="hljs-keyword">const</span> axiosInstance = Axios<span class="hljs-variable">.create</span>(&#123;<br>    withCredentials: true<br>&#125;)<br><br><span class="hljs-comment">// 通过拦截器处理csrf问题，这里的正则和匹配下标可能需要根据实际情况小改动</span><br>axiosInstance<span class="hljs-variable">.interceptors</span><span class="hljs-variable">.request</span><span class="hljs-variable">.use</span>((<span class="hljs-keyword">config</span>) =&gt; &#123;<br>    <span class="hljs-keyword">config</span><span class="hljs-variable">.headers</span>[&#x27;X-Requested-With&#x27;] = &#x27;XMLHttpRequest&#x27;<br>    <span class="hljs-keyword">const</span> regex = /.*csrftoken=([^;.]*).*$/<br>    <span class="hljs-keyword">config</span><span class="hljs-variable">.headers</span>[&#x27;X-CSRFToken&#x27;] = document<span class="hljs-variable">.cookie</span><span class="hljs-variable">.match</span>(regex) === <span class="hljs-literal">null</span> ? <span class="hljs-literal">null</span> : document<span class="hljs-variable">.cookie</span><span class="hljs-variable">.match</span>(regex)[<span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">config</span><br>&#125;)<br><br>axiosInstance<span class="hljs-variable">.interceptors</span><span class="hljs-variable">.response</span><span class="hljs-variable">.use</span>(<br>    response =&gt; &#123;<br>        <span class="hljs-keyword">return</span> response<br>    &#125;,<br>    error =&gt; &#123;<br>        <span class="hljs-keyword">return</span> Promise<span class="hljs-variable">.reject</span>(error)<br>    &#125;<br>)<br><br>Vue<span class="hljs-variable">.prototype</span><span class="hljs-variable">.axios</span> = axiosInstance<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> axiosInstance<br></code></pre></td></tr></table></figure>
 
-<p>重新运行发现路径还是不对，原因是插件不适配</p>
-<p>修改插件的index.js文件（node_modules\hexo-asset-image\index.js）</p>
-<ol>
-<li><p>将beginPos的位置改为link中的第4个“/”之后</p>
-</li>
-<li><p>将endPos的位置都改为link中的最后一个“/”</p>
-</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// ...</span><br><br><span class="hljs-keyword">var</span> link = data.<span class="hljs-property">permalink</span>;<br><span class="hljs-comment">// 改为第4个“/”的位置，因为现在的网址多了blog/</span><br><span class="hljs-keyword">var</span> beginPos = <span class="hljs-title function_">getPosition</span>(link, <span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-number">4</span>) + <span class="hljs-number">1</span>;<br><span class="hljs-keyword">var</span> appendLink = <span class="hljs-string">&#x27;&#x27;</span>;<br><span class="hljs-comment">// In hexo 3.1.1, the permalink of &quot;about&quot; page is like &quot;.../about/index.html&quot;.</span><br><span class="hljs-comment">// if not with index.html endpos = link.lastIndexOf(&#x27;.&#x27;) + 1 support hexo-abbrlink</span><br><span class="hljs-keyword">if</span>(<span class="hljs-regexp">/.*\/index\.html$/</span>.<span class="hljs-title function_">test</span>(link)) &#123;<br>  <span class="hljs-comment">// when permalink is end with index.html, for example 2019/02/20/xxtitle/index.html</span><br>  <span class="hljs-comment">// image in xxtitle/ will go to xxtitle/index/</span><br>  appendLink = <span class="hljs-string">&#x27;index/&#x27;</span>;<br>  <span class="hljs-comment">// var endPos = link.lastIndexOf(&#x27;/&#x27;);</span><br>&#125;<br><span class="hljs-comment">// else &#123;</span><br><span class="hljs-comment">//   var endPos = link.lastIndexOf(&#x27;.&#x27;);</span><br><span class="hljs-comment">// &#125;</span><br><span class="hljs-comment">// 删除上面的endPos语句，无论是否有index.html，路径都是以“/”结尾</span><br><span class="hljs-comment">// 添加下面的endPos语句，endPos是最后一个“/”的位置</span><br><span class="hljs-keyword">var</span> endPos = link.<span class="hljs-title function_">lastIndexOf</span>(<span class="hljs-string">&#x27;/&#x27;</span>);<br>link = link.<span class="hljs-title function_">substring</span>(beginPos, endPos) + <span class="hljs-string">&#x27;/&#x27;</span> + appendLink;<br><br><span class="hljs-comment">// ...</span><br></code></pre></td></tr></table></figure>
+<h2 id="src-api-api-js"><a href="#src-api-api-js" class="headerlink" title="src/api/api.js"></a>src/api/api.js</h2><figure class="highlight v"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs v"><span class="hljs-keyword">import</span> axiosInstance from &#x27;./index&#x27;<br><br><span class="hljs-keyword">const</span> axios = axiosInstance<br><span class="hljs-keyword">const</span> ip = &#x27;http:<span class="hljs-comment">//localhost:8000/app/&#x27;  // api请求地址的统一字段</span><br><br><span class="hljs-comment">// GET请求</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getRequest = () =&gt; &#123;<span class="hljs-keyword">return</span> axios<span class="hljs-variable">.get</span>(ip + &#x27;后端url&#x27;)&#125;<br><br><span class="hljs-comment">// POST请求</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> postRequest = data =&gt; &#123;<span class="hljs-keyword">return</span> axios<span class="hljs-variable">.get</span>(ip + &#x27;后端url&#x27;, data)&#125;<br></code></pre></td></tr></table></figure>
 
-<p><img src="/blog/2023/05/26/GitHub+Hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89/%E6%8F%92%E4%BB%B6%E4%BF%AE%E6%94%B9.png" srcset="/blog/img/loading.gif" lazyload></p>
-<p>最后用hexo命令清除并重新生成博客网站</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo cl</span><br><span class="hljs-attribute">hexo g</span><br><span class="hljs-attribute">hexo d</span><br></code></pre></td></tr></table></figure>
-
-<p>稍等一段时间，访问新的博客网站就可以看到图片可以正常显示</p>
+<h2 id="src-components-HelloWorld-vue"><a href="#src-components-HelloWorld-vue" class="headerlink" title="src/components/HelloWorld.vue"></a>src/components/HelloWorld.vue</h2><figure class="highlight v"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs v">&lt;template&gt;<br>  &lt;div <span class="hljs-keyword">class</span>=<span class="hljs-string">&quot;hello&quot;</span>&gt;<br>    &lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;/h1&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br><span class="hljs-keyword">import</span> &#123;<br>  getRequest, postRequest<br>&#125; from &#x27;../api/api<span class="hljs-variable">.js</span>&#x27;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  name: <span class="hljs-number">&#x27;He</span>lloWorld&#x27;,<br>  data() &#123;<br>    <span class="hljs-keyword">return</span> &#123;<br>      msg: &#x27;Welcome to Your Vue<span class="hljs-variable">.js</span> App&#x27;,<br>    &#125;<br>  &#125;,<br>  methods: &#123;<br>    testGetRequest() &#123;<br>      getRequest()<span class="hljs-variable">.then</span>(response =&gt; &#123;<br>        console<span class="hljs-variable">.log</span>(response<span class="hljs-variable">.data</span>)<br>      &#125;)<span class="hljs-variable">.catch</span>((error) =&gt; &#123;<br>        alert(error<span class="hljs-variable">.response</span><span class="hljs-variable">.data</span>)<br>      &#125;)<br>    &#125;,<br>    testPostRequest() &#123;<br>      postRequest(&#123;<br>        <span class="hljs-comment">// 以字典形式构造POST请求的参数</span><br>        &#x27;key&#x27;: value,<br>        &#x27;key&#x27;: &#x27;value&#x27;,<br>      &#125;)<span class="hljs-variable">.then</span>(response =&gt; &#123;<br>        console<span class="hljs-variable">.log</span>(response<span class="hljs-variable">.data</span>)<br>      &#125;)<span class="hljs-variable">.catch</span>((error) =&gt; &#123;<br>        alert(error<span class="hljs-variable">.response</span><span class="hljs-variable">.data</span>)<br>      &#125;)<br>    &#125;,<br>  &#125;,<br>  created: <span class="hljs-keyword">function</span> () &#123;<br>    <span class="hljs-keyword">this</span><span class="hljs-variable">.testGetRequest</span>()<br>    <span class="hljs-keyword">this</span><span class="hljs-variable">.testPostRequest</span>()<br>  &#125;,<br>&#125;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -355,7 +327,7 @@
     
       <span class="category-chain">
         
-  <a href="/blog/categories/GitHub%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" class="category-chain-item">GitHub个人网站搭建</a>
+  <a href="/blog/categories/%E5%BC%80%E5%8F%91/" class="category-chain-item">开发</a>
   
   
 
@@ -370,7 +342,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/blog/tags/%E6%95%99%E7%A8%8B/">#教程</a>
+        <a href="/blog/tags/%E4%BB%A3%E7%A0%81/">#代码</a>
       
     </div>
   
@@ -382,8 +354,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>GitHub+Hexo博客网站搭建（三）</div>
-      <div>https://wangaaayu.github.io/blog/2023/05/26/GitHub+Hexo博客网站搭建（三）/</div>
+      <div>vue测试后端api接口简易模板</div>
+      <div>https://wangaaayu.github.io/blog/posts/2628a59d/</div>
     </div>
     <div class="license-meta">
       
@@ -395,7 +367,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月26日</div>
+          <div>2023年5月25日</div>
         </div>
       
       
@@ -432,9 +404,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2023/05/29/django%E6%A8%A1%E6%9D%BF/" title="django模板">
+                      <a href="/blog/posts/da212d6d/" title="GitHub+Hexo博客网站搭建（三）">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">django模板</span>
+                        <span class="hidden-mobile">GitHub+Hexo博客网站搭建（三）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -442,8 +414,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2023/05/25/vue%E6%B5%8B%E8%AF%95%E5%90%8E%E7%AB%AFapi%E6%8E%A5%E5%8F%A3%E7%AE%80%E6%98%93%E6%A8%A1%E6%9D%BF/" title="vue测试后端api接口简易模板">
-                        <span class="hidden-mobile">vue测试后端api接口简易模板</span>
+                      <a href="/blog/posts/61a84e4c/" title="vue+django部署ubuntu服务器">
+                        <span class="hidden-mobile">vue+django部署ubuntu服务器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

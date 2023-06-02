@@ -19,28 +19,28 @@
     <meta name="description" content="音频处理笔记1 介绍声音声音由空气压力的变化而产生。声音信号通常由不同频率的信号组合而成。 为了能够将声音输入模型中，我们需要将声波数字化，即将信号转换为一系列的数字。这是通过以固定时间间隔测量声音的振幅来完成的，即采样。采样率是每秒采样出的样本数，常见的采样率约为每秒44100个样本。  音频数据处理方式过去的音频机器学习应用程序依赖于传统的数字信号处理技术来提取特征。例如，用语音学概念分析音频">
 <meta property="og:type" content="article">
 <meta property="og:title" content="音频处理笔记">
-<meta property="og:url" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/114e30c3/index.html">
 <meta property="og:site_name" content="WangAaayu">
 <meta property="og:description" content="音频处理笔记1 介绍声音声音由空气压力的变化而产生。声音信号通常由不同频率的信号组合而成。 为了能够将声音输入模型中，我们需要将声波数字化，即将信号转换为一系列的数字。这是通过以固定时间间隔测量声音的振幅来完成的，即采样。采样率是每秒采样出的样本数，常见的采样率约为每秒44100个样本。  音频数据处理方式过去的音频机器学习应用程序依赖于传统的数字信号处理技术来提取特征。例如，用语音学概念分析音频">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/%E4%BF%A1%E5%8F%B7%E9%87%87%E6%A0%B7.png">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/Spectrum.gif">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/%E6%97%B6%E5%9F%9F%E5%92%8C%E9%A2%91%E5%9F%9F.png">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/Mel.gif">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/Decibel_scale.jpg">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/SSampling.png">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/waveform.png">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/spectrogram.png">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/mel-spectrogram1.png">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/mel-spectrogram2.png">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/STFT.png">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/mfcc.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/114e30c3/%E4%BF%A1%E5%8F%B7%E9%87%87%E6%A0%B7.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/114e30c3/Spectrum.gif">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/114e30c3/%E6%97%B6%E5%9F%9F%E5%92%8C%E9%A2%91%E5%9F%9F.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/114e30c3/Mel.gif">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/114e30c3/Decibel_scale.jpg">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/114e30c3/SSampling.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/114e30c3/waveform.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/114e30c3/spectrogram.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/114e30c3/mel-spectrogram1.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/114e30c3/mel-spectrogram2.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/114e30c3/STFT.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/114e30c3/mfcc.png">
 <meta property="article:published_time" content="2023-02-22T06:39:32.000Z">
 <meta property="article:modified_time" content="2023-05-27T01:05:00.271Z">
 <meta property="article:author" content="WangAaayu">
 <meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangaaayu.github.io/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/%E4%BF%A1%E5%8F%B7%E9%87%87%E6%A0%B7.png">
+<meta name="twitter:image" content="https://wangaaayu.github.io/blog/posts/114e30c3/%E4%BF%A1%E5%8F%B7%E9%87%87%E6%A0%B7.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -252,6 +252,14 @@
 
     
     
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
   </div>
 
   <span class="myupdated">
@@ -303,13 +311,13 @@
                 
                 <h1 id="音频处理笔记"><a href="#音频处理笔记" class="headerlink" title="音频处理笔记"></a>音频处理笔记</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1 介绍"></a>1 介绍</h2><h3 id="声音"><a href="#声音" class="headerlink" title="声音"></a>声音</h3><p>声音由空气压力的变化而产生。声音信号通常由不同频率的信号组合而成。</p>
 <p>为了能够将声音输入模型中，我们需要将声波数字化，即将信号转换为一系列的数字。这是通过以固定时间间隔测量声音的振幅来完成的，即采样。采样率是每秒采样出的样本数，常见的采样率约为每秒44100个样本。</p>
-<p><img src="/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/%E4%BF%A1%E5%8F%B7%E9%87%87%E6%A0%B7.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/114e30c3/%E4%BF%A1%E5%8F%B7%E9%87%87%E6%A0%B7.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h3 id="音频数据处理方式"><a href="#音频数据处理方式" class="headerlink" title="音频数据处理方式"></a>音频数据处理方式</h3><p>过去的音频机器学习应用程序依赖于传统的数字信号处理技术来提取特征。例如，用语音学概念分析音频信号以提取音素等元素。所有这些方法都大量特定领域的专业知识。</p>
 <p>随着深度学习的发展，处理音频的方式不再使用传统的音频处理技术，无需通过大量手动操作和自定义来生成特征，而是采用由音频生成频谱图的技术。</p>
 <h3 id="频谱Spectrum"><a href="#频谱Spectrum" class="headerlink" title="频谱Spectrum"></a>频谱Spectrum</h3><p>频谱是组合产生信号的一组频率。频谱绘制了信号中存在的所有频率以及每个频率的强度或幅度。信号中最低的频率称为基频。基频的整数倍频率称为谐波。</p>
-<p><img src="/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/Spectrum.gif" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/114e30c3/Spectrum.gif" srcset="/blog/img/loading.gif" lazyload></p>
 <p>通常我们看的波形是信号的时域表示，表示振幅随时间的变化。频谱是信号的频域表示，表示再某个时刻，振幅与频率的关系。</p>
-<p><img src="/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/%E6%97%B6%E5%9F%9F%E5%92%8C%E9%A2%91%E5%9F%9F.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/114e30c3/%E6%97%B6%E5%9F%9F%E5%92%8C%E9%A2%91%E5%9F%9F.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h3 id="频谱图spectrogram"><a href="#频谱图spectrogram" class="headerlink" title="频谱图spectrogram"></a>频谱图spectrogram</h3><p>声音信号的组成频率是随时间变化的，因此频谱随时间而变化。</p>
 <p>频谱图是音频信号的等效紧凑表示，就像信号的“指纹”，它将音频数据的基本特征捕获为图像。</p>
 <p>频谱图绘制了时间与频谱的关系，x轴为时间，y轴为频率。</p>
@@ -319,17 +327,17 @@
 <p>我们通常所说的“响度”，其实为声音的振幅。人们对振幅的感知同样也不是线性的。</p>
 <p>事实上，人耳对频率和响度的感知都是对数的。</p>
 <p>为了以真实的方式处理声音，在处理数据中的频率和振幅时，需要使用对数标度，即梅尔标度（频率）和分贝标度（振幅）。这正是Mel Spectrogram的目的。</p>
-<p><img src="/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/Mel.gif" srcset="/blog/img/loading.gif" lazyload></p>
-<p><img src="/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/Decibel_scale.jpg" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/114e30c3/Mel.gif" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/114e30c3/Decibel_scale.jpg" srcset="/blog/img/loading.gif" lazyload></p>
 <h2 id="2-处理"><a href="#2-处理" class="headerlink" title="2 处理"></a>2 处理</h2><h3 id="音频信号的内存表示"><a href="#音频信号的内存表示" class="headerlink" title="音频信号的内存表示"></a>音频信号的内存表示</h3><p>在内存中，音频表示为数字的时间序列，表示每个时间步长的振幅。例如，如果采样率为 44100，则一秒的音频剪辑将有 44100 个数字。由于测量是在固定的时间间隔进行的，因此数据仅包含振幅数字而不包含时间值。给定采样率，我们可以计算出每次振幅数测量是在什么时刻进行的。</p>
 <p>位深度（bit-depth）告诉我们每个样本的幅度测量值可以取多少个可能的值。例如，位深度为 16 表示振幅数可以介于 0 和 65535 (2 16 - 1) 之间。位深度影响音频测量的分辨率——位深度越高，音频保真度越好。</p>
-<p><img src="/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/SSampling.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/114e30c3/SSampling.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h3 id="waveform"><a href="#waveform" class="headerlink" title="waveform"></a>waveform</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> librosa.display<br><span class="hljs-keyword">import</span> sklearn<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> pl<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> npt<br><br>AUDIO_FILE = <span class="hljs-string">&#x27;./audio/周杰伦 - 晴天.mp3&#x27;</span><br><br>samples, sample_rate = librosa.load(AUDIO_FILE, sr=<span class="hljs-literal">None</span>)<br>librosa.display.waveshow(samples, sr=sample_rate)<br>plt.show()<br></code></pre></td></tr></table></figure>
 
-<p><img src="/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/waveform.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/114e30c3/waveform.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h3 id="spectrogram"><a href="#spectrogram" class="headerlink" title="spectrogram"></a>spectrogram</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 短时傅里叶变换，返回一个复数矩阵D(F，T)</span><br>sgram = librosa.stft(samples)<br>librosa.display.specshow(sgram)<br>plt.show()<br></code></pre></td></tr></table></figure>
 
-<p><img src="/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/spectrogram.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/114e30c3/spectrogram.png" srcset="/blog/img/loading.gif" lazyload></p>
 <p>显然，在该频谱图上看不到太多信息。发生这种情况的原因是人耳感知声音的方式是对数的，人类能够听到的大部分声音都集中在一个狭窄的频率和振幅范围内。</p>
 <h3 id="Mel-Spectrogram"><a href="#Mel-Spectrogram" class="headerlink" title="Mel Spectrogram"></a>Mel Spectrogram</h3><p>相对于常规的频谱图，梅尔频谱图有两个重要的变化：</p>
 <ul>
@@ -341,17 +349,17 @@
 <p>深度学习通常使用梅尔频谱图。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 将复数矩阵D(F, T)分离为幅值𝑆和相位𝑃的函数，返回幅值S，相位P</span><br>sgram_mag, _ = librosa.magphase(sgram)<br><span class="hljs-comment"># 计算梅尔频谱</span><br>mel_scale_sgram = librosa.feature.melspectrogram(S=sgram_mag, sr=sample_rate)<br>librosa.display.specshow(mel_scale_sgram)<br>plt.show()<br></code></pre></td></tr></table></figure>
 
-<p><img src="/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/mel-spectrogram1.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/114e30c3/mel-spectrogram1.png" srcset="/blog/img/loading.gif" lazyload></p>
 <p>这好多了，但大部分仍然很暗，可见没有携带足够的有用信息。因此，我们修改它以分贝比例而不是振幅。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 幅值转dB，将幅度频谱转换为dB标度频谱。也就是对S取对数</span><br>mel_sgram = librosa.amplitude_to_db(mel_scale_sgram, ref=np.<span class="hljs-built_in">min</span>)<br>librosa.display.specshow(mel_sgram, sr=sample_rate, x_axis=<span class="hljs-string">&#x27;time&#x27;</span>, y_axis=<span class="hljs-string">&#x27;mel&#x27;</span>)<br>plt.colorbar(<span class="hljs-built_in">format</span>=<span class="hljs-string">&#x27;%+2.0f dB&#x27;</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
 
-<p><img src="/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/mel-spectrogram2.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/114e30c3/mel-spectrogram2.png" srcset="/blog/img/loading.gif" lazyload></p>
 <p>这就是我们真正想要的。</p>
 <h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h3 id="傅立叶变换"><a href="#傅立叶变换" class="headerlink" title="傅立叶变换"></a>傅立叶变换</h3><p>离散傅立叶变换（DFT）：计算成本高，实践中较少用。</p>
 <p>快速傅立叶变换（FFT）：计算音频信号整个时间序列的整体频率分量。但无法得知频率分量在音频信号中随时间的变化情况。</p>
 <p>短时傅里叶变换（STFT）：使用滑动时间窗口将音频信号分解成更小的部分，对每个部分进行FFT，最终组合在一起。能够捕获频率随时间的变化。</p>
 <p>STFT将音频信号分别沿时间轴和频率轴分为多个部分。它对整个频率范围进行划分，在梅尔尺度中分为等距的频带。STFT对每个时间段计算每个频带的振幅或能量。</p>
-<p><img src="/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/STFT.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/114e30c3/STFT.png" srcset="/blog/img/loading.gif" lazyload></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 频谱图是二维的numpy数组，（频段数，时间段数）</span><br><span class="hljs-comment"># 数组中的每个数字都是对应时间段和频段信号的振幅</span><br><span class="hljs-comment"># 数组中的每一列都成为梅尔谱图图像中的一列</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(mel_sgram), mel_sgram.shape)<br><span class="hljs-comment"># &lt;class &#x27;numpy.ndarray&#x27;&gt; (128, 23235)</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="梅尔谱图超参数"><a href="#梅尔谱图超参数" class="headerlink" title="梅尔谱图超参数"></a>梅尔谱图超参数</h3><p>用于调整梅尔谱图的超参数，使用Librosa的参数名称。（其他库也具有等效参数）</p>
@@ -375,7 +383,7 @@
 <p>MFCC可以从梅尔谱图中选择与人类说话最常见的频率相对应的频带的压缩表示。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 提取MFCC特征</span><br>mfcc = librosa.feature.mfcc(samples, sr=sample_rate)<br><span class="hljs-comment"># 执行特征缩放，使得每个系数维度具有零均值和单位方差</span><br>mfcc = sklearn.preprocessing.scale(mfcc, axis=<span class="hljs-number">1</span>)<br>librosa.display.specshow(mfcc, sr=sample_rate, x_axis=<span class="hljs-string">&#x27;time&#x27;</span>)<br>plt.show()<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(mfcc), mfcc.shape)<br><span class="hljs-comment"># &lt;class &#x27;numpy.ndarray&#x27;&gt; (20, 23235)</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="/blog/2023/02/22/%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/mfcc.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/114e30c3/mfcc.png" srcset="/blog/img/loading.gif" lazyload></p>
 <p>MFCC从音频中提取出的特征比梅尔谱图更少，这些特征与捕捉声音的基本质量最相关。</p>
 <h3 id="频谱图增强"><a href="#频谱图增强" class="headerlink" title="频谱图增强"></a>频谱图增强</h3><p>应用于图像的变换不适用于频谱图。例如翻转或旋转等。</p>
 <p>使用SpecAugment，屏蔽频谱图的某个部分，有两种方式：</p>
@@ -445,7 +453,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>音频处理笔记</div>
-      <div>https://wangaaayu.github.io/blog/2023/02/22/音频处理笔记/</div>
+      <div>https://wangaaayu.github.io/blog/posts/114e30c3/</div>
     </div>
     <div class="license-meta">
       
@@ -494,7 +502,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2023/05/04/Dijkstra%E7%AE%97%E6%B3%95%E5%8F%8Anetworkx%E4%B8%8Eanimation%E5%8A%A8%E7%94%BB%E6%BC%94%E7%A4%BA/" title="Dijkstra算法及networkx与animation动画演示">
+                      <a href="/blog/posts/7c297a7f/" title="Dijkstra算法及networkx与animation动画演示">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Dijkstra算法及networkx与animation动画演示</span>
                         <span class="visible-mobile">上一篇</span>
@@ -504,7 +512,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2023/02/02/Diffusion-Model%E7%AC%94%E8%AE%B0/" title="Diffusion Model笔记">
+                      <a href="/blog/posts/33d4eadd/" title="Diffusion Model笔记">
                         <span class="hidden-mobile">Diffusion Model笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>

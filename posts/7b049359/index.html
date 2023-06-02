@@ -16,26 +16,26 @@
   <meta name="author" content="WangAaayu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="vue测试后端api接口简易模板大多数vue项目都把页面放在src&#x2F;views&#x2F;目录下，并且有src&#x2F;router&#x2F;index.js做路由。本项目是vue2版本，主要用于后端开发过程中测试api，只用到api模块。项目结构如图：  src&#x2F;main.js12345678import Vue from &amp;#x27;vue&amp;#x27;import App from &amp;#x27;.&#x2F;App.vue&amp;#x">
+    <meta name="description" content="Transformer笔记      Input EmbeddingOne-Hot Encoding将输入单词用one-hot形式编码成序列向量，向量长度就是预定义的词汇表中拥有的词汇量，向量在这一维中的值只有一个位置是1，其余都是0，1对应的位置就是词汇表中表示这个单词的地方 劣势：稀疏；长 Word Embedding设计一个可学习的权重矩阵W，将one-hot词向量与这个矩阵进行点乘，得到新">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue测试后端api接口简易模板">
-<meta property="og:url" content="https://wangaaayu.github.io/blog/2023/05/25/vue%E6%B5%8B%E8%AF%95%E5%90%8E%E7%AB%AFapi%E6%8E%A5%E5%8F%A3%E7%AE%80%E6%98%93%E6%A8%A1%E6%9D%BF/index.html">
+<meta property="og:title" content="Transformer笔记">
+<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/7b049359/index.html">
 <meta property="og:site_name" content="WangAaayu">
-<meta property="og:description" content="vue测试后端api接口简易模板大多数vue项目都把页面放在src&#x2F;views&#x2F;目录下，并且有src&#x2F;router&#x2F;index.js做路由。本项目是vue2版本，主要用于后端开发过程中测试api，只用到api模块。项目结构如图：  src&#x2F;main.js12345678import Vue from &amp;#x27;vue&amp;#x27;import App from &amp;#x27;.&#x2F;App.vue&amp;#x">
+<meta property="og:description" content="Transformer笔记      Input EmbeddingOne-Hot Encoding将输入单词用one-hot形式编码成序列向量，向量长度就是预定义的词汇表中拥有的词汇量，向量在这一维中的值只有一个位置是1，其余都是0，1对应的位置就是词汇表中表示这个单词的地方 劣势：稀疏；长 Word Embedding设计一个可学习的权重矩阵W，将one-hot词向量与这个矩阵进行点乘，得到新">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/05/25/vue%E6%B5%8B%E8%AF%95%E5%90%8E%E7%AB%AFapi%E6%8E%A5%E5%8F%A3%E7%AE%80%E6%98%93%E6%A8%A1%E6%9D%BF/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png">
-<meta property="article:published_time" content="2023-05-25T11:58:31.000Z">
-<meta property="article:modified_time" content="2023-05-26T13:14:58.546Z">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/7b049359/transformer_model.jpg">
+<meta property="article:published_time" content="2022-11-11T08:57:18.000Z">
+<meta property="article:modified_time" content="2023-05-27T01:05:00.270Z">
 <meta property="article:author" content="WangAaayu">
-<meta property="article:tag" content="代码">
+<meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangaaayu.github.io/blog/2023/05/25/vue%E6%B5%8B%E8%AF%95%E5%90%8E%E7%AB%AFapi%E6%8E%A5%E5%8F%A3%E7%AE%80%E6%98%93%E6%A8%A1%E6%9D%BF/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png">
+<meta name="twitter:image" content="https://wangaaayu.github.io/blog/posts/7b049359/transformer_model.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>vue测试后端api接口简易模板 - WangAaayu</title>
+  <title>Transformer笔记 - WangAaayu</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="vue测试后端api接口简易模板"></span>
+            <span id="subtitle" data-typed-text="Transformer笔记"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-25 19:58" pubdate>
-          2023年5月25日 晚上
+        <time datetime="2022-11-11 16:57" pubdate>
+          2022年11月11日 下午
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.9k 字
+          1.9k 字
         
       </span>
     
@@ -234,12 +234,20 @@
         
         
         
-          25 分钟
+          16 分钟
         
       </span>
     
 
     
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
     
   </div>
 
@@ -249,7 +257,7 @@
       <span class="post-meta ">
         
           
-            本文最后更新于：2023年5月26日 晚上
+            本文最后更新于：2023年5月27日 上午
           
         
       </span>
@@ -285,22 +293,50 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vue测试后端api接口简易模板</h1>
+            <h1 style="display: none">Transformer笔记</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="vue测试后端api接口简易模板"><a href="#vue测试后端api接口简易模板" class="headerlink" title="vue测试后端api接口简易模板"></a>vue测试后端api接口简易模板</h1><p>大多数vue项目都把页面放在src/views/目录下，并且有src/router/index.js做路由。本项目是<strong>vue2</strong>版本，主要用于后端开发过程中测试api，只用到api模块。项目结构如图：</p>
-<p><img src="/blog/2023/05/25/vue%E6%B5%8B%E8%AF%95%E5%90%8E%E7%AB%AFapi%E6%8E%A5%E5%8F%A3%E7%AE%80%E6%98%93%E6%A8%A1%E6%9D%BF/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png" srcset="/blog/img/loading.gif" lazyload></p>
-<h2 id="src-main-js"><a href="#src-main-js" class="headerlink" title="src/main.js"></a>src/main.js</h2><figure class="highlight v"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs v"><span class="hljs-keyword">import</span> Vue from &#x27;vue&#x27;<br><span class="hljs-keyword">import</span> App from &#x27;./App<span class="hljs-variable">.vue</span>&#x27;<br><br>Vue<span class="hljs-variable">.config</span><span class="hljs-variable">.productionTip</span> = false<br><br><span class="hljs-keyword">new</span> Vue(&#123;<br>  render: h =&gt; h(App),<br>&#125;).$mount(&#x27;#app&#x27;)<br></code></pre></td></tr></table></figure>
-
-<h2 id="src-App-vue"><a href="#src-App-vue" class="headerlink" title="src/App.vue"></a>src/App.vue</h2><figure class="highlight v"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs v">&lt;template&gt;<br>  &lt;div id=<span class="hljs-string">&quot;app&quot;</span>&gt;<br>    &lt;img alt=<span class="hljs-string">&quot;Vue logo&quot;</span> src=<span class="hljs-string">&quot;./assets/logo.png&quot;</span>&gt;<br>    &lt;HelloWorld msg=<span class="hljs-string">&quot;Welcome to Your Vue.js App&quot;</span>/&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br><span class="hljs-keyword">import</span> HelloWorld from &#x27;./components/HelloWorld<span class="hljs-variable">.vue</span>&#x27;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  name: &#x27;App&#x27;,<br>  components: &#123;<br>    HelloWorld<br>  &#125;<br>&#125;<br>&lt;/script&gt;<br><br>&lt;style&gt;<br>#app &#123;<br>  font-family: Avenir, Helvetica, Arial, sans-serif;<br>  -webkit-font-smoothing: antialiased;<br>  -moz-osx-font-smoothing: grayscale;<br>  text-align: center;<br>  color: #<span class="hljs-number">2</span>c3e50;<br>  margin-top: <span class="hljs-number">60</span>px;<br>&#125;<br>&lt;/style&gt;<br></code></pre></td></tr></table></figure>
-
-<h2 id="src-api-index-js"><a href="#src-api-index-js" class="headerlink" title="src/api/index.js"></a>src/api/index.js</h2><figure class="highlight v"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs v"><span class="hljs-keyword">import</span> Vue from &#x27;vue&#x27;<br><span class="hljs-keyword">import</span> Axios from &#x27;axios&#x27;<br><br><span class="hljs-keyword">const</span> axiosInstance = Axios<span class="hljs-variable">.create</span>(&#123;<br>    withCredentials: true<br>&#125;)<br><br><span class="hljs-comment">// 通过拦截器处理csrf问题，这里的正则和匹配下标可能需要根据实际情况小改动</span><br>axiosInstance<span class="hljs-variable">.interceptors</span><span class="hljs-variable">.request</span><span class="hljs-variable">.use</span>((<span class="hljs-keyword">config</span>) =&gt; &#123;<br>    <span class="hljs-keyword">config</span><span class="hljs-variable">.headers</span>[&#x27;X-Requested-With&#x27;] = &#x27;XMLHttpRequest&#x27;<br>    <span class="hljs-keyword">const</span> regex = /.*csrftoken=([^;.]*).*$/<br>    <span class="hljs-keyword">config</span><span class="hljs-variable">.headers</span>[&#x27;X-CSRFToken&#x27;] = document<span class="hljs-variable">.cookie</span><span class="hljs-variable">.match</span>(regex) === <span class="hljs-literal">null</span> ? <span class="hljs-literal">null</span> : document<span class="hljs-variable">.cookie</span><span class="hljs-variable">.match</span>(regex)[<span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">config</span><br>&#125;)<br><br>axiosInstance<span class="hljs-variable">.interceptors</span><span class="hljs-variable">.response</span><span class="hljs-variable">.use</span>(<br>    response =&gt; &#123;<br>        <span class="hljs-keyword">return</span> response<br>    &#125;,<br>    error =&gt; &#123;<br>        <span class="hljs-keyword">return</span> Promise<span class="hljs-variable">.reject</span>(error)<br>    &#125;<br>)<br><br>Vue<span class="hljs-variable">.prototype</span><span class="hljs-variable">.axios</span> = axiosInstance<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> axiosInstance<br></code></pre></td></tr></table></figure>
-
-<h2 id="src-api-api-js"><a href="#src-api-api-js" class="headerlink" title="src/api/api.js"></a>src/api/api.js</h2><figure class="highlight v"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs v"><span class="hljs-keyword">import</span> axiosInstance from &#x27;./index&#x27;<br><br><span class="hljs-keyword">const</span> axios = axiosInstance<br><span class="hljs-keyword">const</span> ip = &#x27;http:<span class="hljs-comment">//localhost:8000/app/&#x27;  // api请求地址的统一字段</span><br><br><span class="hljs-comment">// GET请求</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getRequest = () =&gt; &#123;<span class="hljs-keyword">return</span> axios<span class="hljs-variable">.get</span>(ip + &#x27;后端url&#x27;)&#125;<br><br><span class="hljs-comment">// POST请求</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> postRequest = data =&gt; &#123;<span class="hljs-keyword">return</span> axios<span class="hljs-variable">.get</span>(ip + &#x27;后端url&#x27;, data)&#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="src-components-HelloWorld-vue"><a href="#src-components-HelloWorld-vue" class="headerlink" title="src/components/HelloWorld.vue"></a>src/components/HelloWorld.vue</h2><figure class="highlight v"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs v">&lt;template&gt;<br>  &lt;div <span class="hljs-keyword">class</span>=<span class="hljs-string">&quot;hello&quot;</span>&gt;<br>    &lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;/h1&gt;<br>  &lt;/div&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br><span class="hljs-keyword">import</span> &#123;<br>  getRequest, postRequest<br>&#125; from &#x27;../api/api<span class="hljs-variable">.js</span>&#x27;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  name: <span class="hljs-number">&#x27;He</span>lloWorld&#x27;,<br>  data() &#123;<br>    <span class="hljs-keyword">return</span> &#123;<br>      msg: &#x27;Welcome to Your Vue<span class="hljs-variable">.js</span> App&#x27;,<br>    &#125;<br>  &#125;,<br>  methods: &#123;<br>    testGetRequest() &#123;<br>      getRequest()<span class="hljs-variable">.then</span>(response =&gt; &#123;<br>        console<span class="hljs-variable">.log</span>(response<span class="hljs-variable">.data</span>)<br>      &#125;)<span class="hljs-variable">.catch</span>((error) =&gt; &#123;<br>        alert(error<span class="hljs-variable">.response</span><span class="hljs-variable">.data</span>)<br>      &#125;)<br>    &#125;,<br>    testPostRequest() &#123;<br>      postRequest(&#123;<br>        <span class="hljs-comment">// 以字典形式构造POST请求的参数</span><br>        &#x27;key&#x27;: value,<br>        &#x27;key&#x27;: &#x27;value&#x27;,<br>      &#125;)<span class="hljs-variable">.then</span>(response =&gt; &#123;<br>        console<span class="hljs-variable">.log</span>(response<span class="hljs-variable">.data</span>)<br>      &#125;)<span class="hljs-variable">.catch</span>((error) =&gt; &#123;<br>        alert(error<span class="hljs-variable">.response</span><span class="hljs-variable">.data</span>)<br>      &#125;)<br>    &#125;,<br>  &#125;,<br>  created: <span class="hljs-keyword">function</span> () &#123;<br>    <span class="hljs-keyword">this</span><span class="hljs-variable">.testGetRequest</span>()<br>    <span class="hljs-keyword">this</span><span class="hljs-variable">.testPostRequest</span>()<br>  &#125;,<br>&#125;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>
+                <h1 id="Transformer笔记"><a href="#Transformer笔记" class="headerlink" title="Transformer笔记"></a>Transformer笔记</h1><p>     <img src="/blog/posts/7b049359/transformer_model.jpg" srcset="/blog/img/loading.gif" lazyload></p>
+<h2 id="Input-Embedding"><a href="#Input-Embedding" class="headerlink" title="Input Embedding"></a>Input Embedding</h2><h3 id="One-Hot-Encoding"><a href="#One-Hot-Encoding" class="headerlink" title="One-Hot Encoding"></a>One-Hot Encoding</h3><p>将输入单词用one-hot形式编码成序列向量，向量长度就是预定义的词汇表中拥有的词汇量，向量在这一维中的值只有一个位置是1，其余都是0，1对应的位置就是词汇表中表示这个单词的地方</p>
+<p>劣势：稀疏；长</p>
+<h3 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h3><p>设计一个可学习的权重矩阵W，将one-hot词向量与这个矩阵进行点乘，得到新的表示结果</p>
+<p>优势：降维</p>
+<h3 id="Position-Encoding"><a href="#Position-Encoding" class="headerlink" title="Position Encoding"></a>Position Encoding</h3><p>预定义函数，通过函数计算出位置信息<br>$PE_{(pos,2i)}=sin(pos/10000^{2i/d})$</p>
+<p>$PE_{(pos,2i+1)}=cos(pos/10000^{2i/d})$<br>这种编码方式保证了不同位置在所有维度上不会被编码到完全一样的值</p>
+<h3 id="Transformer对输入的操作概括"><a href="#Transformer对输入的操作概括" class="headerlink" title="Transformer对输入的操作概括"></a>Transformer对输入的操作概括</h3><p>word embedding + position embedding = final representation</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e6b5b463cf7b">Transformer 修炼之道（一）、Input Embedding</a></p>
+<h2 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h2><p>Encoder由多个（通常6个）层组成，每个层内部都有<strong>残差连接</strong>和<strong>归一化操作</strong>，主要内容包括<strong>多头自注意力层</strong>（Multi-Head Self-Attention）和<strong>前向反馈网络层</strong>（Feed Forward Network），前者用于捕捉特征之间的关系，后者是进一步编码学习，实质上等同于MLP（Multi-Layer Perception）</p>
+<h3 id="Multi-Head-Self-Attention"><a href="#Multi-Head-Self-Attention" class="headerlink" title="Multi-Head Self-Attention"></a>Multi-Head Self-Attention</h3><p>多头（多个，通常为8）</p>
+<ol>
+<li><p>对输入做不同的线性变换生成<strong>Q（Query）、K（Key）、V（Value）</strong></p>
+</li>
+<li><p><strong>Scaled Dot-Product Attention</strong>（对Q、K、V进行计算得到输出）</p>
+<p>$$<br>Attention(Q,K,V)=softmax(\frac{Q K^T}{\sqrt{d_k}})V \<br>d_k是Q,K矩阵的列数，即向量维度<br>$$</p>
+<p>除以\sqrt{d_k}的原因是防止Q和K的点积值过大（\sqrt{d_k}即Q的列数，也是K的行数），避免在经过softmax后梯度太小</p>
+</li>
+<li><p>将多个自注意力的输出拼接起来，再进行线性变换</p>
+</li>
+</ol>
+<h3 id="Feed-Forward-Network（FFN）"><a href="#Feed-Forward-Network（FFN）" class="headerlink" title="Feed Forward Network（FFN）"></a>Feed Forward Network（FFN）</h3><p>两个全连接层，其中一个带ReLU激活，两层中间有Dropout<br>$FFN(x)=max(0,xW_1+b_1)W_2+b_2$</p>
+<h3 id="Add-amp-Norm"><a href="#Add-amp-Norm" class="headerlink" title="Add &amp; Norm"></a>Add &amp; Norm</h3><p>$$<br>LayerNorm(X+MultiHeadAttention(X)) \<br>LayerNorm(X+FeedForward(X))<br>$$</p>
+<p>Add：输入加输出（残差连接）</p>
+<p>Norm：Layer Normalization，通常为$\frac{x-\mu}{\sigma}$，$\mu$表示均值$\sigma$表示标准差</p>
+<h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/81901d3d3f8e">Transformer 修炼之道（二）、Encoder</a></p>
+<h2 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h2><h3 id="Multi-Head-Attention-with-Mask"><a href="#Multi-Head-Attention-with-Mask" class="headerlink" title="Multi-Head Attention with Mask"></a>Multi-Head Attention with Mask</h3><p>mask：忽略某些位置（要预测的之后的内容），不计算与其相关的注意力权重（下三角矩阵，以极大负值代替0，从而使得其经过softmax后生成的概率趋近于0，相当于不计算这些位置的注意力权重）</p>
+<h3 id="Encoder-Decoder-Attention"><a href="#Encoder-Decoder-Attention" class="headerlink" title="Encoder-Decoder Attention"></a>Encoder-Decoder Attention</h3><p>其实是多头自注意力，K和V来自Encoder的输出，Q：如果是Decoder的第一层，则使用（已解码的）输入序列（最开始则是起始字符）；如果是后面的层，则是前面层的输出</p>
+<h3 id="Output-Generator"><a href="#Output-Generator" class="headerlink" title="Output Generator"></a>Output Generator</h3><p>实质是线性层，将解码的序列映射回原来的空间维度，然后经过softmax（或log-softmax）生成预测概率</p>
+<h3 id="参考-2"><a href="#参考-2" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2ee8a87bcd29">Transformer 修炼之道（三）、Decoder</a></p>
+<h2 id="Transformer总结"><a href="#Transformer总结" class="headerlink" title="Transformer总结"></a>Transformer总结</h2><ul>
+<li>Transformer 与 RNN 不同，可以比较好地并行训练</li>
+<li>Transformer 本身是不能利用单词的顺序信息的，因此需要在输入中添加位置 Embedding，否则 Transformer 就是一个词袋模型了</li>
+<li>Transformer 的重点是 Self-Attention 结构，其中用到的 Q, K, V矩阵通过输出进行线性变换得到</li>
+<li>Transformer 中 Multi-Head Attention 中有多个 Self-Attention，可以捕获单词之间多种维度上的相关系数 attention score</li>
+</ul>
+<h2 id="整体可参考"><a href="#整体可参考" class="headerlink" title="整体可参考"></a>整体可参考</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/338817680">Transformer模型详解（图解最完整版）</a></p>
+<h2 id="变种"><a href="#变种" class="headerlink" title="变种"></a>变种</h2><h3 id="Sandwich-Transformer"><a href="#Sandwich-Transformer" class="headerlink" title="Sandwich Transformer"></a>Sandwich Transformer</h3><p>变换了self-attention和FFN的顺序</p>
+<h3 id="Universal-Transformer"><a href="#Universal-Transformer" class="headerlink" title="Universal Transformer"></a>Universal Transformer</h3><p>在深度上加上循环，增加通用性</p>
 
                 
               </div>
@@ -319,7 +355,7 @@
     
       <span class="category-chain">
         
-  <a href="/blog/categories/%E5%BC%80%E5%8F%91/" class="category-chain-item">开发</a>
+  <a href="/blog/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
   
   
 
@@ -334,7 +370,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/blog/tags/%E4%BB%A3%E7%A0%81/">#代码</a>
+        <a href="/blog/tags/%E7%AC%94%E8%AE%B0/">#笔记</a>
       
     </div>
   
@@ -346,8 +382,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>vue测试后端api接口简易模板</div>
-      <div>https://wangaaayu.github.io/blog/2023/05/25/vue测试后端api接口简易模板/</div>
+      <div>Transformer笔记</div>
+      <div>https://wangaaayu.github.io/blog/posts/7b049359/</div>
     </div>
     <div class="license-meta">
       
@@ -359,13 +395,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月25日</div>
+          <div>2022年11月11日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年5月26日</div>
+          <div>2023年5月27日</div>
         </div>
       
       
@@ -396,9 +432,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2023/05/26/GitHub+Hexo%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89/" title="GitHub+Hexo博客网站搭建（三）">
+                      <a href="/blog/posts/973f8e3f/" title="GitHub+Hexo博客网站搭建（二）">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">GitHub+Hexo博客网站搭建（三）</span>
+                        <span class="hidden-mobile">GitHub+Hexo博客网站搭建（二）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -406,8 +442,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2023/05/18/vue+django%E9%83%A8%E7%BD%B2ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="vue+django部署ubuntu服务器">
-                        <span class="hidden-mobile">vue+django部署ubuntu服务器</span>
+                      <a href="/blog/posts/a72962e7/" title="GitHub+Hexo博客网站搭建（一）">
+                        <span class="hidden-mobile">GitHub+Hexo博客网站搭建（一）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

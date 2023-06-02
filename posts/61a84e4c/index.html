@@ -19,20 +19,20 @@
     <meta name="description" content="vue+django部署ubuntu服务器首先用MobaXterm（或其他软件）连接上ubuntu服务器 ubuntu服务器上需安装：  mysql  python3（django+uwsgi）  nginx   整体架构 查看端口与进程查看mysql的3306、django项目的8000等要用的端口有没有被占用 1234# -a查看已连接的服务端口，-ap查看所有的服务端口netstat -ap">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue+django部署ubuntu服务器">
-<meta property="og:url" content="https://wangaaayu.github.io/blog/2023/05/18/vue+django%E9%83%A8%E7%BD%B2ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/61a84e4c/index.html">
 <meta property="og:site_name" content="WangAaayu">
 <meta property="og:description" content="vue+django部署ubuntu服务器首先用MobaXterm（或其他软件）连接上ubuntu服务器 ubuntu服务器上需安装：  mysql  python3（django+uwsgi）  nginx   整体架构 查看端口与进程查看mysql的3306、django项目的8000等要用的端口有没有被占用 1234# -a查看已连接的服务端口，-ap查看所有的服务端口netstat -ap">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/05/18/vue+django%E9%83%A8%E7%BD%B2ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9E%B6%E6%9E%84.jpg">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/05/18/vue+django%E9%83%A8%E7%BD%B2ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8/mysql%E8%BF%9E%E6%8E%A5%E6%88%90%E5%8A%9F.png">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/05/18/vue+django%E9%83%A8%E7%BD%B2ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8/uwsgi%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F.png">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/2023/05/18/vue+django%E9%83%A8%E7%BD%B2ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8/nginx%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/61a84e4c/%E6%9E%B6%E6%9E%84.jpg">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/61a84e4c/mysql%E8%BF%9E%E6%8E%A5%E6%88%90%E5%8A%9F.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/61a84e4c/uwsgi%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/61a84e4c/nginx%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F.png">
 <meta property="article:published_time" content="2023-05-18T02:12:38.000Z">
 <meta property="article:modified_time" content="2023-05-26T13:16:05.747Z">
 <meta property="article:author" content="WangAaayu">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangaaayu.github.io/blog/2023/05/18/vue+django%E9%83%A8%E7%BD%B2ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9E%B6%E6%9E%84.jpg">
+<meta name="twitter:image" content="https://wangaaayu.github.io/blog/posts/61a84e4c/%E6%9E%B6%E6%9E%84.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -244,6 +244,14 @@
 
     
     
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
   </div>
 
   <span class="myupdated">
@@ -303,7 +311,7 @@
 <li><p>nginx</p>
 </li>
 </ul>
-<h2 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h2><p><img src="/blog/2023/05/18/vue+django%E9%83%A8%E7%BD%B2ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9E%B6%E6%9E%84.jpg" srcset="/blog/img/loading.gif" lazyload></p>
+<h2 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h2><p><img src="/blog/posts/61a84e4c/%E6%9E%B6%E6%9E%84.jpg" srcset="/blog/img/loading.gif" lazyload></p>
 <h2 id="查看端口与进程"><a href="#查看端口与进程" class="headerlink" title="查看端口与进程"></a>查看端口与进程</h2><p>查看mysql的3306、django项目的8000等要用的端口有没有被占用</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># -a查看已连接的服务端口，-ap查看所有的服务端口</span><br><span class="hljs-attribute">netstat</span> -ap | grep <span class="hljs-number">8000</span><br><span class="hljs-comment"># 关闭使用端口的程序</span><br><span class="hljs-attribute">kill</span> -<span class="hljs-number">9</span> pid号<br></code></pre></td></tr></table></figure>
 
@@ -313,7 +321,7 @@
 <h2 id="mysql安装配置"><a href="#mysql安装配置" class="headerlink" title="mysql安装配置"></a>mysql安装配置</h2><p>mysql8.0，设置root密码、授予root所有权限、并使root能够远程连接</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 安装mysql（可只安装server）</span><br>sudo apt-<span class="hljs-built_in">get</span> install mysql-server<br>sudo apt-<span class="hljs-built_in">get</span> install mysql-client<br><span class="hljs-comment"># 查看mysql服务状态</span><br>systemctl status mysql.service<br><span class="hljs-comment"># mysql基本安全配置</span><br><span class="hljs-comment"># 配置的内容为：增加密码组件；设置root密码策略和密码；是否禁用匿名用户；是否不允许root远程登录；是否移除test数据库；是否重新加载权限表</span><br>sudo mysql_secure_installation<br><span class="hljs-comment"># 进入mysql</span><br>mysql -u root -p<br><span class="hljs-comment"># 设置密码策略</span><br><span class="hljs-built_in">set</span> global validate_password.<span class="hljs-attribute">policy</span>=LOW;<br><span class="hljs-comment"># 设置密码长度</span><br><span class="hljs-built_in">set</span> global validate_password.<span class="hljs-attribute">length</span>=6;<br><span class="hljs-comment"># 修改root密码</span><br>alter<span class="hljs-built_in"> user </span><span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> identified with mysql_native_password by <span class="hljs-string">&#x27;password&#x27;</span>;<br><span class="hljs-comment"># 进入mysql数据库</span><br>use mysql;<br><span class="hljs-comment"># 更改root的host</span><br>update<span class="hljs-built_in"> user </span><span class="hljs-built_in">set</span> <span class="hljs-attribute">host</span>=<span class="hljs-string">&#x27;%&#x27;</span> where <span class="hljs-attribute">user</span>=<span class="hljs-string">&#x27;root&#x27;</span>;<br><span class="hljs-comment"># 授予所有地址root所有数据库权限</span><br>grant all privileges on *.* <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> with grant option;<br><span class="hljs-comment"># 刷新权限，使之生效</span><br>flush privileges;<br><span class="hljs-comment"># 退出mysql</span><br>exit<br><span class="hljs-comment"># 修改mysqld.cnf配置文件中的bind-address</span><br>sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf<br>bind-address = 127.0.0.1,服务器ip地址<br><span class="hljs-comment"># 重启mysql</span><br>sudo systemctl restart mysql.service<br><span class="hljs-comment"># 查看3306端口的地址</span><br>ss -anplt | grep 3306<br><span class="hljs-comment"># 验证是否能够远程连接</span><br>mysql -u root -p -h ipv4地址<br></code></pre></td></tr></table></figure>
 
-<p><img src="/blog/2023/05/18/vue+django%E9%83%A8%E7%BD%B2ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8/mysql%E8%BF%9E%E6%8E%A5%E6%88%90%E5%8A%9F.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/61a84e4c/mysql%E8%BF%9E%E6%8E%A5%E6%88%90%E5%8A%9F.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h2 id="python3虚拟环境"><a href="#python3虚拟环境" class="headerlink" title="python3虚拟环境"></a>python3虚拟环境</h2><p>创建虚拟环境来运行项目，方便python环境管理</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 安装virtualenv包</span><br>pip install virtualenv<br><span class="hljs-comment"># 创建虚拟环境</span><br>virtualenv 环境名称<br><span class="hljs-comment"># 指定python版本创建虚拟环境</span><br>virtualenv 环境名称 --python=python3.8<br><span class="hljs-comment"># 激活虚拟环境</span><br><span class="hljs-built_in">source</span> 虚拟环境目录/bin/activate<br><span class="hljs-comment"># 退出虚拟环境</span><br>deactivate<br><span class="hljs-comment"># 删除环境删除文件夹即可</span><br><span class="hljs-built_in">rm</span> -rf 环境名称<br></code></pre></td></tr></table></figure>
 
@@ -347,7 +355,7 @@
 <p>运行uwsgi，启动django项目</p>
 <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">uwsgi <span class="hljs-comment">--ini uwsgi.ini</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="/blog/2023/05/18/vue+django%E9%83%A8%E7%BD%B2ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8/uwsgi%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/61a84e4c/uwsgi%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F.png" srcset="/blog/img/loading.gif" lazyload></p>
 <p>uwsgi常用命令</p>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-comment"># 运行</span><br>uwsgi <span class="hljs-comment">--ini uwsgi.ini</span><br><span class="hljs-comment"># 停止</span><br>uwsgi <span class="hljs-comment">--stop uwsgi.pid</span><br><span class="hljs-comment"># 重启</span><br>uwsgi <span class="hljs-comment">--reload uwsgi.pid</span><br></code></pre></td></tr></table></figure>
 
@@ -378,7 +386,7 @@
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">service nginx restart</span><br></code></pre></td></tr></table></figure>
 
 <p>登录刚配置的网址看是否有nginx的欢迎界面</p>
-<p><img src="/blog/2023/05/18/vue+django%E9%83%A8%E7%BD%B2ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8/nginx%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/61a84e4c/nginx%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F.png" srcset="/blog/img/loading.gif" lazyload></p>
 <p>nginx常用命令</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 开机自启动</span><br>systemctl <span class="hljs-built_in">enable</span> nginx<br><span class="hljs-comment"># 启动</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">service </span>nginx start<br>systemctl start nginx<br><span class="hljs-comment"># 停止</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">service </span>nginx stop<br>systemctl stop nginx<br><span class="hljs-comment"># 重启</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">service </span>nginx restart<br>systemctl restart nginx<br><span class="hljs-comment"># 查看状态</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">service </span>nginx status<br>systemctl status nginx<br><span class="hljs-comment"># 重新加载</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">service </span>nginx reload<br>systemctl reload nginx<br>sudo nginx -s reload<br><span class="hljs-comment"># 若修改了/etc/nginx/nginx.conf文件，先测试配置是否正确</span><br>sudo nginx -t<br></code></pre></td></tr></table></figure>
 
@@ -435,7 +443,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>vue+django部署ubuntu服务器</div>
-      <div>https://wangaaayu.github.io/blog/2023/05/18/vue+django部署ubuntu服务器/</div>
+      <div>https://wangaaayu.github.io/blog/posts/61a84e4c/</div>
     </div>
     <div class="license-meta">
       
@@ -484,7 +492,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/2023/05/25/vue%E6%B5%8B%E8%AF%95%E5%90%8E%E7%AB%AFapi%E6%8E%A5%E5%8F%A3%E7%AE%80%E6%98%93%E6%A8%A1%E6%9D%BF/" title="vue测试后端api接口简易模板">
+                      <a href="/blog/posts/2628a59d/" title="vue测试后端api接口简易模板">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">vue测试后端api接口简易模板</span>
                         <span class="visible-mobile">上一篇</span>
@@ -494,7 +502,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/2023/05/13/windows%E4%B8%8Bnginx%E4%BB%A3%E7%90%86django%E9%A1%B9%E7%9B%AE/" title="windows下nginx代理django项目">
+                      <a href="/blog/posts/f0bd5174/" title="windows下nginx代理django项目">
                         <span class="hidden-mobile">windows下nginx代理django项目</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
