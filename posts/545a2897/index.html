@@ -1,0 +1,835 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/icon.png">
+  <link rel="icon" href="/blog/img/icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#81d8d0">
+  <meta name="author" content="WangAaayu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Socket聊天程序（Java）大三网络实验课写的 内容 实现了一个基于TCP协议、Client&#x2F;Server模式的聊天程序，相当于一个多人聊天室。  该聊天室允许多位用户同时在聊天室文本交流、传输文件和接受文件。  该聊天室支持离线文件和断点续传。   客户端与服务器功能客户端 服务器服务器程序（Server.java）设置了sockets队列，用来存储连接的socket。服务器创建服务端，开放">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Socket聊天程序（Java）">
+<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/545a2897/index.html">
+<meta property="og:site_name" content="WangAaayu">
+<meta property="og:description" content="Socket聊天程序（Java）大三网络实验课写的 内容 实现了一个基于TCP协议、Client&#x2F;Server模式的聊天程序，相当于一个多人聊天室。  该聊天室允许多位用户同时在聊天室文本交流、传输文件和接受文件。  该聊天室支持离线文件和断点续传。   客户端与服务器功能客户端 服务器服务器程序（Server.java）设置了sockets队列，用来存储连接的socket。服务器创建服务端，开放">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8A%9F%E8%83%BD.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%88%90%E5%8A%9F.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%8E%E5%8F%B0%E8%BF%9E%E6%8E%A5%E6%B6%88%E6%81%AF.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%8A%93%E5%8C%85.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%8A%93%E5%8C%85%E4%BF%A1%E6%81%AF.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9E%E6%8E%A5%E6%8A%93%E5%8C%85%E4%BF%A1%E6%81%AF.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E8%81%8A%E5%A4%A9.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%8E%E5%8F%B0%E8%81%8A%E5%A4%A9%E6%B6%88%E6%81%AF.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E8%81%8A%E5%A4%A9%E6%8A%93%E5%8C%85.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E9%80%89%E6%8B%A9%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E7%94%A8%E6%88%B7%E7%9C%8B%E8%A7%81%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%B6%88%E6%81%AF.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6%E6%B6%88%E6%81%AF.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E6%98%AF%E5%90%A6%E6%8E%A5%E6%94%B6%E6%96%87%E4%BB%B6%E6%8F%90%E7%A4%BA.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E7%94%A8%E6%88%B7%E7%9C%8B%E8%A7%81%E6%96%87%E4%BB%B6%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E6%94%B6%E6%96%87%E4%BB%B6%E6%B6%88%E6%81%AF.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6.png">
+<meta property="article:published_time" content="2023-06-04T12:56:37.000Z">
+<meta property="article:modified_time" content="2023-06-04T14:29:55.498Z">
+<meta property="article:author" content="WangAaayu">
+<meta property="article:tag" content="代码">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangaaayu.github.io/blog/posts/545a2897/%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8A%9F%E8%83%BD.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Socket聊天程序（Java） - WangAaayu</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangaaayu.github.io","root":"/blog/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>WangAaayu</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/blog/img/wallpaper.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Socket聊天程序（Java）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-04 20:56" pubdate>
+          2023年6月4日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          29k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          243 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+  <span class="myupdated">
+    
+      <i class="fa fa-repeat" aria-hidden="true" style="margin-right: 0.3rem;"></i>
+      <span class="post-meta ">
+        
+          
+            本文最后更新于：2023年6月4日 晚上
+          
+        
+      </span>
+    
+  </span>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Socket聊天程序（Java）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Socket聊天程序（Java）"><a href="#Socket聊天程序（Java）" class="headerlink" title="Socket聊天程序（Java）"></a>Socket聊天程序（Java）</h1><p>大三网络实验课写的</p>
+<h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><ol>
+<li><p>实现了一个基于TCP协议、Client/Server模式的聊天程序，相当于一个多人聊天室。</p>
+</li>
+<li><p>该聊天室允许多位用户同时在聊天室文本交流、传输文件和接受文件。</p>
+</li>
+<li><p>该聊天室支持离线文件和断点续传。</p>
+</li>
+</ol>
+<h2 id="客户端与服务器功能"><a href="#客户端与服务器功能" class="headerlink" title="客户端与服务器功能"></a>客户端与服务器功能</h2><h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p><img src="/blog/posts/545a2897/%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8A%9F%E8%83%BD.png" srcset="/blog/img/loading.gif" lazyload></p>
+<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><p>服务器程序（Server.java）设置了sockets队列，用来存储连接的socket。服务器创建服务端，开放端口后，在while循环里不断地阻塞等待用户的连接，当用户连接后，将该socket放入sockets队列里，并启动一个新的服务器线程ServerThread为该socket服务。使用服务器线程的方法使服务器允许多用户连接。<br>服务器线程程序（ServerThread.java）进行用户与服务器连接后的工作。服务器线程程序处理用户在线的整个过程，主要提供用户登录、用户基本文字聊天、用户之间传输文件（包括二进制大文件）、离线文件和断点续传等功能。实现方法如下：</p>
+<ol>
+<li><p>用户登录功能：服务器将已经注册的用户名和密码存储在account_password.txt文件中，若用户登录时发送用户名和密码，服务器将其与存储的用户名密码进行匹配，若匹配成功则发送“登录成功”提示，用户可以继续进行后续操作，否则，发送“登录失败！账号或密码有误！”提示，并关闭该socket，用户则无法进行后续操作。</p>
+</li>
+<li><p>用户基本文字聊天功能：服务器阻塞等待接收用户的输入，一旦收到输入，则判断是否为文件操作，否则将在输入的字符串前加上该用户的ip地址和端口组成新的消息，然后给sockets队列加锁，防止对sockets队列的使用产生冲突，加锁成功后向sockets队列里所有连接的socket发送该消息。通过该方法提供聊天室功能，即一位用户发送的消息所有在线用户都能收到。</p>
+</li>
+<li><p>用户之间传输文件（包括二进制大文件）功能：服务器对用户每次的输入进行判断，若为发送文件，则打开接收文件的端口，与用户连接，启动ReceiveFileServerThread在新连接的socket上接收用户发送的文件，若为接收文件，则同理打开发送文件的端口，与用户连接，启动SendFileServerThread在新连接的socket上发送给用户所请求的文件。通过将聊天、发送文件、接收文件的端口分开，可以使用户同时进行聊天、发送文件、接收文件的多个操作，并且发送文件和接收文件使用多线程运行，因此用户可以同时发送和接收多个文件。</p>
+</li>
+<li><p>离线文件功能：服务器通过将用户上传的文件存放在本地的方法提供离线文件功能，用户若想接收不在线时别的用户发送的文件，只需向服务器发送下载请求即可，相对的，若用户发送文件的对象不在线，也可上传文件提供发送对象下载。</p>
+</li>
+<li><p>断点续传功能：服务器在接收文件的过程中，是对该文件的.temp文件进行写入，当文件接收完毕时，才将文件改为正式文件。通过.temp文件方法，可以判断文件是否传输完毕，若某次传输中断，再次传输时，服务器在本地发现了同名的.temp文件，即可知道上次文件未传输完毕，于是在断点位置继续写入，避免了已接收内容的重复接收。</p>
+</li>
+</ol>
+<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><h3 id="客户端连接与断开服务器"><a href="#客户端连接与断开服务器" class="headerlink" title="客户端连接与断开服务器"></a>客户端连接与断开服务器</h3><p>当启动客户端程序后，该用户界面自动弹出，并且已经默认填写好服务器IP、端口和默认的用户名密码，点击连接后，若连接成功，则会弹出连接成功的提示，若连接失败，则会弹出连接失败的提示。点击断开按钮即可断开与服务器的连接，退出聊天室。</p>
+<p><img src="/blog/posts/545a2897/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%88%90%E5%8A%9F.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>该过程在服务器后台有着相应的消息显示。</p>
+<p><img src="/blog/posts/545a2897/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%8E%E5%8F%B0%E8%BF%9E%E6%8E%A5%E6%B6%88%E6%81%AF.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>在客户端抓包，可以看见本机与服务器的连接。基本聊天功能连接的是服务器的6655端口。并且可以捕获到服务器与主机的信息交互，如用户名密码的发送等等。</p>
+<p><img src="/blog/posts/545a2897/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%8A%93%E5%8C%85.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p><img src="/blog/posts/545a2897/%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%8A%93%E5%8C%85%E4%BF%A1%E6%81%AF.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>服务器上抓包。</p>
+<p><img src="/blog/posts/545a2897/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9E%E6%8E%A5%E6%8A%93%E5%8C%85%E4%BF%A1%E6%81%AF.png" srcset="/blog/img/loading.gif" lazyload></p>
+<h3 id="用户之间的聊天"><a href="#用户之间的聊天" class="headerlink" title="用户之间的聊天"></a>用户之间的聊天</h3><p>用户的聊天以IP地址、端口号、用户名与消息的形式发送给所有在线用户。若用户试图发送空的消息，则会弹出消息不能为空的提示。</p>
+<p><img src="/blog/posts/545a2897/%E8%81%8A%E5%A4%A9.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>该过程在服务器后台有着相应的消息显示。</p>
+<p><img src="/blog/posts/545a2897/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%8E%E5%8F%B0%E8%81%8A%E5%A4%A9%E6%B6%88%E6%81%AF.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>在客户端抓包，可以看见本机与服务器消息交互的数据包。在服务器抓包，可以在Data字段里看见服务器转发给客户端的消息。</p>
+<p><img src="/blog/posts/545a2897/%E8%81%8A%E5%A4%A9%E6%8A%93%E5%8C%85.png" srcset="/blog/img/loading.gif" lazyload></p>
+<h3 id="用户之间的文件传输"><a href="#用户之间的文件传输" class="headerlink" title="用户之间的文件传输"></a>用户之间的文件传输</h3><p>用户点击上传文件按钮时，就弹出选择文件窗口。</p>
+<p><img src="/blog/posts/545a2897/%E9%80%89%E6%8B%A9%E6%96%87%E4%BB%B6.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>当选择好文件，点击打开或按回车时，开始发送文件。发送过程中会有文件传输窗口。当文件传输完成时也有相应的提示，并且显示1秒后自动关闭。</p>
+<p><img src="/blog/posts/545a2897/%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>传输完成后所有在线用户可以看见服务器发送的消息。</p>
+<p><img src="/blog/posts/545a2897/%E7%94%A8%E6%88%B7%E7%9C%8B%E8%A7%81%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E6%B6%88%E6%81%AF.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>服务器显示用户传输文件的消息。</p>
+<p><img src="/blog/posts/545a2897/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6%E6%B6%88%E6%81%AF.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>其他所有用户会弹出文件接收提示窗口。选择是后开始接收文件。同样接收成功后也会有相应的接收成功提示，并且显示1秒后自动关闭。</p>
+<p><img src="/blog/posts/545a2897/%E6%98%AF%E5%90%A6%E6%8E%A5%E6%94%B6%E6%96%87%E4%BB%B6%E6%8F%90%E7%A4%BA.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>接收完成后所有在线用户可以看见服务器发送的消息。</p>
+<p><img src="/blog/posts/545a2897/%E7%94%A8%E6%88%B7%E7%9C%8B%E8%A7%81%E6%96%87%E4%BB%B6%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>服务器显示用户接收文件的消息。</p>
+<p><img src="/blog/posts/545a2897/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A5%E6%94%B6%E6%96%87%E4%BB%B6%E6%B6%88%E6%81%AF.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>在客户端抓包，可以看见本机与服务器文件传输的数据包。文件发送连接的是服务器的8822端口，文件接收连接的是服务器的9911端口。在数据包中可以看出文件是以二进制的形式传输。</p>
+<h3 id="离线文件和断电续传"><a href="#离线文件和断电续传" class="headerlink" title="离线文件和断电续传"></a>离线文件和断电续传</h3><p>用户点击下载文件按钮，即弹出下载文件输入窗口。输入要下载的文件名后，开始下载离线文件，服务器以本地的文件进行发送。过程同用户接收文件。</p>
+<p><img src="/blog/posts/545a2897/%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6.png" srcset="/blog/img/loading.gif" lazyload><br>在客户端抓包。此时为客户端接收文件，连接的是服务器的9911端口。传输的同样为二进制数据。</p>
+<p>当用户在传输过程中点击取消按钮，则取消发送文件，会有取消发送的提示窗口。在服务器存放文件的目录下会有该文件的.temp文件。</p>
+<p><img src="/blog/posts/545a2897/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6.png" srcset="/blog/img/loading.gif" lazyload></p>
+<p>当下次继续发送该文件时，直接从上次断点位置开始，直观显示为进度条为上次中断的位置。</p>
+<p>通过抓包可以看出，取消发送后，客户端断开了与服务器8822断开的连接，当继续上传文件时，再次建立连接。通过断点信息交互后继续从断点位置开始传输文件。</p>
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p>用户输入的用户名密码不正确，用户重复连接，用户重复断开，用户发送空消息等错误操作都会弹出相应的提示窗口，并且不会断开与服务器的连接。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="Client-java"><a href="#Client-java" class="headerlink" title="Client.java"></a>Client.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> mysocket2;<br><br><span class="hljs-keyword">import</span> java.awt.*;<br><span class="hljs-keyword">import</span> java.awt.event.ActionEvent;<br><span class="hljs-keyword">import</span> java.awt.event.ActionListener;<br><span class="hljs-keyword">import</span> java.awt.event.WindowAdapter;<br><span class="hljs-keyword">import</span> java.awt.event.WindowEvent;<br><span class="hljs-keyword">import</span> java.io.*;<br><span class="hljs-keyword">import</span> java.net.*;<br><span class="hljs-keyword">import</span> java.util.*;<br><span class="hljs-keyword">import</span> javax.swing.*;<br><span class="hljs-keyword">import</span> javax.swing.border.TitledBorder;<br><span class="hljs-keyword">import</span> javax.swing.event.ListSelectionEvent;<br><span class="hljs-keyword">import</span> javax.swing.event.ListSelectionListener;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Client</span> &#123;<br>    <span class="hljs-comment">//private String SERVER_IP=&quot;127.0.0.1&quot;;</span><br>    <span class="hljs-keyword">private</span> String SERVER_IP=<span class="hljs-string">&quot;121.36.14.65&quot;</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> SERVER_PORT=<span class="hljs-number">6655</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> SERVER_FILE_SEND_PORT=<span class="hljs-number">8822</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> SERVER_FILE_RECEIVE_PORT=<span class="hljs-number">9911</span>;<br><br>    <span class="hljs-keyword">private</span> JPanel sendPanel;<br>    <span class="hljs-keyword">private</span> JButton btn_send_file;<br>    <span class="hljs-keyword">private</span> JButton btn_download_file;<br>    <span class="hljs-keyword">private</span> JFrame frame;<br>    <span class="hljs-keyword">private</span> JTextArea textArea;<br>    <span class="hljs-keyword">private</span> JTextField textField;<br>    <span class="hljs-keyword">private</span> JTextField txt_port;<br>    <span class="hljs-keyword">private</span> JTextField txt_hostIp;<br>    <span class="hljs-keyword">private</span> JTextField txt_username;<br>    <span class="hljs-keyword">private</span> JTextField txt_userpwd;<br>    <span class="hljs-keyword">private</span> JButton btn_start;<br>    <span class="hljs-keyword">private</span> JButton btn_stop;<br>    <span class="hljs-keyword">private</span> JButton btn_send;<br>    <span class="hljs-keyword">private</span> JPanel northPanel;<br>    <span class="hljs-keyword">private</span> JPanel southPanel;<br>    <span class="hljs-keyword">private</span> JScrollPane rightScroll;<br>    <span class="hljs-keyword">private</span> JScrollPane leftScroll;<br>    <span class="hljs-keyword">private</span> JSplitPane centerSplit;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> <span class="hljs-variable">isConnected</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">private</span> Socket socket;<br>    <span class="hljs-keyword">private</span> PrintWriter writer;<br>    <span class="hljs-keyword">private</span> BufferedReader reader;<br>    <span class="hljs-keyword">private</span> MessageThread messageThread;<span class="hljs-comment">// 负责接收消息的线程</span><br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span>&#123;<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Client</span>();<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Client</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-comment">// GUI</span><br>        textArea = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JTextArea</span>();<br>        textArea.setEditable(<span class="hljs-literal">false</span>);<br>        textArea.setForeground(Color.blue);<br>        textField = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JTextField</span>();<br>        txt_port = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JTextField</span>(<span class="hljs-string">&quot;6655&quot;</span>);<br>        <span class="hljs-comment">//txt_hostIp = new JTextField(&quot;127.0.0.1&quot;);</span><br>        txt_hostIp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JTextField</span>(<span class="hljs-string">&quot;121.36.14.65&quot;</span>);<br>        txt_username = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JTextField</span>(<span class="hljs-string">&quot;asd&quot;</span>);<br>        txt_userpwd = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JTextField</span>(<span class="hljs-string">&quot;123&quot;</span>);<br>        btn_start = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JButton</span>(<span class="hljs-string">&quot;连接&quot;</span>);<br>        btn_stop = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JButton</span>(<span class="hljs-string">&quot;断开&quot;</span>);<br>        btn_send = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JButton</span>(<span class="hljs-string">&quot;发送&quot;</span>);<br>        btn_send_file = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JButton</span>(<span class="hljs-string">&quot;上传文件&quot;</span>);<br>        btn_download_file = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JButton</span>(<span class="hljs-string">&quot;下载文件&quot;</span>);<br>        northPanel = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JPanel</span>();<br>        northPanel.setLayout(<span class="hljs-keyword">new</span> <span class="hljs-title class_">GridLayout</span>(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>));<br>        northPanel.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">JLabel</span>(<span class="hljs-string">&quot;服务器IP&quot;</span>));<br>        northPanel.add(txt_hostIp);<br>        northPanel.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">JLabel</span>(<span class="hljs-string">&quot;端口&quot;</span>));<br>        northPanel.add(txt_port);<br>        northPanel.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">JLabel</span>(<span class="hljs-string">&quot;用户名&quot;</span>));<br>        northPanel.add(txt_username);<br>        northPanel.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">JLabel</span>(<span class="hljs-string">&quot;密码&quot;</span>));<span class="hljs-comment">//</span><br>        northPanel.add(txt_userpwd);<br>        northPanel.add(btn_start);<br>        northPanel.add(btn_stop);<br>        northPanel.setBorder(<span class="hljs-keyword">new</span> <span class="hljs-title class_">TitledBorder</span>(<span class="hljs-string">&quot;连接信息&quot;</span>));<br>        rightScroll = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JScrollPane</span>(textArea);<br>        rightScroll.setBorder(<span class="hljs-keyword">new</span> <span class="hljs-title class_">TitledBorder</span>(<span class="hljs-string">&quot;消息显示区&quot;</span>));<br>        southPanel = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JPanel</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">BorderLayout</span>());<br>        sendPanel = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JPanel</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">BorderLayout</span>());<br>        southPanel.setBorder(<span class="hljs-keyword">new</span> <span class="hljs-title class_">TitledBorder</span>(<span class="hljs-string">&quot;写消息&quot;</span>));<br>        southPanel.add(textField, <span class="hljs-string">&quot;Center&quot;</span>);<br>        sendPanel.add(btn_send, BorderLayout.NORTH);<br>        sendPanel.add(btn_send_file, BorderLayout.CENTER);<br>        sendPanel.add(btn_download_file, BorderLayout.SOUTH);<br>        southPanel.add(sendPanel, <span class="hljs-string">&quot;East&quot;</span>);<br>        centerSplit = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSplitPane</span>(JSplitPane.HORIZONTAL_SPLIT, leftScroll, rightScroll);<br>        centerSplit.setDividerLocation(<span class="hljs-number">150</span>);<br>        frame = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JFrame</span>(<span class="hljs-string">&quot;客户机&quot;</span>);<br>        frame.setLayout(<span class="hljs-keyword">new</span> <span class="hljs-title class_">BorderLayout</span>());<br>        frame.add(northPanel, <span class="hljs-string">&quot;North&quot;</span>);<br>        frame.add(centerSplit, <span class="hljs-string">&quot;Center&quot;</span>);<br>        frame.add(southPanel, <span class="hljs-string">&quot;South&quot;</span>);<br>        frame.setSize(<span class="hljs-number">800</span>, <span class="hljs-number">600</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">screen_width</span> <span class="hljs-operator">=</span> Toolkit.getDefaultToolkit().getScreenSize().width;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">screen_height</span> <span class="hljs-operator">=</span> Toolkit.getDefaultToolkit().getScreenSize().height;<br>        frame.setLocation((screen_width - frame.getWidth()) / <span class="hljs-number">2</span>, (screen_height - frame.getHeight()) / <span class="hljs-number">2</span>);<br>        frame.setVisible(<span class="hljs-literal">true</span>);<br><br>        <span class="hljs-comment">// 写消息的文本框中按回车键时事件</span><br>        textField.addActionListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ActionListener</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">actionPerformed</span><span class="hljs-params">(ActionEvent e)</span> &#123;<br>                send();<br>            &#125;<br>        &#125;);<br><br>        <span class="hljs-comment">// 单击发送按钮时事件</span><br>        btn_send.addActionListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ActionListener</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">actionPerformed</span><span class="hljs-params">(ActionEvent e)</span> &#123;<br>                send();<br>            &#125;<br>        &#125;);<br><br>        <span class="hljs-comment">// 单击文件按钮时事件</span><br>        btn_send_file.addActionListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ActionListener</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">actionPerformed</span><span class="hljs-params">(ActionEvent e)</span> &#123;<br>                sendFile();<br>            &#125;<br>        &#125;);<br><br>        <span class="hljs-comment">// 单击下载按钮时事件</span><br>        btn_download_file.addActionListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ActionListener</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">actionPerformed</span><span class="hljs-params">(ActionEvent e)</span> &#123;<br>                <span class="hljs-type">String</span> <span class="hljs-variable">fn</span> <span class="hljs-operator">=</span> JOptionPane.showInputDialog(<span class="hljs-literal">null</span>,<span class="hljs-string">&quot;请输入要下载的文件名：&quot;</span>,<span class="hljs-string">&quot;下载文件&quot;</span>,JOptionPane.PLAIN_MESSAGE);<br>                textArea.append(<span class="hljs-string">&quot;接收文件：&quot;</span> + fn + <span class="hljs-string">&quot;\r\n&quot;</span>);<br>                sendMessage(frame.getTitle() + <span class="hljs-string">&quot;接收文件：&quot;</span> + fn);<br>                <span class="hljs-type">ReceiveFileClientThread</span> <span class="hljs-variable">rfct_download</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ReceiveFileClientThread</span>(SERVER_IP, SERVER_FILE_RECEIVE_PORT, fn);<br>                rfct_download.start();<br>            &#125;<br>        &#125;);<br><br>        <span class="hljs-comment">// 单击连接按钮时事件</span><br>        btn_start.addActionListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ActionListener</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">actionPerformed</span><span class="hljs-params">(ActionEvent e)</span> &#123;<br>                <span class="hljs-keyword">if</span>(isConnected)&#123;<br>                    JOptionPane.showMessageDialog(frame, <span class="hljs-string">&quot;已经连接！&quot;</span>, <span class="hljs-string">&quot;错误&quot;</span>, JOptionPane.ERROR_MESSAGE);<br>                    <span class="hljs-keyword">return</span>;<br>                &#125;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">port</span> <span class="hljs-operator">=</span> Integer.parseInt(txt_port.getText().trim());<br>                <span class="hljs-type">String</span> <span class="hljs-variable">hostIp</span> <span class="hljs-operator">=</span> txt_hostIp.getText().trim();<br>                <span class="hljs-type">String</span> <span class="hljs-variable">username</span> <span class="hljs-operator">=</span> txt_username.getText().trim();<br>                <span class="hljs-type">String</span> <span class="hljs-variable">userpwd</span> <span class="hljs-operator">=</span> txt_userpwd.getText().trim();<br>                <span class="hljs-type">boolean</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> connectServer(port, hostIp, username, userpwd);<br>                <span class="hljs-keyword">if</span>(flag)&#123;<br>                    frame.setTitle(username);<br>                    JOptionPane.showMessageDialog(frame, <span class="hljs-string">&quot;连接成功!&quot;</span>);<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    JOptionPane.showMessageDialog(frame, <span class="hljs-string">&quot;连接失败!&quot;</span>);<br>                &#125;<br>            &#125;<br>        &#125;);<br><br>        <span class="hljs-comment">// 单击断开按钮时事件</span><br>        btn_stop.addActionListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ActionListener</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">actionPerformed</span><span class="hljs-params">(ActionEvent e)</span> &#123;<br>                <span class="hljs-keyword">if</span>(!isConnected)&#123;<br>                    JOptionPane.showMessageDialog(frame, <span class="hljs-string">&quot;已经断开！&quot;</span>, <span class="hljs-string">&quot;错误&quot;</span>, JOptionPane.ERROR_MESSAGE);<br>                    <span class="hljs-keyword">return</span>;<br>                &#125;<br>                <span class="hljs-type">boolean</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> closeConnection();<br>                <span class="hljs-keyword">if</span>(flag == <span class="hljs-literal">false</span>)&#123;<br>                    JOptionPane.showMessageDialog(frame, <span class="hljs-string">&quot;断开失败！&quot;</span>, <span class="hljs-string">&quot;错误&quot;</span>, JOptionPane.ERROR_MESSAGE);<br>                &#125;<br>                JOptionPane.showMessageDialog(frame, <span class="hljs-string">&quot;断开成功!&quot;</span>);<br>                textArea.setText(<span class="hljs-string">&quot;&quot;</span>);<br>            &#125;<br>        &#125;);<br><br>        <span class="hljs-comment">// 关闭窗口事件</span><br>        frame.addWindowListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">WindowAdapter</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">windowClosing</span><span class="hljs-params">(WindowEvent e)</span> &#123;<br>                <span class="hljs-keyword">if</span>(isConnected)&#123;<br>                    closeConnection();<span class="hljs-comment">// 关闭连接</span><br>                &#125;<br>                System.exit(<span class="hljs-number">0</span>);<br>            &#125;<br>        &#125;);<br>    &#125;<br><br>    <span class="hljs-comment">// 发送消息</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">send</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (!isConnected) &#123;<br>            JOptionPane.showMessageDialog(frame, <span class="hljs-string">&quot;还没有连接服务器，无法发送消息！&quot;</span>, <span class="hljs-string">&quot;错误&quot;</span>, JOptionPane.ERROR_MESSAGE);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">message</span> <span class="hljs-operator">=</span> textField.getText().trim();<br>        <span class="hljs-keyword">if</span> (message == <span class="hljs-literal">null</span> || message.equals(<span class="hljs-string">&quot;&quot;</span>)) &#123;<br>            JOptionPane.showMessageDialog(frame, <span class="hljs-string">&quot;消息不能为空！&quot;</span>, <span class="hljs-string">&quot;错误&quot;</span>, JOptionPane.ERROR_MESSAGE);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        sendMessage(frame.getTitle() + <span class="hljs-string">&quot;:&quot;</span> + message);<br>        textField.setText(<span class="hljs-string">&quot;&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-comment">// 发送文件</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sendFile</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">JFileChooser</span> <span class="hljs-variable">sourceFileChooser</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JFileChooser</span>(<span class="hljs-string">&quot;.&quot;</span>);<br>        sourceFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">status</span> <span class="hljs-operator">=</span> sourceFileChooser.showOpenDialog(frame);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">pathname</span> <span class="hljs-operator">=</span> sourceFileChooser.getSelectedFile().getPath();<br>        <span class="hljs-type">File</span> <span class="hljs-variable">sourceFile</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(pathname);<br>        textArea.append(<span class="hljs-string">&quot;发送文件：&quot;</span> + sourceFile.getName() + <span class="hljs-string">&quot;\r\n&quot;</span>);<br>        sendMessage(frame.getTitle() + <span class="hljs-string">&quot;发送文件：&quot;</span> + sourceFile.getName());<br>        <span class="hljs-type">SendFileClientThread</span> <span class="hljs-variable">sfct</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SendFileClientThread</span>(SERVER_IP, SERVER_FILE_SEND_PORT, pathname);<br>        sfct.start();<br>    &#125;<br><br>    <span class="hljs-comment">// 连接服务器</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">connectServer</span><span class="hljs-params">(<span class="hljs-type">int</span> port, String hostIp, String username, String userpwd)</span> &#123;<br>        <span class="hljs-comment">// 连接服务器</span><br>        <span class="hljs-keyword">try</span> &#123;<br>            socket = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Socket</span>(hostIp, port);<span class="hljs-comment">// 根据端口号和服务器ip建立连接</span><br>            reader = <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedReader</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InputStreamReader</span>(socket.getInputStream()));<br>            writer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PrintWriter</span>(socket.getOutputStream());<br>            <span class="hljs-comment">///////////////</span><br>            ObjectOutputStream oos=    <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectOutputStream</span>(socket.getOutputStream());<br>            User u=<span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(username, userpwd);<br>            oos.writeObject(u);<br>            <span class="hljs-comment">/////////////////</span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">login_message</span> <span class="hljs-operator">=</span> reader.readLine();<br>            textArea.append(login_message + <span class="hljs-string">&quot;\r\n&quot;</span>);<br>            <span class="hljs-keyword">if</span>(login_message.contains(<span class="hljs-string">&quot;成功&quot;</span>))&#123;<br>                <span class="hljs-comment">// 开启接收消息的线程</span><br>                messageThread = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MessageThread</span>(reader, textArea);<br>                messageThread.start();<br>                isConnected = <span class="hljs-literal">true</span>;<span class="hljs-comment">// 已经连接上了</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                isConnected = <span class="hljs-literal">false</span>;<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>            &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                textArea.append(<span class="hljs-string">&quot;与端口号为：&quot;</span> + port + <span class="hljs-string">&quot;    IP地址为：&quot;</span> + hostIp + <span class="hljs-string">&quot;   的服务器连接失败!&quot;</span> + <span class="hljs-string">&quot;\r\n&quot;</span>);<br>                isConnected = <span class="hljs-literal">false</span>;<span class="hljs-comment">// 未连接上</span><br>                e.printStackTrace();<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// 接收服务器消息</span><br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">MessageThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Thread</span>&#123;<br>        <span class="hljs-keyword">private</span> BufferedReader reader;<br>        <span class="hljs-keyword">private</span> JTextArea textArea;<br>        <span class="hljs-keyword">public</span> <span class="hljs-title function_">MessageThread</span><span class="hljs-params">(BufferedReader reader, JTextArea textArea)</span>&#123;<br>            <span class="hljs-built_in">this</span>.reader = reader;<br>            <span class="hljs-built_in">this</span>.textArea = textArea;<br>        &#125;<br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">message</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;<br>            <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;<br>                <span class="hljs-keyword">try</span> &#123;<br>                    message = reader.readLine();<br>                    <span class="hljs-keyword">if</span>(message!=<span class="hljs-literal">null</span>) &#123;<br>                        textArea.append(message + <span class="hljs-string">&quot;\r\n&quot;</span>);<br>                        <span class="hljs-keyword">if</span> (message.contains(<span class="hljs-string">&quot;发送文件：&quot;</span>)) &#123;<br>                            <span class="hljs-keyword">if</span> (!message.contains(frame.getTitle())) &#123;<br>                                String[] m = message.split(<span class="hljs-string">&quot;发送文件：&quot;</span>);<br>                                <span class="hljs-type">String</span> <span class="hljs-variable">fn</span> <span class="hljs-operator">=</span> m[<span class="hljs-number">1</span>];<br>                                <span class="hljs-type">int</span> <span class="hljs-variable">option</span> <span class="hljs-operator">=</span> JOptionPane.showConfirmDialog(<span class="hljs-literal">null</span>, <span class="hljs-string">&quot;是否接收文件&quot;</span> + fn + <span class="hljs-string">&quot;？&quot;</span>, <span class="hljs-string">&quot;文件接收提示&quot;</span>, JOptionPane.YES_NO_OPTION);<br>                                <span class="hljs-keyword">if</span> (option == JOptionPane.YES_OPTION) &#123;<br>                                    textArea.append(<span class="hljs-string">&quot;接收文件：&quot;</span> + fn + <span class="hljs-string">&quot;\r\n&quot;</span>);<br>                                    sendMessage(frame.getTitle() + <span class="hljs-string">&quot;接收文件：&quot;</span> + fn);<br>                                    <span class="hljs-type">ReceiveFileClientThread</span> <span class="hljs-variable">rfct</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ReceiveFileClientThread</span>(SERVER_IP, SERVER_FILE_RECEIVE_PORT, fn);<br>                                    rfct.start();<br>                                &#125;<br>                            &#125;<br>                        &#125;<br>                    &#125;<br>                &#125;<span class="hljs-keyword">catch</span> (IOException e) &#123;<br>                    e.printStackTrace();<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// 向服务器发送消息</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sendMessage</span><span class="hljs-params">(String message)</span> &#123;<br>        writer.println(message);<br>        writer.flush();<br>    &#125;<br><br>    <span class="hljs-comment">// 断开连接</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">closeConnection</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>        sendMessage(<span class="hljs-string">&quot;CLOSE&quot;</span>);<span class="hljs-comment">// 发送断开连接命令给服务器</span><br>        messageThread.stop();<span class="hljs-comment">// 停止接受消息线程</span><br>        <span class="hljs-comment">// 释放资源</span><br>        <span class="hljs-keyword">if</span> (reader != <span class="hljs-literal">null</span>) &#123;<br>            reader.close();<br>        &#125;<br>        <span class="hljs-keyword">if</span> (writer != <span class="hljs-literal">null</span>) &#123;<br>            writer.close();<br>        &#125;<br>        <span class="hljs-keyword">if</span> (socket != <span class="hljs-literal">null</span>) &#123;<br>            socket.close();<br>        &#125;<br>        isConnected = <span class="hljs-literal">false</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e1) &#123;<br>            e1.printStackTrace();<br>            isConnected = <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="SendFileClientThread-java"><a href="#SendFileClientThread-java" class="headerlink" title="SendFileClientThread.java"></a>SendFileClientThread.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> mysocket2;<br><br><span class="hljs-keyword">import</span> javafx.scene.control.Labeled;<br><br><span class="hljs-keyword">import</span> java.awt.event.ActionEvent;<br><span class="hljs-keyword">import</span> java.awt.event.ActionListener;<br><span class="hljs-keyword">import</span> java.io.*;<br><span class="hljs-keyword">import</span> java.net.*;<br><span class="hljs-keyword">import</span> java.awt.*;<br><span class="hljs-keyword">import</span> javax.swing.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SendFileClientThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Thread</span> &#123;<br>    String server_ip;<br>    <span class="hljs-type">int</span> server_port;<br>    String pn;<br><br>    JFrame jframe;<br>    Container contentPanel;<br>    JProgressBar progressbar;<br>    JLabel label;<br><br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">SendFileClientThread</span><span class="hljs-params">(String server_ip, <span class="hljs-type">int</span> server_port, String pn)</span> &#123;<br>        <span class="hljs-built_in">this</span>.server_ip = server_ip;<br>        <span class="hljs-built_in">this</span>.server_port = server_port;<br>        <span class="hljs-built_in">this</span>.pn = pn;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>        FileInputStream fis;<br>        DataInputStream dis;<br>        DataOutputStream dos;<br>        <span class="hljs-keyword">try</span> &#123;<br>            jframe = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JFrame</span>(<span class="hljs-string">&quot;文件传输&quot;</span>);<br>            <span class="hljs-type">Socket</span> <span class="hljs-variable">socket</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Socket</span>(server_ip, server_port);<br>            File file=<span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(pn);<br>            fis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(file);<br>            <span class="hljs-comment">//BufferedInputStream bi=new BufferedInputStream(new InputStreamReader(new FileInputStream(file),&quot;GBK&quot;));</span><br>            dis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataInputStream</span>(socket.getInputStream());<br>            dos = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataOutputStream</span>(socket.getOutputStream());<span class="hljs-comment">//client.getOutputStream()返回此套接字的输出流</span><br>            <span class="hljs-comment">//文件名、大小等属性</span><br>            dos.writeUTF(file.getName());<br>            dos.flush();<br>            dos.writeLong(file.length());<br>            dos.flush();<br>            <span class="hljs-comment">///////////////</span><br>            <span class="hljs-type">RandomAccessFile</span> <span class="hljs-variable">rad</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RandomAccessFile</span>(pn, <span class="hljs-string">&quot;r&quot;</span>);<br>            <span class="hljs-type">long</span> size=dis.readLong();<span class="hljs-comment">//读取文件已发送的大小</span><br>            dos.writeLong(rad.length());<span class="hljs-comment">//完整文件大小</span><br>            dos.flush();<br>            <span class="hljs-comment">//开始传输的位置</span><br>            <span class="hljs-type">long</span> offset=size;<br>            <span class="hljs-comment">// 文件分块</span><br>            <span class="hljs-type">int</span> barSize=(<span class="hljs-type">int</span>) (rad.length()/<span class="hljs-number">1024</span>);<br>            <span class="hljs-type">int</span> barOffset=(<span class="hljs-type">int</span>)(offset/<span class="hljs-number">1024</span>);<br><br>            <span class="hljs-comment">//传输界面</span><br>            jframe.setSize(<span class="hljs-number">380</span>,<span class="hljs-number">120</span>);<br>            contentPanel = jframe.getContentPane();<br>            contentPanel.setLayout(<span class="hljs-keyword">new</span> <span class="hljs-title class_">BoxLayout</span>(contentPanel, BoxLayout.Y_AXIS));<br>            progressbar = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JProgressBar</span>();<span class="hljs-comment">//进度条</span><br>            label = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JLabel</span>(file.getName()+<span class="hljs-string">&quot; 发送中&quot;</span>);<br>            contentPanel.add(label);<br>            progressbar.setOrientation(JProgressBar.HORIZONTAL);<br>            progressbar.setMinimum(<span class="hljs-number">0</span>);<br>            progressbar.setMaximum(barSize);<br>            progressbar.setValue(barOffset);<br>            progressbar.setStringPainted(<span class="hljs-literal">true</span>);<br>            progressbar.setPreferredSize(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Dimension</span>(<span class="hljs-number">150</span>, <span class="hljs-number">20</span>));<br>            progressbar.setBorderPainted(<span class="hljs-literal">true</span>);<br>            progressbar.setBackground(Color.pink);<br>            JButton cancel=<span class="hljs-keyword">new</span> <span class="hljs-title class_">JButton</span>(<span class="hljs-string">&quot;取消&quot;</span>);<br>            JPanel barPanel=<span class="hljs-keyword">new</span> <span class="hljs-title class_">JPanel</span>();<br>            barPanel.setLayout(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FlowLayout</span>(FlowLayout.LEFT));<br>            barPanel.add(progressbar);<br>            barPanel.add(cancel);<br>            contentPanel.add(barPanel);<br>            cancel.addActionListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">CancelActionListener</span>(label,dis,dos,rad,jframe,socket));<br>            <span class="hljs-comment">//jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">screen_width</span> <span class="hljs-operator">=</span> Toolkit.getDefaultToolkit().getScreenSize().width;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">screen_height</span> <span class="hljs-operator">=</span> Toolkit.getDefaultToolkit().getScreenSize().height;<br>            jframe.setLocation((screen_width - jframe.getWidth()) / <span class="hljs-number">2</span>, (screen_height - jframe.getHeight()) / <span class="hljs-number">2</span>);<br>            jframe.setVisible(<span class="hljs-literal">true</span>);<br><br>            System.out.println(<span class="hljs-string">&quot;发送文件 &quot;</span> + file.getName());<br>            System.out.println(<span class="hljs-string">&quot;######## 开始传输文件 ########&quot;</span>);<br>            <span class="hljs-type">byte</span>[] buf=<span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br>            <span class="hljs-type">int</span> length;<br>            <span class="hljs-keyword">if</span> (offset&lt;rad.length()) &#123;<br>                rad.seek(offset);<br>                <span class="hljs-keyword">while</span>((length=rad.read(buf))&gt;<span class="hljs-number">0</span>)&#123;<br>                    dos.write(buf,<span class="hljs-number">0</span>,length);<br>                    progressbar.setValue(++barOffset);<br>                    dos.flush();<br>                &#125;<br>            &#125;<br>            System.out.println(<span class="hljs-string">&quot;######## 文件传输成功 ########&quot;</span>);<br>            label.setText(file.getName()+<span class="hljs-string">&quot; 发送完成&quot;</span>);<br>            dis.close();<br>            dos.close();<br>            rad.close();<br>            sleep(<span class="hljs-number">1000</span>);<br>            <span class="hljs-comment">///////////////</span><br>        &#125;<span class="hljs-keyword">catch</span>(IOException | InterruptedException e)&#123;<br>            label.setText(<span class="hljs-string">&quot; 取消发送,连接关闭&quot;</span>);<br>            <span class="hljs-comment">//e.printStackTrace();</span><br>            <span class="hljs-comment">//System.out.println(&quot;客户端文件传输异常&quot;);</span><br>            <span class="hljs-comment">//JOptionPane.showMessageDialog(frame, &quot;无法发送文件!&quot;, &quot;错误&quot;, JOptionPane.ERROR_MESSAGE);</span><br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            jframe.dispose();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="ReceiveFileClientThread-java"><a href="#ReceiveFileClientThread-java" class="headerlink" title="ReceiveFileClientThread.java"></a>ReceiveFileClientThread.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> mysocket2;<br><br><span class="hljs-keyword">import</span> java.awt.*;<br><span class="hljs-keyword">import</span> java.io.*;<br><span class="hljs-keyword">import</span> java.net.*;<br><span class="hljs-keyword">import</span> javax.swing.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReceiveFileClientThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Thread</span> &#123;<br>    String server_ip;<br>    <span class="hljs-type">int</span> server_port;<br>    String filename;<br><br>    JFrame jframe;<br>    Container contentPanel;<br>    JProgressBar progressbar;<br>    JLabel label;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">ReceiveFileClientThread</span><span class="hljs-params">(String server_ip, <span class="hljs-type">int</span> server_port, String filename)</span> &#123;<br>        <span class="hljs-built_in">this</span>.server_ip = server_ip;<br>        <span class="hljs-built_in">this</span>.server_port = server_port;<br>        <span class="hljs-built_in">this</span>.filename = filename;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>        DataInputStream dis;<br>        DataOutputStream dos;<br>        <span class="hljs-keyword">try</span> &#123;<br>            jframe=<span class="hljs-keyword">new</span> <span class="hljs-title class_">JFrame</span>(<span class="hljs-string">&quot;接收文件&quot;</span>);<br>            <span class="hljs-type">Socket</span> <span class="hljs-variable">socket</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Socket</span>(server_ip, server_port);<br>            dis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataInputStream</span>(socket.getInputStream());<br>            dos = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataOutputStream</span>(socket.getOutputStream());<br><br>            <span class="hljs-type">File</span> <span class="hljs-variable">directory</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;./client&quot;</span>);<br>            <span class="hljs-keyword">if</span>(!directory.exists()) &#123;<br>                directory.mkdir();<br>            &#125;<br>            <span class="hljs-comment">// 文件名</span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">fn</span> <span class="hljs-operator">=</span> dis.readUTF();<br>            <span class="hljs-type">String</span> <span class="hljs-variable">fileName</span> <span class="hljs-operator">=</span> directory.getAbsolutePath() + File.separatorChar + filename;<br>            <span class="hljs-comment">// 传输时为.temp文件</span><br>            File file=<span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(fileName+<span class="hljs-string">&quot;.temp&quot;</span>);<br>            RandomAccessFile rad=<span class="hljs-keyword">new</span> <span class="hljs-title class_">RandomAccessFile</span>(fileName+<span class="hljs-string">&quot;.temp&quot;</span>, <span class="hljs-string">&quot;rw&quot;</span>);<br>            <span class="hljs-comment">//获得文件大小</span><br>            <span class="hljs-type">long</span> size=<span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">if</span>(file.exists()&amp;&amp; file.isFile())&#123;<br>                size=file.length();<br>            &#125;<br>            dos.writeLong(size); <span class="hljs-comment">//发送已接收的大小</span><br>            dos.flush();<br>            <span class="hljs-type">long</span> allSize=dis.readLong(); <span class="hljs-comment">// 完整文件大小</span><br>            <span class="hljs-comment">// 文件分块</span><br>            <span class="hljs-type">int</span> barSize=(<span class="hljs-type">int</span>)(allSize/<span class="hljs-number">1024</span>);<br>            <span class="hljs-type">int</span> barOffset=(<span class="hljs-type">int</span>)(size/<span class="hljs-number">1024</span>);<br><br>            <span class="hljs-comment">//传输界面</span><br>            jframe.setSize(<span class="hljs-number">300</span>,<span class="hljs-number">120</span>);<br>            contentPanel =jframe.getContentPane();<br>            contentPanel.setLayout(<span class="hljs-keyword">new</span> <span class="hljs-title class_">BoxLayout</span>(contentPanel, BoxLayout.Y_AXIS));<br>            progressbar = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JProgressBar</span>();<span class="hljs-comment">//进度条</span><br>            label=<span class="hljs-keyword">new</span> <span class="hljs-title class_">JLabel</span>(filename+<span class="hljs-string">&quot; 接收中&quot;</span>);<br>            contentPanel.add(label);<br>            progressbar.setOrientation(JProgressBar.HORIZONTAL);<br>            progressbar.setMinimum(<span class="hljs-number">0</span>);<br>            progressbar.setMaximum(barSize);<br>            progressbar.setValue(barOffset);<br>            progressbar.setStringPainted(<span class="hljs-literal">true</span>);<br>            progressbar.setPreferredSize(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Dimension</span>(<span class="hljs-number">150</span>, <span class="hljs-number">20</span>));<br>            progressbar.setBorderPainted(<span class="hljs-literal">true</span>);<br>            progressbar.setBackground(Color.pink);<br>            JButton cancel=<span class="hljs-keyword">new</span> <span class="hljs-title class_">JButton</span>(<span class="hljs-string">&quot;取消&quot;</span>);<br>            JPanel barPanel=<span class="hljs-keyword">new</span> <span class="hljs-title class_">JPanel</span>();<br>            barPanel.setLayout(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FlowLayout</span>(FlowLayout.LEFT));<br>            barPanel.add(progressbar);<br>            barPanel.add(cancel);<br>            contentPanel.add(barPanel);<br>            cancel.addActionListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">CancelActionListener</span>(label,dis,dos,rad,jframe,socket));<br>            <span class="hljs-comment">//jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">screen_width</span> <span class="hljs-operator">=</span> Toolkit.getDefaultToolkit().getScreenSize().width;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">screen_height</span> <span class="hljs-operator">=</span> Toolkit.getDefaultToolkit().getScreenSize().height;<br>            jframe.setLocation((screen_width - jframe.getWidth()) / <span class="hljs-number">2</span>, (screen_height - jframe.getHeight()) / <span class="hljs-number">2</span>);<br>            jframe.setVisible(<span class="hljs-literal">true</span>);<br><br>            System.out.println(<span class="hljs-string">&quot;######## 开始接收文件 ########&quot;</span>);<br>            rad.seek(size);<br>            <span class="hljs-type">int</span> length;<br>            <span class="hljs-type">byte</span>[] buf=<span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br>            <span class="hljs-keyword">while</span>((length=dis.read(buf, <span class="hljs-number">0</span>, buf.length))!=-<span class="hljs-number">1</span>)&#123;<br>                rad.write(buf,<span class="hljs-number">0</span>,length);<br>                progressbar.setValue(++barOffset);<br>            &#125;<br>            dis.close();<br>            dos.close();<br>            rad.close();<br>            File f=<span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(fileName);<br>            <span class="hljs-comment">// 覆盖已有的文件</span><br>            <span class="hljs-keyword">if</span>(f.exists())&#123;<br>                f.delete();<br>            &#125;<br>            <span class="hljs-comment">// 将.temp文件转为正式文件</span><br>            <span class="hljs-keyword">if</span>(barOffset &gt;= barSize)&#123;<br>                file.renameTo(<span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(fileName));<br>            &#125;<br>            <span class="hljs-comment">//////////////</span><br>            System.out.println(<span class="hljs-string">&quot;######## 文件接收成功 [File Name：&quot;</span> + fileName + <span class="hljs-string">&quot;] ########&quot;</span>);<br>            label.setText(filename+<span class="hljs-string">&quot; 接收完成&quot;</span>);<br>            sleep(<span class="hljs-number">1000</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-comment">//e.printStackTrace();</span><br>            label.setText(<span class="hljs-string">&quot; 已取消接收，连接关闭！&quot;</span>);<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            jframe.dispose();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="User-java"><a href="#User-java" class="headerlink" title="User.java"></a>User.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> mysocket2;<br><br><span class="hljs-keyword">import</span> java.io.Serializable;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span>&#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> -<span class="hljs-number">3217779599604368894L</span>;<br>    <span class="hljs-keyword">private</span> String name;<br>    <span class="hljs-keyword">private</span> String password;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getName</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> name;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setName</span><span class="hljs-params">(String name)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>    &#125;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getPassword</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> password;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setPassword</span><span class="hljs-params">(String password)</span> &#123;<br>        <span class="hljs-built_in">this</span>.password = password;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">User</span><span class="hljs-params">(String name, String password)</span> &#123;<br>        <span class="hljs-built_in">super</span>();<br>        <span class="hljs-built_in">this</span>.name = name;<br>        <span class="hljs-built_in">this</span>.password = password;<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">User</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-built_in">super</span>();<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Servers-java"><a href="#Servers-java" class="headerlink" title="Servers.java"></a>Servers.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> mysocket2;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.net.ServerSocket;<br><span class="hljs-keyword">import</span> java.net.Socket;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">import</span> java.util.Vector;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Servers</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> SERVER_PORT=<span class="hljs-number">6655</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> SERVER_FILE_SEND_PORT=<span class="hljs-number">8822</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> SERVER_FILE_RECEIVE_PORT=<span class="hljs-number">9911</span>;<br><br>    <span class="hljs-comment">//将接收到的socket变成一个集合</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">static</span>   List&lt;Socket&gt; sockets = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Vector</span>&lt;&gt;();<br>    <span class="hljs-comment">//protected static   List&lt;Socket&gt; file_send_sockets = new Vector&lt;&gt;();</span><br>    <span class="hljs-comment">//protected static   List&lt;Socket&gt; file_receive_sockets = new Vector&lt;&gt;();</span><br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-comment">//创建服务端</span><br>        <span class="hljs-type">ServerSocket</span> <span class="hljs-variable">server</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServerSocket</span>(SERVER_PORT);<br>        <span class="hljs-comment">//ServerSocket file_send_server = new ServerSocket(SERVER_FILE_SEND_PORT);</span><br>        <span class="hljs-comment">//ServerSocket file_receive_server = new ServerSocket(SERVER_FILE_RECEIVE_PORT);</span><br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-comment">//接受客户端请求</span><br>        <span class="hljs-keyword">while</span> (flag)&#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-comment">//阻塞等待客户端的连接</span><br>                <span class="hljs-type">Socket</span> <span class="hljs-variable">accept</span> <span class="hljs-operator">=</span> server.accept();<br>                <span class="hljs-keyword">synchronized</span> (sockets)&#123;<br>                    sockets.add(accept);<br>                &#125;<br>                <span class="hljs-comment">//多个服务器线程进行对客户端的响应</span><br>                <span class="hljs-type">Thread</span> <span class="hljs-variable">thread</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ServerThead</span>(accept));<br>                thread.start();<br>                <span class="hljs-comment">//捕获异常</span><br>            &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>                flag = <span class="hljs-literal">false</span>;<br>                e.printStackTrace();<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">//关闭服务器</span><br>        <span class="hljs-comment">//file_send_server.close();</span><br>        <span class="hljs-comment">//file_receive_server.close();</span><br>        server.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="ServerThread-java"><a href="#ServerThread-java" class="headerlink" title="ServerThread.java"></a>ServerThread.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> mysocket2;<br><br><span class="hljs-keyword">import</span> java.io.*;<br><span class="hljs-keyword">import</span> java.net.ServerSocket;<br><span class="hljs-keyword">import</span> java.net.Socket;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 服务器线程，主要来处理多个客户端的请求</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ServerThead</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">mysocket2</span>.Servers <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Runnable</span>&#123;<br><br>    Socket socket;<br>    String socketName;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> SERVER_PORT=<span class="hljs-number">5200</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> SERVER_FILE_SEND_PORT=<span class="hljs-number">8822</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> SERVER_FILE_RECEIVE_PORT=<span class="hljs-number">9911</span>;<br><br>    <span class="hljs-comment">/////////////////////</span><br>    <span class="hljs-comment">/////////////////////</span><br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">ServerThead</span><span class="hljs-params">(Socket socket)</span>&#123;<br>        <span class="hljs-built_in">this</span>.socket = socket;<br>    &#125;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(Thread.currentThread().getName()+<span class="hljs-string">&quot;请求登录...&quot;</span>);<br>        <span class="hljs-comment">//3.获取输入流(对象流)</span><br>        ObjectInputStream ois;<br>        <span class="hljs-comment">//5.获取输出流(数据流)，反馈给客户端登录信息</span><br>        DataOutputStream dos;<br>        <span class="hljs-keyword">try</span> &#123;<br>            ois = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectInputStream</span>(socket.getInputStream());<br>            <span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> (User) ois.readObject();<br>            System.out.println(socket.getInetAddress().getHostAddress()+<span class="hljs-string">&quot;请求登录\t用户名：&quot;</span>+user.getName()+<span class="hljs-string">&quot;\t密码：&quot;</span>+user.getPassword());<br>            String str;<br>            <span class="hljs-comment">//对用户名和密码进行验证</span><br>            <span class="hljs-type">BufferedReader</span> <span class="hljs-variable">aps</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedReader</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileReader</span>(<span class="hljs-string">&quot;src/mysocket2/account_password.txt&quot;</span>));<br>            <span class="hljs-type">String</span> <span class="hljs-variable">apline</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>            <span class="hljs-type">boolean</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span>;<br>            String[] ap;<br>            <span class="hljs-keyword">while</span>((apline=aps.readLine())!=<span class="hljs-literal">null</span>)<br>            &#123;<br>                ap=apline.split(<span class="hljs-string">&quot; &quot;</span>); <span class="hljs-comment">// 空格分隔用户名和密码</span><br>                <span class="hljs-keyword">if</span>(ap[<span class="hljs-number">0</span>].equals(user.getName())&amp;&amp;ap[<span class="hljs-number">1</span>].equals(user.getPassword()))<br>                &#123;<br>                    b = <span class="hljs-literal">true</span>;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">if</span>(b) &#123;<br>                str=user.getName()+<span class="hljs-string">&quot;登录成功！&quot;</span>;<br>                <span class="hljs-type">PrintWriter</span> <span class="hljs-variable">pw</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PrintWriter</span>(socket.getOutputStream());<br>                pw.println(str);<br>                pw.flush();<br>                <span class="hljs-comment">/////////////////</span><br>                <span class="hljs-type">BufferedReader</span> <span class="hljs-variable">reader</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedReader</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InputStreamReader</span>(socket.getInputStream()));<br>                <span class="hljs-comment">//设置该客户端的端点地址</span><br>                    socketName = socket.getRemoteSocketAddress().toString();<br>                System.out.println(<span class="hljs-string">&quot;Client@&quot;</span>+socketName+<span class="hljs-string">&quot;已加入聊天&quot;</span>);<br>                print(<span class="hljs-string">&quot;Client@&quot;</span>+socketName+<span class="hljs-string">&quot;已加入聊天&quot;</span>);<br>                <span class="hljs-type">boolean</span> <span class="hljs-variable">flag</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;<br>                <span class="hljs-keyword">while</span> (flag)<br>                &#123;<br>                    <span class="hljs-comment">//阻塞，等待该客户端的输出流</span><br>                    <span class="hljs-type">String</span> <span class="hljs-variable">line</span> <span class="hljs-operator">=</span> reader.readLine();<br>                    System.out.println(<span class="hljs-string">&quot;read line &quot;</span>+ line);<br>                    <span class="hljs-comment">//若客户端退出，则退出连接。</span><br>                    <span class="hljs-keyword">if</span> (line == <span class="hljs-literal">null</span>)&#123;<br>                        flag = <span class="hljs-literal">false</span>;<br>                        <span class="hljs-keyword">continue</span>;<br>                    &#125;<br>                    <span class="hljs-keyword">if</span>(line.contains(<span class="hljs-string">&quot;发送文件：&quot;</span>))&#123;<br>                        <span class="hljs-type">String</span> <span class="hljs-variable">msg</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Client@&quot;</span> + socketName + <span class="hljs-string">&quot;:&quot;</span> + line;<br>                        System.out.println(msg);<br>                        print(msg);<br>                        <span class="hljs-comment">//向在线客户端输出信息</span><br>                        <span class="hljs-type">ServerSocket</span> <span class="hljs-variable">file_send_server</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServerSocket</span>(SERVER_FILE_SEND_PORT);<br>                        <span class="hljs-type">Socket</span> <span class="hljs-variable">file_send_accept</span> <span class="hljs-operator">=</span> file_send_server.accept();<br>                        <span class="hljs-type">ReceiveFileServerThread</span> <span class="hljs-variable">rfst</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ReceiveFileServerThread</span>(file_send_accept);<br>                        rfst.start();<br>                        file_send_server.close();<br><br>                    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(line.contains(<span class="hljs-string">&quot;接收文件：&quot;</span>))&#123;<br>                        <span class="hljs-type">String</span> <span class="hljs-variable">msg</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Client@&quot;</span> + socketName + <span class="hljs-string">&quot;:&quot;</span> + line;<br>                        System.out.println(msg);<br>                        print(msg);<br>                        <span class="hljs-comment">//向在线客户端输出信息</span><br>                        String[] l=line.split(<span class="hljs-string">&quot;接收文件：&quot;</span>);<br>                        String fn=l[<span class="hljs-number">1</span>];<br>                        <span class="hljs-type">ServerSocket</span> <span class="hljs-variable">file_receive_server</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServerSocket</span>(SERVER_FILE_RECEIVE_PORT);<br>                        <span class="hljs-type">Socket</span> <span class="hljs-variable">file_receive_accept</span> <span class="hljs-operator">=</span> file_receive_server.accept();<br>                        <span class="hljs-type">SendFileServerThread</span> <span class="hljs-variable">sfst</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SendFileServerThread</span>(file_receive_accept,fn);<br>                        sfst.start();<br>                        file_receive_server.close();<br><br>                    &#125;<br>                    <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-type">String</span> <span class="hljs-variable">msg</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Client@&quot;</span> + socketName + <span class="hljs-string">&quot;:&quot;</span> + line;<br>                        System.out.println(msg);<br>                        <span class="hljs-comment">//向在线客户端输出信息</span><br>                        print(msg);<br>                    &#125;<br>                &#125;<br>                closeConnect();<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                str=<span class="hljs-string">&quot;登录失败！账号或密码有误！&quot;</span>;<br>                <span class="hljs-type">PrintWriter</span> <span class="hljs-variable">pw</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PrintWriter</span>(socket.getOutputStream());<br>                pw.println(str);<br>                pw.flush();<br>                closeConnect();<br>            &#125;<br>        &#125; <span class="hljs-keyword">catch</span> (IOException | ClassNotFoundException e) &#123;<br>            e.printStackTrace();<br>            <span class="hljs-keyword">try</span> &#123;<br>                closeConnect();<br>            &#125; <span class="hljs-keyword">catch</span> (IOException e1) &#123;<br>                e1.printStackTrace();<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 向所有在线客户端socket转发消息</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> msg</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> IOException</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">print</span><span class="hljs-params">(String msg)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-type">PrintWriter</span> <span class="hljs-variable">out</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">synchronized</span> (sockets)&#123;<br>            <span class="hljs-keyword">for</span> (Socket sc : sockets)&#123;<br>                out = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PrintWriter</span>(sc.getOutputStream());<br>                out.println(msg);<br>                out.flush();<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 关闭该socket的连接</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> IOException</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">closeConnect</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        System.out.println(<span class="hljs-string">&quot;Client@&quot;</span>+socketName+<span class="hljs-string">&quot;已退出聊天&quot;</span>);<br>        print(<span class="hljs-string">&quot;Client@&quot;</span>+socketName+<span class="hljs-string">&quot;已退出聊天&quot;</span>);<br>        <span class="hljs-comment">//移除没连接上的客户端</span><br>        <span class="hljs-keyword">synchronized</span> (sockets)&#123;<br>            sockets.remove(socket);<br>        &#125;<br>        socket.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="SendFileServerThread-java"><a href="#SendFileServerThread-java" class="headerlink" title="SendFileServerThread.java"></a>SendFileServerThread.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> mysocket2;<br><br><span class="hljs-keyword">import</span> java.io.*;<br><span class="hljs-keyword">import</span> java.net.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SendFileServerThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Thread</span> &#123;<br>    Socket socket;<br>    String fn;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">SendFileServerThread</span><span class="hljs-params">(Socket socket, String fn)</span> &#123;<br>        <span class="hljs-built_in">this</span>.socket = socket;<br>        <span class="hljs-built_in">this</span>.fn = fn;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>        FileInputStream fis;<br>        DataInputStream dis;<br>        DataOutputStream dos;<br>        <span class="hljs-keyword">try</span> &#123;<br>            File file=<span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;./&quot;</span>+fn);<br>            fis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(file);<br>            dis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataInputStream</span>(socket.getInputStream());<br>            dos = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataOutputStream</span>(socket.getOutputStream());<br>            <span class="hljs-comment">//文件名、大小等属性</span><br>            dos.writeUTF(file.getName());<br>            dos.flush();<br>            dos.writeLong(file.length());<br>            dos.flush();<br>            <span class="hljs-comment">///////////////</span><br>            <span class="hljs-type">RandomAccessFile</span> <span class="hljs-variable">rad</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RandomAccessFile</span>(fn, <span class="hljs-string">&quot;r&quot;</span>);<br>            <span class="hljs-type">long</span> size=dis.readLong();<span class="hljs-comment">//读取文件已发送的大小</span><br>            dos.writeLong(rad.length());<span class="hljs-comment">//完整文件大小</span><br>            dos.flush();<br>            <span class="hljs-comment">//开始传输的位置</span><br>            <span class="hljs-type">long</span> offset=size;<br>            <span class="hljs-comment">// 文件分块</span><br>            <span class="hljs-type">int</span> barSize=(<span class="hljs-type">int</span>) (rad.length()/<span class="hljs-number">1024</span>);<br>            <span class="hljs-type">int</span> barOffset=(<span class="hljs-type">int</span>)(offset/<span class="hljs-number">1024</span>);<br><br>            System.out.println(<span class="hljs-string">&quot;发送文件 &quot;</span> + file.getName());<br>            System.out.println(<span class="hljs-string">&quot;######## 开始传输文件 ########&quot;</span>);<br>            <span class="hljs-type">byte</span>[] buf=<span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br>            <span class="hljs-type">int</span> length;<br>            <span class="hljs-keyword">if</span> (offset&lt;rad.length()) &#123;<br>                rad.seek(offset);<br>                <span class="hljs-keyword">while</span>((length=rad.read(buf))&gt;<span class="hljs-number">0</span>)&#123;<br>                    dos.write(buf,<span class="hljs-number">0</span>,length);<br>                    dos.flush();<br>                &#125;<br>            &#125;<br>            System.out.println(<span class="hljs-string">&quot;######## 文件传输成功 ########&quot;</span>);<br>            dis.close();<br>            dos.close();<br>            rad.close();<br>            <span class="hljs-comment">///////////////</span><br>        &#125;<span class="hljs-keyword">catch</span>(IOException e)&#123;<br>            e.printStackTrace();<br>            System.out.println(<span class="hljs-string">&quot;文件传输异常&quot;</span>);<br>            <span class="hljs-comment">//JOptionPane.showMessageDialog(frame, &quot;无法发送文件!&quot;, &quot;错误&quot;, JOptionPane.ERROR_MESSAGE);</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="ReceiveFileServerThread-java"><a href="#ReceiveFileServerThread-java" class="headerlink" title="ReceiveFileServerThread.java"></a>ReceiveFileServerThread.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> mysocket2;<br><br><span class="hljs-keyword">import</span> java.io.*;<br><span class="hljs-keyword">import</span> java.net.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReceiveFileServerThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Thread</span> &#123;<br>    Socket socket;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> SERVER_FILE_RECEIVE_PORT=<span class="hljs-number">9911</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">ReceiveFileServerThread</span><span class="hljs-params">(Socket socket)</span> &#123;<br>        <span class="hljs-built_in">this</span>.socket = socket;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>        DataInputStream dis;<br>        DataOutputStream dos;<br>        <span class="hljs-keyword">try</span> &#123;<br>            dis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataInputStream</span>(socket.getInputStream());<br>            dos = <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataOutputStream</span>(socket.getOutputStream());<br><br>            <span class="hljs-comment">// 文件名和长度</span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">fileName</span> <span class="hljs-operator">=</span> dis.readUTF();<br>            <span class="hljs-comment">//////////////</span><br>            File file=<span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(fileName+<span class="hljs-string">&quot;.temp&quot;</span>);<br>            RandomAccessFile rad=<span class="hljs-keyword">new</span> <span class="hljs-title class_">RandomAccessFile</span>(fileName+<span class="hljs-string">&quot;.temp&quot;</span>, <span class="hljs-string">&quot;rw&quot;</span>);<br>            <span class="hljs-comment">//获得文件大小</span><br>            <span class="hljs-type">long</span> size=<span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">if</span>(file.exists()&amp;&amp; file.isFile())&#123;<br>                size=file.length();<br>            &#125;<br>            dos.writeLong(size);<span class="hljs-comment">//发送已接收的大小</span><br>            dos.flush();<br>            <span class="hljs-type">long</span> allSize=dis.readLong();<span class="hljs-comment">//接收完整文件大小</span><br>            <span class="hljs-comment">// 文件分块</span><br>            <span class="hljs-type">int</span> barSize=(<span class="hljs-type">int</span>)(allSize/<span class="hljs-number">1024</span>); <span class="hljs-comment">// 块数</span><br>            <span class="hljs-type">int</span> barOffset=(<span class="hljs-type">int</span>)(size/<span class="hljs-number">1024</span>); <span class="hljs-comment">//</span><br>            System.out.println(<span class="hljs-string">&quot;######## 开始接收文件 ########&quot;</span>);<br>            rad.seek(size);<br>            <span class="hljs-type">int</span> length;<br>            <span class="hljs-type">byte</span>[] buf=<span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br>            <span class="hljs-keyword">while</span>((length=dis.read(buf, <span class="hljs-number">0</span>, buf.length))!=-<span class="hljs-number">1</span>)&#123;<br>                rad.write(buf,<span class="hljs-number">0</span>,length);<br>                barOffset += <span class="hljs-number">1</span>;<br>            &#125;<br>            dis.close();<br>            dos.close();<br>            rad.close();<br>            File f=<span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(fileName);<br>            <span class="hljs-comment">// 覆盖已有的文件</span><br>            <span class="hljs-keyword">if</span>(f.exists())&#123;<br>                f.delete();<br>            &#125;<br>            <span class="hljs-comment">// 将.temp文件转为正式文件</span><br>            <span class="hljs-keyword">if</span>(barOffset &gt;= barSize)&#123;<br>                file.renameTo(<span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(fileName));<br>            &#125;<br>            <span class="hljs-comment">//////////////</span><br>            System.out.println(<span class="hljs-string">&quot;######## 文件接收成功 [File Name：&quot;</span> + fileName + <span class="hljs-string">&quot;] ########&quot;</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="CancelActionListener-java"><a href="#CancelActionListener-java" class="headerlink" title="CancelActionListener.java"></a>CancelActionListener.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> mysocket2;<br><br><span class="hljs-keyword">import</span> javax.swing.*;<br><span class="hljs-keyword">import</span> java.awt.event.ActionEvent;<br><span class="hljs-keyword">import</span> java.awt.event.ActionListener;<br><span class="hljs-keyword">import</span> java.io.DataInputStream;<br><span class="hljs-keyword">import</span> java.io.DataOutputStream;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.RandomAccessFile;<br><span class="hljs-keyword">import</span> java.net.Socket;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CancelActionListener</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ActionListener</span> &#123;<br>    JLabel label;<br>    DataInputStream dis;<br>    DataOutputStream dos;<br>    RandomAccessFile rad;<br>    JFrame frame;<br>    Socket socket;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">CancelActionListener</span><span class="hljs-params">(JLabel label,DataInputStream dis,DataOutputStream dos,RandomAccessFile rad,JFrame frame,Socket socket)</span>&#123;<br>        <span class="hljs-built_in">this</span>.label = label;<br>        <span class="hljs-built_in">this</span>.dis = dis;<br>        <span class="hljs-built_in">this</span>.dos = dos;<br>        <span class="hljs-built_in">this</span>.rad = rad;<br>        <span class="hljs-built_in">this</span>.frame = frame;<br>        <span class="hljs-built_in">this</span>.socket = socket;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">actionPerformed</span><span class="hljs-params">(ActionEvent e3)</span>&#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            label.setText(<span class="hljs-string">&quot; 取消发送,连接关闭&quot;</span>);<br>            JOptionPane.showMessageDialog(frame, <span class="hljs-string">&quot;取消发送给，连接关闭!&quot;</span>, <span class="hljs-string">&quot;提示：&quot;</span>, JOptionPane.INFORMATION_MESSAGE);<br>            dis.close();<br>            dos.close();<br>            rad.close();<br>            frame.dispose();<br>            socket.close();<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/%E7%BC%96%E7%A8%8B/" class="category-chain-item">编程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/blog/tags/%E4%BB%A3%E7%A0%81/">#代码</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Socket聊天程序（Java）</div>
+      <div>https://wangaaayu.github.io/blog/posts/545a2897/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>WangAaayu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年6月4日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年6月4日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/posts/6d0c3408/" title="GitHub+Hexo博客网站搭建（四）">
+                        <span class="hidden-mobile">GitHub+Hexo博客网站搭建（四）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
