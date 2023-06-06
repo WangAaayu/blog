@@ -16,19 +16,19 @@
   <meta name="author" content="WangAaayu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="vue+django部署ubuntu服务器首先用MobaXterm（或其他软件）连接上ubuntu服务器 ubuntu服务器上需安装：  mysql  python3（django+uwsgi）  nginx   整体架构 查看端口与进程查看mysql的3306、django项目的8000等要用的端口有没有被占用 1234# -a查看已连接的服务端口，-ap查看所有的服务端口netstat -ap">
+    <meta name="description" content="Vue+Django部署Ubuntu服务器首先用MobaXterm（或其他软件）连接上ubuntu服务器 ubuntu服务器上需安装：  mysql  python3（django+uwsgi）  nginx   整体架构 查看端口与进程查看mysql的3306、django项目的8000等要用的端口有没有被占用 1234# -a查看已连接的服务端口，-ap查看所有的服务端口netstat -ap">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue+django部署ubuntu服务器">
+<meta property="og:title" content="Vue+Django部署Ubuntu服务器">
 <meta property="og:url" content="https://wangaaayu.github.io/blog/posts/61a84e4c/index.html">
 <meta property="og:site_name" content="WangAaayu">
-<meta property="og:description" content="vue+django部署ubuntu服务器首先用MobaXterm（或其他软件）连接上ubuntu服务器 ubuntu服务器上需安装：  mysql  python3（django+uwsgi）  nginx   整体架构 查看端口与进程查看mysql的3306、django项目的8000等要用的端口有没有被占用 1234# -a查看已连接的服务端口，-ap查看所有的服务端口netstat -ap">
+<meta property="og:description" content="Vue+Django部署Ubuntu服务器首先用MobaXterm（或其他软件）连接上ubuntu服务器 ubuntu服务器上需安装：  mysql  python3（django+uwsgi）  nginx   整体架构 查看端口与进程查看mysql的3306、django项目的8000等要用的端口有没有被占用 1234# -a查看已连接的服务端口，-ap查看所有的服务端口netstat -ap">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://wangaaayu.github.io/blog/posts/61a84e4c/%E6%9E%B6%E6%9E%84.jpg">
 <meta property="og:image" content="https://wangaaayu.github.io/blog/posts/61a84e4c/mysql%E8%BF%9E%E6%8E%A5%E6%88%90%E5%8A%9F.png">
 <meta property="og:image" content="https://wangaaayu.github.io/blog/posts/61a84e4c/uwsgi%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F.png">
 <meta property="og:image" content="https://wangaaayu.github.io/blog/posts/61a84e4c/nginx%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F.png">
 <meta property="article:published_time" content="2023-05-18T02:12:38.000Z">
-<meta property="article:modified_time" content="2023-06-02T02:47:53.977Z">
+<meta property="article:modified_time" content="2023-06-06T12:55:00.822Z">
 <meta property="article:author" content="WangAaayu">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary_large_image">
@@ -38,7 +38,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>vue+django部署ubuntu服务器 - WangAaayu</title>
+  <title>Vue+Django部署Ubuntu服务器 - WangAaayu</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="vue+django部署ubuntu服务器"></span>
+            <span id="subtitle" data-typed-text="Vue+Django部署Ubuntu服务器"></span>
           
         </div>
 
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.8k 字
+          5k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          41 分钟
+          43 分钟
         
       </span>
     
@@ -260,7 +260,7 @@
       <span class="post-meta ">
         
           
-            本文最后更新于：2023年6月2日 上午
+            本文最后更新于：2023年6月6日 晚上
           
         
       </span>
@@ -296,12 +296,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vue+django部署ubuntu服务器</h1>
+            <h1 style="display: none">Vue+Django部署Ubuntu服务器</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="vue-django部署ubuntu服务器"><a href="#vue-django部署ubuntu服务器" class="headerlink" title="vue+django部署ubuntu服务器"></a>vue+django部署ubuntu服务器</h1><p>首先用MobaXterm（或其他软件）连接上ubuntu服务器</p>
+                <h1 id="Vue-Django部署Ubuntu服务器"><a href="#Vue-Django部署Ubuntu服务器" class="headerlink" title="Vue+Django部署Ubuntu服务器"></a>Vue+Django部署Ubuntu服务器</h1><p>首先用MobaXterm（或其他软件）连接上ubuntu服务器</p>
 <p>ubuntu服务器上需安装：</p>
 <ul>
 <li><p>mysql</p>
@@ -318,8 +318,12 @@
 <p>查看mysql、nginx等进程</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 输出格式为：拥有者 PID PPID CPU 系统启动时间 登入者的终端机位置 使用掉的CPU时间 下达的命令</span><br><span class="hljs-comment"># 该命令最少有一个结果，即该命令本身</span><br><span class="hljs-attribute">ps</span> -ef | grep mysql<br><span class="hljs-comment"># 关闭进程</span><br><span class="hljs-attribute">kill</span> -<span class="hljs-number">9</span> pid号<br></code></pre></td></tr></table></figure>
 
-<h2 id="mysql安装配置"><a href="#mysql安装配置" class="headerlink" title="mysql安装配置"></a>mysql安装配置</h2><p>mysql8.0，设置root密码、授予root所有权限、并使root能够远程连接</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 安装mysql（可只安装server）</span><br>sudo apt-<span class="hljs-built_in">get</span> install mysql-server<br>sudo apt-<span class="hljs-built_in">get</span> install mysql-client<br><span class="hljs-comment"># 查看mysql服务状态</span><br>systemctl status mysql.service<br><span class="hljs-comment"># mysql基本安全配置</span><br><span class="hljs-comment"># 配置的内容为：增加密码组件；设置root密码策略和密码；是否禁用匿名用户；是否不允许root远程登录；是否移除test数据库；是否重新加载权限表</span><br>sudo mysql_secure_installation<br><span class="hljs-comment"># 进入mysql</span><br>mysql -u root -p<br><span class="hljs-comment"># 设置密码策略</span><br><span class="hljs-built_in">set</span> global validate_password.<span class="hljs-attribute">policy</span>=LOW;<br><span class="hljs-comment"># 设置密码长度</span><br><span class="hljs-built_in">set</span> global validate_password.<span class="hljs-attribute">length</span>=6;<br><span class="hljs-comment"># 修改root密码</span><br>alter<span class="hljs-built_in"> user </span><span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> identified with mysql_native_password by <span class="hljs-string">&#x27;password&#x27;</span>;<br><span class="hljs-comment"># 进入mysql数据库</span><br>use mysql;<br><span class="hljs-comment"># 更改root的host</span><br>update<span class="hljs-built_in"> user </span><span class="hljs-built_in">set</span> <span class="hljs-attribute">host</span>=<span class="hljs-string">&#x27;%&#x27;</span> where <span class="hljs-attribute">user</span>=<span class="hljs-string">&#x27;root&#x27;</span>;<br><span class="hljs-comment"># 授予所有地址root所有数据库权限</span><br>grant all privileges on *.* <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> with grant option;<br><span class="hljs-comment"># 刷新权限，使之生效</span><br>flush privileges;<br><span class="hljs-comment"># 退出mysql</span><br>exit<br><span class="hljs-comment"># 修改mysqld.cnf配置文件中的bind-address</span><br>sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf<br>bind-address = 127.0.0.1,服务器ip地址<br><span class="hljs-comment"># 重启mysql</span><br>sudo systemctl restart mysql.service<br><span class="hljs-comment"># 查看3306端口的地址</span><br>ss -anplt | grep 3306<br><span class="hljs-comment"># 验证是否能够远程连接</span><br>mysql -u root -p -h ipv4地址<br></code></pre></td></tr></table></figure>
+<h2 id="mysql安装配置"><a href="#mysql安装配置" class="headerlink" title="mysql安装配置"></a>mysql安装配置</h2><p>mysql8.0</p>
+<p>安装与密码基本配置</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 安装mysql（可只安装server）</span><br>sudo apt-<span class="hljs-built_in">get</span> install mysql-server<br>sudo apt-<span class="hljs-built_in">get</span> install mysql-client<br><span class="hljs-comment"># 查看mysql服务状态</span><br>systemctl status mysql.service<br><span class="hljs-comment"># mysql基本安全配置</span><br><span class="hljs-comment"># 配置的内容为：增加密码组件；设置root密码策略和密码；是否禁用匿名用户；是否不允许root远程登录；是否移除test数据库；是否重新加载权限表</span><br>sudo mysql_secure_installation<br><span class="hljs-comment"># 进入mysql</span><br>mysql -u root -p<br><span class="hljs-comment"># 设置密码策略</span><br><span class="hljs-built_in">set</span> global validate_password.<span class="hljs-attribute">policy</span>=LOW;<br><span class="hljs-comment"># 设置密码长度</span><br><span class="hljs-built_in">set</span> global validate_password.<span class="hljs-attribute">length</span>=6;<br><span class="hljs-comment"># 修改root密码（建议密码不要设太简单）</span><br>alter<span class="hljs-built_in"> user </span><span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> identified with mysql_native_password by <span class="hljs-string">&#x27;password&#x27;</span>;<br><span class="hljs-comment"># 退出mysql</span><br>exit<br></code></pre></td></tr></table></figure>
+
+<p>创建新用户并授予项目数据库的所有权限、并使mysql能够远程连接</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># 进入mysql数据库<br>use mysql;<br># 查看<span class="hljs-keyword">user</span>表<br><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span>;<br># 查看用户和host<br><span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>,host <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span>;<br># 创建新用户<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;visitor&#x27;</span>@<span class="hljs-string">&#x27;要访问的主机ip地址（%为任意）&#x27;</span> identified <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;password&#x27;</span>;<br># 授予该用户数据库权限<br><span class="hljs-keyword">grant</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">privileges</span> <span class="hljs-keyword">on</span> 数据库名（*为任意）.表名（*为任意） <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;要访问的主机ip地址（%为任意）&#x27;</span>;<br># 或<br><span class="hljs-keyword">grant</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">privileges</span> <span class="hljs-keyword">on</span> 数据库名（*为任意）.表名（*为任意） <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;要访问的主机ip地址（%为任意）&#x27;</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">grant</span> <span class="hljs-keyword">option</span>;<br># 刷新权限，使之生效<br>flush <span class="hljs-keyword">privileges</span>;<br># 退出mysql<br><span class="hljs-keyword">exit</span><br># 修改mysqld.cnf配置文件中的bind-address<br>sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf<br>bind-address = <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>,服务器ip地址<br># 重启mysql<br>sudo systemctl <span class="hljs-keyword">restart</span> mysql.service<br># 查看<span class="hljs-number">3306</span>端口的地址<br>ss -anplt | grep <span class="hljs-number">3306</span><br># 验证是否能够远程连接<br>mysql -u root -p -h ipv4地址<br></code></pre></td></tr></table></figure>
 
 <p><img src="/blog/posts/61a84e4c/mysql%E8%BF%9E%E6%8E%A5%E6%88%90%E5%8A%9F.png" srcset="/blog/img/loading.gif" lazyload></p>
 <h2 id="python3虚拟环境"><a href="#python3虚拟环境" class="headerlink" title="python3虚拟环境"></a>python3虚拟环境</h2><p>创建虚拟环境来运行项目，方便python环境管理</p>
@@ -442,7 +446,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>vue+django部署ubuntu服务器</div>
+      <div>Vue+Django部署Ubuntu服务器</div>
       <div>https://wangaaayu.github.io/blog/posts/61a84e4c/</div>
     </div>
     <div class="license-meta">
@@ -461,7 +465,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年6月2日</div>
+          <div>2023年6月6日</div>
         </div>
       
       
@@ -492,9 +496,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/posts/2628a59d/" title="vue测试后端api接口简易模板">
+                      <a href="/blog/posts/2628a59d/" title="Vue测试后端API接口简易模板">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vue测试后端api接口简易模板</span>
+                        <span class="hidden-mobile">Vue测试后端API接口简易模板</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -502,8 +506,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/posts/f0bd5174/" title="windows下nginx代理django项目">
-                        <span class="hidden-mobile">windows下nginx代理django项目</span>
+                      <a href="/blog/posts/f0bd5174/" title="Windows下Nginx代理Django项目">
+                        <span class="hidden-mobile">Windows下Nginx代理Django项目</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
