@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://wangaaayu.github.io/blog/posts/61a84e4c/uwsgi%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F.png">
 <meta property="og:image" content="https://wangaaayu.github.io/blog/posts/61a84e4c/nginx%E8%BF%90%E8%A1%8C%E6%88%90%E5%8A%9F.png">
 <meta property="article:published_time" content="2023-05-18T02:12:38.000Z">
-<meta property="article:modified_time" content="2023-06-06T13:00:40.478Z">
+<meta property="article:modified_time" content="2023-06-06T13:09:19.946Z">
 <meta property="article:author" content="WangAaayu">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary_large_image">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.1k 字
+          5.2k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          43 分钟
+          44 分钟
         
       </span>
     
@@ -322,8 +322,8 @@
 <p>安装与密码基本配置</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 安装mysql（可只安装server）</span><br>sudo apt-<span class="hljs-built_in">get</span> install mysql-server<br>sudo apt-<span class="hljs-built_in">get</span> install mysql-client<br><span class="hljs-comment"># 查看mysql服务状态</span><br>systemctl status mysql.service<br><span class="hljs-comment"># mysql基本安全配置</span><br><span class="hljs-comment"># 配置的内容为：增加密码组件；设置root密码策略和密码；是否禁用匿名用户；是否不允许root远程登录；是否移除test数据库；是否重新加载权限表</span><br>sudo mysql_secure_installation<br><span class="hljs-comment"># 进入mysql</span><br>mysql -u root -p<br><span class="hljs-comment"># 设置密码策略</span><br><span class="hljs-built_in">set</span> global validate_password.<span class="hljs-attribute">policy</span>=LOW;<br><span class="hljs-comment"># 设置密码长度</span><br><span class="hljs-built_in">set</span> global validate_password.<span class="hljs-attribute">length</span>=6;<br><span class="hljs-comment"># 修改root密码（建议密码不要设太简单）</span><br>alter<span class="hljs-built_in"> user </span><span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> identified with mysql_native_password by <span class="hljs-string">&#x27;password&#x27;</span>;<br><span class="hljs-comment"># 退出mysql</span><br>exit<br></code></pre></td></tr></table></figure>
 
-<p>若忘记密码</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta"># 使用该命令输出的默认用户名密码登录</span><br><br></code></pre></td></tr></table></figure>
+<p>若忘记密码，据说不能用skip-grant-tables来跳过密码登录（<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_29231725/article/details/114472319">ubuntu20.04安装mysql_Ubuntu 20.04安装MySQL 8.0.20记_zibuyu9的博客-CSDN博客</a>）</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 使用该命令输出的默认用户名密码登录，再修改密码</span><br>sudo cat <span class="hljs-regexp">/etc/my</span>sql/debian.cnf<br></code></pre></td></tr></table></figure>
 
 <p>创建新用户并授予项目数据库的所有权限、并使mysql能够远程连接</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># 进入mysql数据库<br>use mysql;<br># 查看<span class="hljs-keyword">user</span>表<br><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span>;<br># 查看用户和host<br><span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>,host <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span>;<br># 创建新用户<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;用户名&#x27;</span>@<span class="hljs-string">&#x27;要访问的主机ip地址（%为任意）&#x27;</span> identified <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;password&#x27;</span>;<br># 授予该用户数据库权限<br><span class="hljs-keyword">grant</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">privileges</span> <span class="hljs-keyword">on</span> 数据库名（*为任意）.表名（*为任意） <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;用户名&#x27;</span>@<span class="hljs-string">&#x27;要访问的主机ip地址（%为任意）&#x27;</span>;<br># 或<br><span class="hljs-keyword">grant</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">privileges</span> <span class="hljs-keyword">on</span> 数据库名（*为任意）.表名（*为任意） <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;用户名&#x27;</span>@<span class="hljs-string">&#x27;要访问的主机ip地址（%为任意）&#x27;</span> <span class="hljs-keyword">with</span> <span class="hljs-keyword">grant</span> <span class="hljs-keyword">option</span>;<br># 刷新权限，使之生效<br>flush <span class="hljs-keyword">privileges</span>;<br># 退出mysql<br><span class="hljs-keyword">exit</span><br># 修改mysqld.cnf配置文件中的bind-address<br>sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf<br>bind-address = <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>,服务器ip地址<br># 重启mysql<br>sudo systemctl <span class="hljs-keyword">restart</span> mysql.service<br># 查看<span class="hljs-number">3306</span>端口的地址<br>ss -anplt | grep <span class="hljs-number">3306</span><br># 验证是否能够远程连接<br>mysql -u 用户名 -p -h 数据库的ipv4地址<br></code></pre></td></tr></table></figure>
