@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>VSCode搭建Java环境</title>
+    <link href="/blog/posts/b893e3bf/"/>
+    <url>/blog/posts/b893e3bf/</url>
+    
+    <content type="html"><![CDATA[<h1 id="VSCode搭建Java环境"><a href="#VSCode搭建Java环境" class="headerlink" title="VSCode搭建Java环境"></a>VSCode搭建Java环境</h1><h2 id="java安装配置"><a href="#java安装配置" class="headerlink" title="java安装配置"></a>java安装配置</h2><p>java官网：<a href="https://www.oracle.com/java/technologies/downloads/">Java Downloads | Oracle</a>下载JDK（Java Development Kit，Java开发工具包），选择对应操作系统和java版本（推荐java8），x86是32位系统，x64是64位系统</p><p>打开windows的高级系统设置，环境变量，双击系统变量中的Path进行编辑，点击新建，填入jdk的bin目录的绝对路径，如D:\Java\java_jdk-8u341\bin，点击编辑环境变量和环境变量窗口的确定</p><p>win+R输入cmd，打开命令行窗口，输入java可以输出java的信息，说明已配置好</p><h2 id="vscode插件安装"><a href="#vscode插件安装" class="headerlink" title="vscode插件安装"></a>vscode插件安装</h2><p>插件搜索java，安装Extension Pack for Java，包含6个插件</p><p>重启vscode打开新窗口，可以点击左侧explorer里的create java project来创建java项目，根据需要选择项目类型</p><h2 id="java编译与运行"><a href="#java编译与运行" class="headerlink" title="java编译与运行"></a>java编译与运行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 编译</span><br>javac xxx.java<br><span class="hljs-comment"># 指定源文件使用的字符编码进行编译</span><br>javac -encoding [utf-8/gbk] xxx.java<br><span class="hljs-comment"># 运行</span><br>java xxx<br></code></pre></td></tr></table></figure><h2 id="maven项目配置"><a href="#maven项目配置" class="headerlink" title="maven项目配置"></a>maven项目配置</h2><p>maven官网：<a href="https://maven.apache.org/%EF%BC%8C%E7%82%B9%E5%87%BB%E5%B7%A6%E4%BE%A7%E7%9A%84download%EF%BC%8C%E4%B8%8B%E8%BD%BDBinary">https://maven.apache.org/</a> ，点击左侧的download，下载Binary zip archive并解压</p><p>打开windows的高级系统设置，环境变量，双击系统变量中的Path进行编辑，点击新建，填入maven的bin目录的绝对路径，如D:\maven\apache-maven-3.9.2\bin，点击编辑环境变量和环境变量窗口的确定</p><p>win+R输入cmd，打开命令行窗口，输入mvn -v可以输出maven的信息，说明已配置好</p><p>打开vscode设置，搜索Maven.Executable.Path，填入maven的bin目录下的mvn.cmd的绝对路径，如D:\maven\apache-maven-3.9.2\bin\mvn.cmd</p><p>创建maven项目时，可以选择archetype原型来创建，创建好后，explorer栏的最下方有maven插件可以管理项目</p><p>添加依赖时，可以去maven官网<a href="https://mvnrepository.com/%EF%BC%8C%E6%90%9C%E7%B4%A2%E9%9C%80%E8%A6%81%E7%9A%84%E5%8C%85%EF%BC%8C%E9%80%89%E6%8B%A9%E5%AF%B9%E5%BA%94%E7%9A%84%E7%89%88%E6%9C%AC%EF%BC%8C%E5%8F%AF%E4%BB%A5%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%A4%8D%E5%88%B6%E4%BB%A3%E7%A0%81">https://mvnrepository.com/，搜索需要的包，选择对应的版本，可以下载和复制代码</a></p><p><img src="/blog/posts/b893e3bf/maven%E4%BE%9D%E8%B5%96.png"></p><h2 id="关于java中文乱码"><a href="#关于java中文乱码" class="headerlink" title="关于java中文乱码"></a>关于java中文乱码</h2><p>参考<a href="https://blog.csdn.net/m0_74075298/article/details/128607966">Java中文乱码浅析及解决方案_浩绪的博客-CSDN博客</a></p><p>java中文乱码与以下几个编码格式的设置有关：</p><ol><li><p>java编译器自动选择的编码格式</p></li><li><p>输出终端的编码格式</p></li><li><p>代码文件的编码格式</p></li><li><p>（如果Gradle开发）Gradle项目配置中的编码格式</p></li></ol><p>这些设置如果不一致，或者不同但没有合适的转换，就会导致中文乱码</p><h3 id="java编译器自动选择的编码格式"><a href="#java编译器自动选择的编码格式" class="headerlink" title="java编译器自动选择的编码格式"></a>java编译器自动选择的编码格式</h3><p>取决于操作系统和地区语言设置，无法自行改变，win11中文版为gbk编码</p><h3 id="输出终端的编码格式"><a href="#输出终端的编码格式" class="headerlink" title="输出终端的编码格式"></a>输出终端的编码格式</h3><p>cmd中输入chcp可以查看编码格式</p><p>65001为utf-8编码</p><p>936为gbk编码</p><p>该编码格式应与java编译器的编码格式一致，可以使用<code>chcp xxx</code>改变</p><h3 id="代码文件的编码格式"><a href="#代码文件的编码格式" class="headerlink" title="代码文件的编码格式"></a>代码文件的编码格式</h3><p>通常为utf-8，开发工具的下方都有显示</p><h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p><strong>源文件UTF-8+编译指定UTF-8+Java编译器GBK（固定）+输出终端GBK</strong></p><ol><li><p>编译时指定的源文件字符编码应与源文件编码格式一致</p></li><li><p>输出终端的编码格式应与java编译器的编码格式一致</p></li></ol><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-comment"># 指定源文件使用的字符编码为utf-8，然后进行编译</span><br><span class="hljs-keyword">javac </span>-encoding utf<span class="hljs-number">-8</span> xxx.<span class="hljs-keyword">java</span><br><span class="hljs-keyword"></span><span class="hljs-comment"># 由于java编译器自动选择gbk编码格式，因此将输出终端的编码格式也改为gbk（以cmd为例）</span><br>chcp <span class="hljs-number">936</span><br><span class="hljs-comment"># 运行java文件</span><br><span class="hljs-keyword">java </span>xxx <br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>开发</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>教程</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Socket聊天程序（Java）</title>
     <link href="/blog/posts/545a2897/"/>
     <url>/blog/posts/545a2897/</url>

@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangaaayu.github.io/blog/posts/b893e3bf/</loc>
+    
+    <lastmod>2023-06-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://wangaaayu.github.io/blog/posts/da6f56bd/</loc>
     
     <lastmod>2023-06-12</lastmod>
@@ -139,7 +148,7 @@
 
   <url>
     <loc>https://wangaaayu.github.io/blog</loc>
-    <lastmod>2023-06-12</lastmod>
+    <lastmod>2023-06-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -147,21 +156,21 @@
   
   <url>
     <loc>https://wangaaayu.github.io/blog/tags/%E4%BB%A3%E7%A0%81/</loc>
-    <lastmod>2023-06-12</lastmod>
+    <lastmod>2023-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wangaaayu.github.io/blog/tags/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2023-06-12</lastmod>
+    <lastmod>2023-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wangaaayu.github.io/blog/tags/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2023-06-12</lastmod>
+    <lastmod>2023-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -170,28 +179,28 @@
   
   <url>
     <loc>https://wangaaayu.github.io/blog/categories/%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2023-06-12</lastmod>
+    <lastmod>2023-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wangaaayu.github.io/blog/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2023-06-12</lastmod>
+    <lastmod>2023-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wangaaayu.github.io/blog/categories/GitHub%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/</loc>
-    <lastmod>2023-06-12</lastmod>
+    <lastmod>2023-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wangaaayu.github.io/blog/categories/%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2023-06-12</lastmod>
+    <lastmod>2023-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
