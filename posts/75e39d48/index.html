@@ -1,0 +1,783 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/blog/img/icon.png">
+  <link rel="icon" href="/blog/img/icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#81d8d0">
+  <meta name="author" content="WangAaayu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="雪花算法（SnowFlake）Twitter雪花算法 雪花算法原理是生成一个的64位比特位的long类型的唯一id  最高1位固定值0，使生成的id为正整数 41位存储毫秒级时间戳，2^41&#x2F;(1000606024365)&#x3D;69，大概可以使用69年 10位存储机器码，包括5位datacenterId和5位workerId，最多可以部署2^10&#x3D;1024台机器 12位存储序列号，时间戳同一毫秒时，通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="雪花算法（SnowFlake）">
+<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/75e39d48/index.html">
+<meta property="og:site_name" content="WangAaayu">
+<meta property="og:description" content="雪花算法（SnowFlake）Twitter雪花算法 雪花算法原理是生成一个的64位比特位的long类型的唯一id  最高1位固定值0，使生成的id为正整数 41位存储毫秒级时间戳，2^41&#x2F;(1000606024365)&#x3D;69，大概可以使用69年 10位存储机器码，包括5位datacenterId和5位workerId，最多可以部署2^10&#x3D;1024台机器 12位存储序列号，时间戳同一毫秒时，通">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/75e39d48/twitter%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95.jpg">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/75e39d48/%E6%94%B9%E7%94%9F%E6%88%90id.png">
+<meta property="article:published_time" content="2023-06-14T08:10:07.000Z">
+<meta property="article:modified_time" content="2023-06-17T01:39:24.798Z">
+<meta property="article:author" content="WangAaayu">
+<meta property="article:tag" content="代码">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangaaayu.github.io/blog/posts/75e39d48/twitter%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>雪花算法（SnowFlake） - WangAaayu</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/blog/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/blog/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/blog/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangaaayu.github.io","root":"/blog/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/blog/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/blog/js/utils.js" ></script>
+  <script  src="/blog/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/blog/">
+      <strong>WangAaayu</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/blog/img/wallpaper.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="雪花算法（SnowFlake）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-14 16:10" pubdate>
+          2023年6月14日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          13k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          111 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+  <span class="myupdated">
+    
+      <i class="fa fa-repeat" aria-hidden="true" style="margin-right: 0.3rem;"></i>
+      <span class="post-meta ">
+        
+          
+            本文最后更新于：2023年6月17日 上午
+          
+        
+      </span>
+    
+  </span>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">雪花算法（SnowFlake）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="雪花算法（SnowFlake）"><a href="#雪花算法（SnowFlake）" class="headerlink" title="雪花算法（SnowFlake）"></a>雪花算法（SnowFlake）</h1><h2 id="Twitter雪花算法"><a href="#Twitter雪花算法" class="headerlink" title="Twitter雪花算法"></a>Twitter雪花算法</h2><p><img src="/blog/posts/75e39d48/twitter%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95.jpg" srcset="/blog/img/loading.gif" lazyload></p>
+<p>雪花算法原理是生成一个的64位比特位的long类型的唯一id</p>
+<ul>
+<li>最高1位固定值0，使生成的id为正整数</li>
+<li>41位存储毫秒级时间戳，2^41/(1000<em>60</em>60<em>24</em>365)=69，大概可以使用69年</li>
+<li>10位存储机器码，包括5位datacenterId和5位workerId，最多可以部署2^10=1024台机器</li>
+<li>12位存储序列号，时间戳同一毫秒时，通过这个递增的序列号来区分，即对于同一台机器，一毫秒时间戳可以生成2^12=4096个不重复id</li>
+</ul>
+<p>可以将雪花算法作为一个单独的服务进行部署，然后需要全局唯一 id 的系统，请求雪花算法服务获取 id 即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Twitter_Snowflake</span><br><span class="hljs-comment"> * SnowFlake的结构如下(每部分用-分开):</span><br><span class="hljs-comment"> * 0 - 0000000000 0000000000 0000000000 0000000000 0 - 00000 - 00000 -</span><br><span class="hljs-comment"> * 000000000000</span><br><span class="hljs-comment"> * 1位标识，由于long基本类型在Java中是带符号的，最高位是符号位，正数是0，负数是1，所以id一般是正数，最高位是0</span><br><span class="hljs-comment"> * 41位时间截(毫秒级)，注意，41位时间截不是存储当前时间的时间截，而是存储时间截的差值（当前时间截 - 开始时间截)</span><br><span class="hljs-comment"> * 得到的值），这里的的开始时间截，一般是我们的id生成器开始使用的时间，由我们程序来指定的（如下下面程序IdWorker类的startTime属性）。41位的时间截，可以使用69年，年T</span><br><span class="hljs-comment"> * = (1L &lt;&lt; 41) / (1000L * 60 * 60 * 24 * 365) = 69</span><br><span class="hljs-comment"> * 10位的数据机器位，可以部署在1024个节点，包括5位datacenterId和5位workerId</span><br><span class="hljs-comment"> * 12位序列，毫秒内的计数，12位的计数顺序号支持每个节点每毫秒(同一机器，同一时间截)产生4096个ID序号</span><br><span class="hljs-comment"> * 加起来刚好64位，为一个Long型。</span><br><span class="hljs-comment"> * SnowFlake的优点是，整体上按照时间自增排序，并且整个分布式系统内不会产生ID碰撞(由数据中心ID和机器ID作区分)，并且效率较高，经测试，SnowFlake每秒能够产生26万ID左右。</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SnowflakeIdWorker</span> &#123;<br>    <span class="hljs-comment">// ==============================Fields===========================================</span><br>    <span class="hljs-comment">/** 开始时间截 (2020-08-28) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">twepoch</span> <span class="hljs-operator">=</span> <span class="hljs-number">1598598185157L</span>;<br><br>    <span class="hljs-comment">/** 机器id所占的位数 */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">workerIdBits</span> <span class="hljs-operator">=</span> <span class="hljs-number">5L</span>;<br><br>    <span class="hljs-comment">/** 数据标识id所占的位数 */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">datacenterIdBits</span> <span class="hljs-operator">=</span> <span class="hljs-number">5L</span>;<br><br>    <span class="hljs-comment">/** 支持的最大机器id，结果是31 (这个移位算法可以很快的计算出几位二进制数所能表示的最大十进制数) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">maxWorkerId</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1L</span> ^ (-<span class="hljs-number">1L</span> &lt;&lt; workerIdBits);<br><br>    <span class="hljs-comment">/** 支持的最大数据标识id，结果是31 */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">maxDatacenterId</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1L</span> ^ (-<span class="hljs-number">1L</span> &lt;&lt; datacenterIdBits);<br><br>    <span class="hljs-comment">/** 序列在id中占的位数 */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">sequenceBits</span> <span class="hljs-operator">=</span> <span class="hljs-number">12L</span>;<br><br>    <span class="hljs-comment">/** 机器ID向左移12位 */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">workerIdShift</span> <span class="hljs-operator">=</span> sequenceBits;<br><br>    <span class="hljs-comment">/** 数据标识id向左移17位(12+5) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">datacenterIdShift</span> <span class="hljs-operator">=</span> sequenceBits + workerIdBits;<br><br>    <span class="hljs-comment">/** 时间截向左移22位(5+5+12) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">timestampLeftShift</span> <span class="hljs-operator">=</span> sequenceBits + workerIdBits + datacenterIdBits;<br><br>    <span class="hljs-comment">/** 生成序列的掩码，这里为4095 (0b111111111111=0xfff=4095) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">sequenceMask</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1L</span> ^ (-<span class="hljs-number">1L</span> &lt;&lt; sequenceBits);<br><br>    <span class="hljs-comment">/** 工作机器ID(0~31) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> workerId;<br><br>    <span class="hljs-comment">/** 数据中心ID(0~31) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> datacenterId;<br><br>    <span class="hljs-comment">/** 毫秒内序列(0~4095) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> <span class="hljs-variable">sequence</span> <span class="hljs-operator">=</span> <span class="hljs-number">0L</span>;<br><br>    <span class="hljs-comment">/** 上次生成ID的时间截 */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> <span class="hljs-variable">lastTimestamp</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1L</span>;<br><br>    <span class="hljs-comment">// ==============================Constructors=====================================</span><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 构造函数</span><br><span class="hljs-comment">     * </span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> workerId     工作ID (0~31)</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> datacenterId 数据中心ID (0~31) 此方法是判断传入的机房号和机器号是否超过了最大值，即31，或者小于0</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">SnowflakeIdWorker</span><span class="hljs-params">(<span class="hljs-type">long</span> workerId, <span class="hljs-type">long</span> datacenterId)</span> &#123;<br>        <span class="hljs-keyword">if</span> (workerId &gt; maxWorkerId || workerId &lt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<br>                    String.format(<span class="hljs-string">&quot;worker Id can&#x27;t be greater than %d or less than 0&quot;</span>, maxWorkerId));<br>        &#125;<br>        <span class="hljs-keyword">if</span> (datacenterId &gt; maxDatacenterId || datacenterId &lt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<br>                    String.format(<span class="hljs-string">&quot;datacenter Id can&#x27;t be greater than %d or less than 0&quot;</span>, maxDatacenterId));<br>        &#125;<br>        <span class="hljs-built_in">this</span>.workerId = workerId;<br>        <span class="hljs-built_in">this</span>.datacenterId = datacenterId;<br>    &#125;<br><br>    <span class="hljs-comment">// ==============================Methods==========================================</span><br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">     * 核心方法</span><br><span class="hljs-comment">     * 获得下一个ID (该方法是线程安全的)</span><br><span class="hljs-comment">     * </span><br><span class="hljs-comment">     * @return SnowflakeId</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-type">long</span> <span class="hljs-title function_">nextId</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-comment">// 1.获取当前的系统时间</span><br>        <span class="hljs-type">long</span> <span class="hljs-variable">timestamp</span> <span class="hljs-operator">=</span> timeGen();<br><br>        <span class="hljs-comment">// 如果当前时间小于上一次ID生成的时间戳，说明系统时钟回退过这个时候应当抛出异常</span><br>        <span class="hljs-keyword">if</span> (timestamp &lt; lastTimestamp) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<br>                    String.format(<span class="hljs-string">&quot;Clock moved backwards.  Refusing to generate id for %d milliseconds&quot;</span>,<br>                            lastTimestamp - timestamp));<br>        &#125;<br><br>        <span class="hljs-comment">// 如果是同一时间生成的，则进行毫秒内序列</span><br>        <span class="hljs-keyword">if</span> (lastTimestamp == timestamp) &#123;<br>            <span class="hljs-comment">// sequence 要增1, 但要预防sequence超过 最大值4095，所以要 与 SEQUENCE_MASK 按位求与</span><br>            <span class="hljs-comment">// 即如果此时sequence等于4095，加1后为4096，再和4095按位与后，结果为0</span><br>            sequence = (sequence + <span class="hljs-number">1</span>) &amp; sequenceMask;<br>            <span class="hljs-comment">// 毫秒内序列溢出</span><br>            <span class="hljs-keyword">if</span> (sequence == <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-comment">// 阻塞到下一个毫秒,获得新的时间戳</span><br>                timestamp = tilNextMillis(lastTimestamp);<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// 时间戳改变，毫秒内序列重置</span><br>        <span class="hljs-keyword">else</span> &#123;<br>            sequence = <span class="hljs-number">0L</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// 上次生成ID的时间截</span><br>        <span class="hljs-comment">// 把当前时间赋值给 lastTime, 以便下一次判断是否处在同一个毫秒内</span><br>        lastTimestamp = timestamp;<br><br>        <span class="hljs-comment">// 移位并通过或运算拼到一起组成64位的ID</span><br>        <span class="hljs-type">long</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> ((timestamp - twepoch) &lt;&lt; timestampLeftShift) <span class="hljs-comment">// 时间戳减去默认时间 再左移22位 与运算</span><br>                | (datacenterId &lt;&lt; datacenterIdShift) <span class="hljs-comment">// 机房号 左移17位 与运算</span><br>                | (workerId &lt;&lt; workerIdShift) <span class="hljs-comment">// 机器号 左移12位 与运算</span><br>                | sequence; <span class="hljs-comment">// 序列号无需左移 直接进行与运算</span><br>        <span class="hljs-keyword">return</span> id;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 阻塞到下一个毫秒，直到获得新的时间戳</span><br><span class="hljs-comment">     * </span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> lastTimestamp 上次生成ID的时间截</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 当前时间戳</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-type">long</span> <span class="hljs-title function_">tilNextMillis</span><span class="hljs-params">(<span class="hljs-type">long</span> lastTimestamp)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">timestamp</span> <span class="hljs-operator">=</span> timeGen();<br>        <span class="hljs-keyword">while</span> (timestamp &lt;= lastTimestamp) &#123;<br>            timestamp = timeGen();<br>        &#125;<br>        <span class="hljs-keyword">return</span> timestamp;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 返回以毫秒为单位的当前时间</span><br><span class="hljs-comment">     * </span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 当前时间(毫秒)</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-type">long</span> <span class="hljs-title function_">timeGen</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> System.currentTimeMillis();<br>    &#125;<br><br>    <span class="hljs-comment">// ==============================Test=============================================</span><br>    <span class="hljs-comment">/** 测试 */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">SnowflakeIdWorker</span> <span class="hljs-variable">idWorker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SnowflakeIdWorker</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">1000</span>; i++) &#123;<br>            <span class="hljs-type">long</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> idWorker.nextId();<br>            System.out.println(id);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7082669476658806792">SnowFlake 雪花算法详解与实现 - 掘金</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41656303/article/details/109316962">snowflake算法(雪花算法)_LQJ灬的博客-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/534893180">分布式唯一 ID 生成方案浅谈</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/88eef580a45a">分布式自增ID算法——雪花算法 - 简书</a></p>
+<h2 id="雪花算法改（增加数据信息）"><a href="#雪花算法改（增加数据信息）" class="headerlink" title="雪花算法改（增加数据信息）"></a>雪花算法改（增加数据信息）</h2><p>根据实际项目的需要，修改SnowFlake的结构</p>
+<p>0 - 0000000000 0000000000 0000000000 00000 - 0 - 0 - 0 - 0000000000 0000000000 00000</p>
+<ul>
+<li><p>1位标识</p>
+</li>
+<li><p>36位时间截(毫秒级)</p>
+</li>
+<li><p>3位数据机器位</p>
+</li>
+<li><p>4位毫秒内序列</p>
+</li>
+<li><p>20位信息序列，存储数据的信息，信息以首字母的形式存储，每5位表示一个字母，0表示空，1-26表示a-z；该信息序列可以表示4个字母，存储部分数据，方便id与数据的对应和检验</p>
+</li>
+</ul>
+<p><img src="/blog/posts/75e39d48/%E6%94%B9%E7%94%9F%E6%88%90id.png" srcset="/blog/img/loading.gif" lazyload></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Date;<br><span class="hljs-keyword">import</span> java.text.SimpleDateFormat;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * SnowFlake的结构如下(每部分用-分开):</span><br><span class="hljs-comment"> * 0 - 0000000000 0000000000 0000000000 000000 - 0 - 00 - 0000 - 0000000000</span><br><span class="hljs-comment"> * 0000000000</span><br><span class="hljs-comment"> * 1位标识，由于long基本类型在Java中是带符号的，最高位是符号位，正数是0，负数是1，所以id一般是正数，最高位是0</span><br><span class="hljs-comment"> * 36位时间截(毫秒级)，注意，41位时间截不是存储当前时间的时间截，而是存储时间截的差值（当前时间截 - 开始时间截)</span><br><span class="hljs-comment"> * 得到的值），这里的的开始时间截，一般是我们的id生成器开始使用的时间，由我们程序来指定的（如下下面程序IdWorker类的startTime属性）。35位的时间截，可以使用1年，年T</span><br><span class="hljs-comment"> * = (1L &lt;&lt; 36) / (1000L * 60 * 60 * 24 * 365) = 2</span><br><span class="hljs-comment"> * 3位的数据机器位，可以部署在4个节点，包括1位datacenterId和1位workerId</span><br><span class="hljs-comment"> * 4位毫秒内序列，毫秒内的计数，1位的计数顺序号支持每个节点每毫秒(同一机器，同一时间截)产生2个ID序号</span><br><span class="hljs-comment"> * 20位信息序列，存储数据信息，信息以首字母的形式存储，每5位表示一个字母，0表示空，1~26表示a~z</span><br><span class="hljs-comment"> * 加起来刚好64位，为一个Long型。</span><br><span class="hljs-comment"> * SnowFlake的优点是，整体上按照时间自增排序，并且整个分布式系统内不会产生ID碰撞(由数据中心ID和机器ID作区分)，并且效率较高，经测试，SnowFlake每秒能够产生26万ID左右。</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MySnowflakeIdWorker</span> &#123;<br>    <span class="hljs-comment">// ==============================Fields===========================================</span><br>    <span class="hljs-comment">/** 开始时间截 (2023-06-16) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">startTimestamp</span> <span class="hljs-operator">=</span> <span class="hljs-number">1686904669147L</span>;<br><br>    <span class="hljs-comment">/** 机器id所占的位数 */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">workerIdBits</span> <span class="hljs-operator">=</span> <span class="hljs-number">2L</span>;<br><br>    <span class="hljs-comment">/** 数据标识id所占的位数 */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">datacenterIdBits</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;<br><br>    <span class="hljs-comment">/** 支持的最大机器id，结果是1 (这个移位算法可以很快的计算出几位二进制数所能表示的最大十进制数) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">maxWorkerId</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1L</span> ^ (-<span class="hljs-number">1L</span> &lt;&lt; workerIdBits);<br><br>    <span class="hljs-comment">/** 支持的最大数据标识id，结果是1 */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">maxDatacenterId</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1L</span> ^ (-<span class="hljs-number">1L</span> &lt;&lt; datacenterIdBits);<br><br>    <span class="hljs-comment">/** 序列在id中占的位数 */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">sequenceBits</span> <span class="hljs-operator">=</span> <span class="hljs-number">4L</span>;<br><br>    <span class="hljs-comment">/** 信息在id中占的位数 */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">infoBits</span> <span class="hljs-operator">=</span> <span class="hljs-number">20L</span>;<br><br>    <span class="hljs-comment">/* 时间戳在id中占的位数 */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">timestampBits</span> <span class="hljs-operator">=</span> <span class="hljs-number">64</span> - <span class="hljs-number">1</span> - workerIdBits - datacenterIdBits - sequenceBits - infoBits;<br><br>    <span class="hljs-comment">/** 序列向左移25位 */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">sequenceShift</span> <span class="hljs-operator">=</span> infoBits;<br><br>    <span class="hljs-comment">/** 机器ID向左移26位(25+1) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">workerIdShift</span> <span class="hljs-operator">=</span> infoBits + sequenceBits;<br><br>    <span class="hljs-comment">/** 数据中心id向左移27位(25+1+1) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">datacenterIdShift</span> <span class="hljs-operator">=</span> infoBits + sequenceBits + workerIdBits;<br><br>    <span class="hljs-comment">/** 时间截向左移28位(25+1+1+1) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">timestampShift</span> <span class="hljs-operator">=</span> infoBits + sequenceBits + workerIdBits + datacenterIdBits;<br><br>    <span class="hljs-comment">/** 生成序列的掩码，这里为1 (0b1=0x1=1) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">sequenceMask</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1L</span> ^ (-<span class="hljs-number">1L</span> &lt;&lt; sequenceBits);<br><br>    <span class="hljs-comment">/** 工作机器ID(0~1) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> workerId;<br><br>    <span class="hljs-comment">/** 数据中心ID(0~1) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> datacenterId;<br><br>    <span class="hljs-comment">/** 毫秒内序列(0~1) */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> <span class="hljs-variable">sequence</span> <span class="hljs-operator">=</span> <span class="hljs-number">0L</span>;<br><br>    <span class="hljs-comment">/** 上次生成ID的时间截 */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> <span class="hljs-variable">lastTimestamp</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1L</span>;<br><br>    <span class="hljs-comment">// ==============================Constructors=====================================</span><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 构造函数</span><br><span class="hljs-comment">     * 此方法是判断传入的机房号和机器号是否超过了最大值，即31，或者小于0</span><br><span class="hljs-comment">     * </span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> workerId     工作ID (0~1)</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> datacenterId 数据中心ID (0~1)</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MySnowflakeIdWorker</span><span class="hljs-params">(<span class="hljs-type">long</span> workerId, <span class="hljs-type">long</span> datacenterId)</span> &#123;<br>        <span class="hljs-keyword">if</span> (workerId &gt; maxWorkerId || workerId &lt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<br>                    String.format(<span class="hljs-string">&quot;worker Id can&#x27;t be greater than %d or less than 0&quot;</span>, maxWorkerId));<br>        &#125;<br>        <span class="hljs-keyword">if</span> (datacenterId &gt; maxDatacenterId || datacenterId &lt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<br>                    String.format(<span class="hljs-string">&quot;datacenter Id can&#x27;t be greater than %d or less than 0&quot;</span>, maxDatacenterId));<br>        &#125;<br>        <span class="hljs-built_in">this</span>.workerId = workerId;<br>        <span class="hljs-built_in">this</span>.datacenterId = datacenterId;<br>    &#125;<br><br>    <span class="hljs-comment">// ==============================Methods==========================================</span><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 核心方法</span><br><span class="hljs-comment">     * 获得下一个ID (该方法是线程安全的)</span><br><span class="hljs-comment">     * </span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> data</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> SnowflakeId</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-type">long</span> <span class="hljs-title function_">nextId</span><span class="hljs-params">(String data)</span> &#123;<br>        <span class="hljs-comment">// 1.获取当前的系统时间</span><br>        <span class="hljs-type">long</span> <span class="hljs-variable">timestamp</span> <span class="hljs-operator">=</span> timeGen();<br><br>        <span class="hljs-comment">// 如果当前时间小于上一次ID生成的时间戳，说明系统时钟回退过这个时候应当抛出异常</span><br>        <span class="hljs-keyword">if</span> (timestamp &lt; lastTimestamp) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<br>                    String.format(<span class="hljs-string">&quot;Clock moved backwards.  Refusing to generate id for %d milliseconds&quot;</span>,<br>                            lastTimestamp - timestamp));<br>        &#125;<br><br>        <span class="hljs-comment">// 如果是同一时间生成的，则进行毫秒内序列</span><br>        <span class="hljs-keyword">if</span> (lastTimestamp == timestamp) &#123;<br>            <span class="hljs-comment">// sequence 要增1, 但要预防sequence超过 最大值4095，所以要 与 SEQUENCE_MASK 按位求与</span><br>            <span class="hljs-comment">// 即如果此时sequence等于4095，加1后为4096，再和4095按位与后，结果为0</span><br>            sequence = (sequence + <span class="hljs-number">1</span>) &amp; sequenceMask;<br>            <span class="hljs-comment">// 毫秒内序列溢出</span><br>            <span class="hljs-keyword">if</span> (sequence == <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-comment">// 阻塞到下一个毫秒,获得新的时间戳</span><br>                timestamp = tilNextMillis(lastTimestamp);<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// 时间戳改变，毫秒内序列重置</span><br>        <span class="hljs-keyword">else</span> &#123;<br>            sequence = <span class="hljs-number">0L</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// 上次生成ID的时间截</span><br>        <span class="hljs-comment">// 把当前时间赋值给 lastTime, 以便下一次判断是否处在同一个毫秒内</span><br>        lastTimestamp = timestamp;<br><br>        <span class="hljs-comment">// 根据数据生成信息序列</span><br>        <span class="hljs-type">long</span> <span class="hljs-variable">info</span> <span class="hljs-operator">=</span> infoGen(data);<br><br>        <span class="hljs-comment">// 移位并通过或运算拼到一起组成64位的ID</span><br>        <span class="hljs-type">long</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> ((timestamp - startTimestamp) &lt;&lt; timestampShift) <span class="hljs-comment">// 时间戳减去默认时间 再左移28位 或运算</span><br>                | (datacenterId &lt;&lt; datacenterIdShift) <span class="hljs-comment">// 机房号 左移27位 或运算</span><br>                | (workerId &lt;&lt; workerIdShift) <span class="hljs-comment">// 机器号 左移26位 或运算</span><br>                | (sequence &lt;&lt; sequenceShift) <span class="hljs-comment">// 序列号 左移25位 或运算</span><br>                | (info); <span class="hljs-comment">// 信息号 无需左移 直接进行或运算</span><br>        <span class="hljs-keyword">return</span> id;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 阻塞到下一个毫秒，直到获得新的时间戳</span><br><span class="hljs-comment">     * </span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> lastTimestamp 上次生成ID的时间截</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 当前时间戳</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-type">long</span> <span class="hljs-title function_">tilNextMillis</span><span class="hljs-params">(<span class="hljs-type">long</span> lastTimestamp)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">timestamp</span> <span class="hljs-operator">=</span> timeGen();<br>        <span class="hljs-keyword">while</span> (timestamp &lt;= lastTimestamp) &#123;<br>            timestamp = timeGen();<br>        &#125;<br>        <span class="hljs-keyword">return</span> timestamp;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 返回以毫秒为单位的当前时间</span><br><span class="hljs-comment">     * </span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 当前时间(毫秒)</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-type">long</span> <span class="hljs-title function_">timeGen</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> System.currentTimeMillis();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 根据数据生成信息序列</span><br><span class="hljs-comment">     * </span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> data</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 信息序列</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-type">long</span> <span class="hljs-title function_">infoGen</span><span class="hljs-params">(String data)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> PinYinUtil.getDataHeadChar(data);<br>        <span class="hljs-type">long</span> <span class="hljs-variable">info</span> <span class="hljs-operator">=</span> string2long(s);<br>        <span class="hljs-keyword">return</span> info;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 将字符串转换为long，每个字符对应5位</span><br><span class="hljs-comment">     * </span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> str</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 信息序列</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-type">long</span> <span class="hljs-title function_">string2long</span><span class="hljs-params">(String str)</span> &#123;<br>        <span class="hljs-type">char</span>[] cs = str.toCharArray();<br>        <span class="hljs-type">long</span> <span class="hljs-variable">lo</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; cs.length; i++) &#123;<br>            lo = lo &lt;&lt; <span class="hljs-number">5</span>;<br>            <span class="hljs-keyword">if</span> (cs[i] != <span class="hljs-string">&#x27; &#x27;</span>) &#123;<br>                lo += cs[i] - <span class="hljs-string">&#x27;a&#x27;</span> + <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> lo;<br>    &#125;<br><br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">idDecoder</span><span class="hljs-params">(<span class="hljs-type">long</span> id)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">timestampFilter</span> <span class="hljs-operator">=</span> (-<span class="hljs-number">1L</span> ^ (-<span class="hljs-number">1L</span> &lt;&lt; timestampBits) &lt;&lt; timestampShift);<br>        <span class="hljs-type">long</span> <span class="hljs-variable">datacenterIdFilter</span> <span class="hljs-operator">=</span> (-<span class="hljs-number">1L</span> ^ (-<span class="hljs-number">1L</span> &lt;&lt; datacenterIdBits) &lt;&lt; datacenterIdShift);<br>        <span class="hljs-type">long</span> <span class="hljs-variable">workerIdFilter</span> <span class="hljs-operator">=</span> (-<span class="hljs-number">1L</span> ^ (-<span class="hljs-number">1L</span> &lt;&lt; workerIdBits) &lt;&lt; workerIdShift);<br>        <span class="hljs-type">long</span> <span class="hljs-variable">sequenceFilter</span> <span class="hljs-operator">=</span> (-<span class="hljs-number">1L</span> ^ (-<span class="hljs-number">1L</span> &lt;&lt; sequenceBits) &lt;&lt; sequenceShift);<br>        <span class="hljs-type">long</span> <span class="hljs-variable">infoFilter</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1L</span> ^ (-<span class="hljs-number">1L</span> &lt;&lt; infoBits);<br>        <span class="hljs-type">long</span> <span class="hljs-variable">ts</span> <span class="hljs-operator">=</span> ((id &amp; timestampFilter) &gt;&gt; timestampShift) + startTimestamp;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">did</span> <span class="hljs-operator">=</span> (id &amp; datacenterIdFilter) &gt;&gt; datacenterIdShift;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">wid</span> <span class="hljs-operator">=</span> (id &amp; workerIdFilter) &gt;&gt; workerIdShift;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">seq</span> <span class="hljs-operator">=</span> (id &amp; sequenceFilter) &gt;&gt; sequenceShift;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">info</span> <span class="hljs-operator">=</span> id &amp; infoFilter;<br>        System.out.println(<span class="hljs-string">&quot;time: &quot;</span> + <span class="hljs-keyword">new</span> <span class="hljs-title class_">SimpleDateFormat</span>(<span class="hljs-string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>).format(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(ts)));<br>        System.out.println(<span class="hljs-string">&quot;datacenter id: &quot;</span> + did);<br>        System.out.println(<span class="hljs-string">&quot;worker id: &quot;</span> + wid);<br>        System.out.println(<span class="hljs-string">&quot;sequence: &quot;</span> + seq);<br>        System.out.println(<span class="hljs-string">&quot;data: &quot;</span> + PinYinUtil.getDataFromLong(info));<br>    &#125;<br><br>    <span class="hljs-comment">// ==============================Test=============================================</span><br>    <span class="hljs-comment">/** 测试 */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">MySnowflakeIdWorker</span> <span class="hljs-variable">idWorker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MySnowflakeIdWorker</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-type">long</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> idWorker.nextId(<span class="hljs-string">&quot;你好谢谢&quot;</span>);<br>        System.out.println(l);<br>        System.out.println(Long.toBinaryString(l));<br>        idWorker.idDecoder(l);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> net.sourceforge.pinyin4j.PinyinHelper;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PinYinUtil</span> &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">dataWord</span> <span class="hljs-operator">=</span> <span class="hljs-number">4</span>;<br><br>    <span class="hljs-comment">/* 去掉字符串中的其他符号，值保留英文和中文 */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">string2AllTrim</span><span class="hljs-params">(String value)</span> &#123;<br>        <span class="hljs-keyword">if</span> (isNull(value)) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> value.replaceAll(<span class="hljs-string">&quot;[^a-zA-Z\u4e00-\u9fa5]&quot;</span>, <span class="hljs-string">&quot;&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-comment">/* 判断字符串是否为空 */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isNull</span><span class="hljs-params">(Object strData)</span> &#123;<br>        <span class="hljs-keyword">if</span> (strData == <span class="hljs-literal">null</span> || String.valueOf(strData).trim().equals(<span class="hljs-string">&quot;&quot;</span>)) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/* 提取每个汉字的首字母(小写) */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">getPinYinHeadChar</span><span class="hljs-params">(String str)</span> &#123;<br>        <span class="hljs-keyword">if</span> (isNull(str)) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>        &#125;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">convert</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; str.length(); j++) &#123;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">word</span> <span class="hljs-operator">=</span> str.charAt(j);<br>            <span class="hljs-comment">// 提取汉字的首字母</span><br>            String[] pinyinArray = PinyinHelper.toHanyuPinyinStringArray(word);<br>            <span class="hljs-keyword">if</span> (pinyinArray != <span class="hljs-literal">null</span>) &#123;<br>                convert += pinyinArray[<span class="hljs-number">0</span>].charAt(<span class="hljs-number">0</span>);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                convert += word;<br>            &#125;<br>        &#125;<br><br>        convert = string2AllTrim(convert);<br>        <span class="hljs-keyword">return</span> convert.toLowerCase();<br>    &#125;<br><br>    <span class="hljs-comment">/* 获取数据的首字母，长度为4，多则删除少则空格填补 */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">getDataHeadChar</span><span class="hljs-params">(String str)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> PinYinUtil.getPinYinHeadChar(str);<br>        <span class="hljs-keyword">if</span> (s.length() &lt; dataWord) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; dataWord - s.length(); i++) &#123;<br>                s += <span class="hljs-string">&quot; &quot;</span>;<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s.length() &gt; dataWord) &#123;<br>            s = s.substring(<span class="hljs-number">0</span>, dataWord);<br>        &#125;<br>        <span class="hljs-keyword">return</span> s;<br>    &#125;<br><br>    <span class="hljs-comment">/* 将long信息序列转换为字母字符串 */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">long2InfoString</span><span class="hljs-params">(<span class="hljs-type">long</span> lo)</span> &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1L</span> ^ (-<span class="hljs-number">1L</span> &lt;&lt; <span class="hljs-number">5</span>);<br>        <span class="hljs-type">StringBuffer</span> <span class="hljs-variable">info</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>();<br>        <span class="hljs-keyword">while</span> (lo != <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> (<span class="hljs-type">int</span>) (lo &amp; filter);<br>            <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) &#123;<br>                <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-string">&#x27; &#x27;</span>;<br>                info.append(c);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> (<span class="hljs-type">char</span>) (<span class="hljs-string">&#x27;a&#x27;</span> + n - <span class="hljs-number">1</span>);<br>                info.append(c);<br>            &#125;<br>            lo = lo &gt;&gt; <span class="hljs-number">5</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> info.reverse().toString();<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">getDataFromLong</span><span class="hljs-params">(<span class="hljs-type">long</span> lo)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">data</span> <span class="hljs-operator">=</span> long2InfoString(lo);<br>        <span class="hljs-keyword">return</span> data;<br>    &#125;<br><br>    <span class="hljs-comment">/* 测试 */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        System.out.println(PinYinUtil.getDataHeadChar(<span class="hljs-string">&quot;你好谢谢&quot;</span>));<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44740485/article/details/129099951">java获取汉字的首字母_java获取中文首字母_可乐丿不加冰的博客-CSDN博客</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/blog/categories/%E5%BC%80%E5%8F%91/" class="category-chain-item">开发</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/blog/tags/%E4%BB%A3%E7%A0%81/">#代码</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>雪花算法（SnowFlake）</div>
+      <div>https://wangaaayu.github.io/blog/posts/75e39d48/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>WangAaayu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年6月14日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年6月17日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/blog/posts/189cd634/" title="Python调用Java程序（打包与JPype）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Python调用Java程序（打包与JPype）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/blog/posts/b893e3bf/" title="VSCode搭建Java环境">
+                        <span class="hidden-mobile">VSCode搭建Java环境</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/blog/js/events.js" ></script>
+<script  src="/blog/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/blog/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/blog/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/blog/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
