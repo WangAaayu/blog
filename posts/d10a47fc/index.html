@@ -16,24 +16,25 @@
   <meta name="author" content="WangAaayu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Vue+Django开发过程问题整合vue同步与异步vue的方法是顺序调用的，方法体内也是顺序执行的，但是无法保证先调用的方法先执行结束，即方法内是同步的，但是方法间是异步的 解决方法： 使用async和await修饰符，使方法间同步 async用于修饰函数，表示该函数异步，该函数执行不会阻塞后面代码的执行，await只能放在async修饰的函数内，表示需要等待await修饰的函数执行结束后才继续">
+    <meta name="description" content="Python运行方式运行python有四种方式：  脚本运行：python xxx.py  库模块作为脚本运行：python -m xxx  代码运行：python -c &quot;code&quot;  交互式解释器模式（Read-Eval-Print Loop, REPL）下运行   四种方式的区别在于sys.path不同 sys.pathsys.path是指定模块搜索路径的字符串列表。从环">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue+Django开发过程问题整合">
-<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/977e27a9/index.html">
+<meta property="og:title" content="Python运行方式">
+<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/d10a47fc/index.html">
 <meta property="og:site_name" content="WangAaayu">
-<meta property="og:description" content="Vue+Django开发过程问题整合vue同步与异步vue的方法是顺序调用的，方法体内也是顺序执行的，但是无法保证先调用的方法先执行结束，即方法内是同步的，但是方法间是异步的 解决方法： 使用async和await修饰符，使方法间同步 async用于修饰函数，表示该函数异步，该函数执行不会阻塞后面代码的执行，await只能放在async修饰的函数内，表示需要等待await修饰的函数执行结束后才继续">
+<meta property="og:description" content="Python运行方式运行python有四种方式：  脚本运行：python xxx.py  库模块作为脚本运行：python -m xxx  代码运行：python -c &quot;code&quot;  交互式解释器模式（Read-Eval-Print Loop, REPL）下运行   四种方式的区别在于sys.path不同 sys.pathsys.path是指定模块搜索路径的字符串列表。从环">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-12T07:59:37.000Z">
-<meta property="article:modified_time" content="2023-07-13T09:25:18.319Z">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/d10a47fc/syspath.png">
+<meta property="article:published_time" content="2023-08-03T11:48:06.000Z">
+<meta property="article:modified_time" content="2023-08-03T12:34:13.924Z">
 <meta property="article:author" content="WangAaayu">
-<meta property="article:tag" content="问题">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangaaayu.github.io/blog/posts/d10a47fc/syspath.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Vue+Django开发过程问题整合 - WangAaayu</title>
+  <title>Python运行方式 - WangAaayu</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Vue+Django开发过程问题整合"></span>
+            <span id="subtitle" data-typed-text="Python运行方式"></span>
           
         </div>
 
@@ -209,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-12 15:59" pubdate>
-          2023年7月12日 下午
+        <time datetime="2023-08-03 19:48" pubdate>
+          2023年8月3日 晚上
         </time>
       </span>
     
@@ -221,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          486 字
         
       </span>
     
@@ -232,7 +233,7 @@
         
         
         
-          15 分钟
+          5 分钟
         
       </span>
     
@@ -255,7 +256,7 @@
       <span class="post-meta ">
         
           
-            本文最后更新于：2023年7月13日 下午
+            本文最后更新于：2023年8月3日 晚上
           
         
       </span>
@@ -291,38 +292,36 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Vue+Django开发过程问题整合</h1>
+            <h1 style="display: none">Python运行方式</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Vue-Django开发过程问题整合"><a href="#Vue-Django开发过程问题整合" class="headerlink" title="Vue+Django开发过程问题整合"></a>Vue+Django开发过程问题整合</h1><h2 id="vue同步与异步"><a href="#vue同步与异步" class="headerlink" title="vue同步与异步"></a>vue同步与异步</h2><p>vue的方法是顺序调用的，方法体内也是顺序执行的，但是无法保证先调用的方法先执行结束，即方法内是同步的，但是方法间是异步的</p>
-<p>解决方法：</p>
-<p>使用async和await修饰符，使方法间同步</p>
-<p>async用于修饰函数，表示该函数异步，该函数执行不会阻塞后面代码的执行，await只能放在async修饰的函数内，表示需要等待await修饰的函数执行结束后才继续执行后面的代码</p>
-<figure class="highlight v"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs v">async method()&#123;<br>    await method1()<br>    await method2()<br>    await method3()<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="vue丢失后端数据的精度"><a href="#vue丢失后端数据的精度" class="headerlink" title="vue丢失后端数据的精度"></a>vue丢失后端数据的精度</h2><p>后端的数据为64位长整数，前端javascript数字为64位，但整数最多为15位，因此后端的数据超过前端能表示的最大整数时，前端的数据将溢出</p>
-<p>javascript数字表示见：<a target="_blank" rel="noopener" href="https://www.runoob.com/js/js-obj-number.html">JavaScript Number 对象 | 菜鸟教程</a></p>
-<p>解决方法：</p>
-<p>后端将长整数转换为字符串传给前端，接收前端返回的数据字符串后转换为长整数</p>
-<p>该问题出现在数据库id上，后端需根据前端返回的id查询数据库，理论上来说，后端可以不用将该字符串转换为长整数，因为在这种情况下，mysql会将字符串转换为匹配对应字段的数据类型，但是只使用字符串的前导数字，即在第一个非数字字符及其之后的所有字符会被丢弃</p>
-<p>mysql查询字符串转换为数字见：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/ask/sof/1225507">在MySQL中使用字符串查询Int字段的奇怪行为 - 问答 - 腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
-<h2 id="django的json编码"><a href="#django的json编码" class="headerlink" title="django的json编码"></a>django的json编码</h2><p>django视图层函数返回数据时需要先将其转成json，json默认的编码器无法转换datetime对象</p>
-<p>解决方法：</p>
-<p>构造json编码器以转换datetime对象</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyEncoder</span>(json.JSONEncoder):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">default</span>(<span class="hljs-params">self, obj</span>):<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(obj, datetime):<br>            <span class="hljs-keyword">return</span> obj.strftime(<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">return</span> json.JSONEncoder.default(self, obj)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">view1</span>(<span class="hljs-params">request</span>):<br>    <span class="hljs-comment"># ...</span><br>    json_data = json.dumps(data, cls=MyEncoder)<br>    <span class="hljs-keyword">return</span> HttpResponse(json_data, content_type=<span class="hljs-string">&quot;application/json&quot;</span>)<br></code></pre></td></tr></table></figure>
-
-<h2 id="django外键与外键-id"><a href="#django外键与外键-id" class="headerlink" title="django外键与外键_id"></a>django外键与外键_id</h2><p>django当表含有外键时，该表对象的字段除了有外键之外，还有外键_id</p>
-<p>该外键字段返回的是对应主键所在表的一条数据，是一个表对象，而外键_id字段返回的是对应的值</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">TableB</span>(models.Model):<br>    b_id = models.AutoField(primary_key=<span class="hljs-literal">True</span>)<br>    a_id = models.ForeignKey(to=TableA, db_column=<span class="hljs-string">&#x27;a_id&#x27;</span>, on_delete=models.CASCADE)<br></code></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">show_table_b</span>(<span class="hljs-params">request</span>):<br>    b = TableB.objects.get(b_id=<span class="hljs-number">1</span>)<br>    <span class="hljs-built_in">print</span>(b.a_id)  <span class="hljs-comment"># TableA对象</span><br>    <span class="hljs-built_in">print</span>(b.a_id_id)  <span class="hljs-comment"># 值</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="django与单例模式"><a href="#django与单例模式" class="headerlink" title="django与单例模式"></a>django与单例模式</h2><p>django视图层需要一些全局的数据，供函数读取</p>
-<p>解决方法：</p>
-<p>通过单例模式构造一个存储全局数据的类（也可以使用数据库存储，该方法的优点是节省空间，适用于少量数据）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span>(<span class="hljs-title class_ inherited__">object</span>):<br>    _instance_lock = threading.Lock()<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__new__</span>(<span class="hljs-params">cls, *args, **kwargs</span>):<br>        <span class="hljs-keyword">with</span> Singleton._instance_lock:<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">hasattr</span>(Singleton, <span class="hljs-string">&quot;_instance&quot;</span>):<br>                Singleton._instance = <span class="hljs-built_in">object</span>.__new__(cls)<br>        <span class="hljs-keyword">return</span> Singleton._instance<br>        <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        data()<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">data</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-comment"># ...</span><br></code></pre></td></tr></table></figure>
+                <h1 id="Python运行方式"><a href="#Python运行方式" class="headerlink" title="Python运行方式"></a>Python运行方式</h1><p>运行python有四种方式：</p>
+<ol>
+<li><p>脚本运行：<code>python xxx.py</code></p>
+</li>
+<li><p>库模块作为脚本运行：<code>python -m xxx</code></p>
+</li>
+<li><p>代码运行：<code>python -c &quot;code&quot;</code></p>
+</li>
+<li><p>交互式解释器模式（Read-Eval-Print Loop, REPL）下运行</p>
+</li>
+</ol>
+<p>四种方式的区别在于sys.path不同</p>
+<h2 id="sys-path"><a href="#sys-path" class="headerlink" title="sys.path"></a>sys.path</h2><p>sys.path是指定模块搜索路径的字符串列表。从环境变量PYTHONPATH初始化，加上安装依赖的默认值。</p>
+<p>默认情况下，sys.path列表的第一项将根据运行方式的不同而不同</p>
+<h3 id="脚本运行"><a href="#脚本运行" class="headerlink" title="脚本运行"></a>脚本运行</h3><p>sys.path[0]为脚本所在的目录</p>
+<h3 id="库模块作为脚本运行"><a href="#库模块作为脚本运行" class="headerlink" title="库模块作为脚本运行"></a>库模块作为脚本运行</h3><p>sys.path[0]为当前的目录</p>
+<h3 id="代码运行-REPL运行"><a href="#代码运行-REPL运行" class="headerlink" title="代码运行/REPL运行"></a>代码运行/REPL运行</h3><p>sys.path[0]为空字符串</p>
+<p><img src="/blog/posts/d10a47fc/syspath.png" srcset="/blog/img/loading.gif" lazyload></p>
+<h2 id="运行方式选择"><a href="#运行方式选择" class="headerlink" title="运行方式选择"></a>运行方式选择</h2><p>没有编译器，在命令行的情况下需要选择合适的运行方式：</p>
+<ul>
+<li><p>当程序不依赖自定义的模块时，使用脚本运行方式<code>python xxx.py</code></p>
+</li>
+<li><p>当程序依赖自定义的模块时，使用库模块作为脚本运行方式<code>python -m pkg.xxx</code>（需要在所有使用的模块目录下新建__init__.py，python才能将该目录识别为包，并且需要在所有包的根目录下运行）</p>
+</li>
+</ul>
 
                 
               </div>
@@ -331,34 +330,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/blog/categories/%E5%BC%80%E5%8F%91/" class="category-chain-item">开发</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/blog/tags/%E9%97%AE%E9%A2%98/">#问题</a>
-      
-    </div>
   
 </div>
 
@@ -368,8 +339,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Vue+Django开发过程问题整合</div>
-      <div>https://wangaaayu.github.io/blog/posts/977e27a9/</div>
+      <div>Python运行方式</div>
+      <div>https://wangaaayu.github.io/blog/posts/d10a47fc/</div>
     </div>
     <div class="license-meta">
       
@@ -381,13 +352,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月12日</div>
+          <div>2023年8月3日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年7月13日</div>
+          <div>2023年8月3日</div>
         </div>
       
       
@@ -418,18 +389,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/posts/d10a47fc/" title="Python运行方式">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Python运行方式</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/posts/189cd634/" title="Python调用Java程序（打包与JPype）">
-                        <span class="hidden-mobile">Python调用Java程序（打包与JPype）</span>
+                      <a href="/blog/posts/977e27a9/" title="Vue+Django开发过程问题整合">
+                        <span class="hidden-mobile">Vue+Django开发过程问题整合</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
