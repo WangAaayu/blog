@@ -16,26 +16,26 @@
   <meta name="author" content="WangAaayu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="VSCode搭建Java环境vscode插件安装插件搜索java，安装Extension Pack for Java，包含6个插件 重启vscode打开新窗口，可以点击左侧explorer里的create java project来创建java项目，根据需要选择项目类型 java编译与运行不使用插件编译运行的方法 123456# 编译javac xxx.java# 指定源文件使用的字符编码进行编译">
+    <meta name="description" content="Python运行方式运行python有四种方式：  脚本运行：python xxx.py  库模块作为脚本运行：python -m xxx  代码运行：python -c &quot;code&quot;  交互式解释器模式（Read-Eval-Print Loop, REPL）下运行   四种方式的区别在于sys.path不同 sys.pathsys.path是指定模块搜索路径的字符串列表。从环">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VSCode搭建Java环境">
-<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/b893e3bf/index.html">
+<meta property="og:title" content="Python运行方式">
+<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/d10a47fc/index.html">
 <meta property="og:site_name" content="WangAaayu">
-<meta property="og:description" content="VSCode搭建Java环境vscode插件安装插件搜索java，安装Extension Pack for Java，包含6个插件 重启vscode打开新窗口，可以点击左侧explorer里的create java project来创建java项目，根据需要选择项目类型 java编译与运行不使用插件编译运行的方法 123456# 编译javac xxx.java# 指定源文件使用的字符编码进行编译">
+<meta property="og:description" content="Python运行方式运行python有四种方式：  脚本运行：python xxx.py  库模块作为脚本运行：python -m xxx  代码运行：python -c &quot;code&quot;  交互式解释器模式（Read-Eval-Print Loop, REPL）下运行   四种方式的区别在于sys.path不同 sys.pathsys.path是指定模块搜索路径的字符串列表。从环">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/b893e3bf/maven%E4%BE%9D%E8%B5%96.png">
-<meta property="article:published_time" content="2023-06-13T07:48:51.000Z">
-<meta property="article:modified_time" content="2023-08-03T12:46:59.358Z">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/d10a47fc/syspath.png">
+<meta property="article:published_time" content="2023-08-03T11:48:06.000Z">
+<meta property="article:modified_time" content="2023-09-02T12:12:07.344Z">
 <meta property="article:author" content="WangAaayu">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangaaayu.github.io/blog/posts/b893e3bf/maven%E4%BE%9D%E8%B5%96.png">
+<meta name="twitter:image" content="https://wangaaayu.github.io/blog/posts/d10a47fc/syspath.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>VSCode搭建Java环境 - WangAaayu</title>
+  <title>Python运行方式 - WangAaayu</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="VSCode搭建Java环境"></span>
+            <span id="subtitle" data-typed-text="Python运行方式"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-13 15:48" pubdate>
-          2023年6月13日 下午
+        <time datetime="2023-08-03 19:48" pubdate>
+          2023年8月3日 晚上
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          486 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          11 分钟
+          5 分钟
         
       </span>
     
@@ -257,7 +257,7 @@
       <span class="post-meta ">
         
           
-            本文最后更新于：2023年8月3日 晚上
+            本文最后更新于：2023年9月2日 晚上
           
         
       </span>
@@ -293,50 +293,36 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">VSCode搭建Java环境</h1>
+            <h1 style="display: none">Python运行方式</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="VSCode搭建Java环境"><a href="#VSCode搭建Java环境" class="headerlink" title="VSCode搭建Java环境"></a>VSCode搭建Java环境</h1><h2 id="vscode插件安装"><a href="#vscode插件安装" class="headerlink" title="vscode插件安装"></a>vscode插件安装</h2><p>插件搜索java，安装Extension Pack for Java，包含6个插件</p>
-<p>重启vscode打开新窗口，可以点击左侧explorer里的create java project来创建java项目，根据需要选择项目类型</p>
-<h2 id="java编译与运行"><a href="#java编译与运行" class="headerlink" title="java编译与运行"></a>java编译与运行</h2><p>不使用插件编译运行的方法</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 编译</span><br>javac xxx.java<br><span class="hljs-comment"># 指定源文件使用的字符编码进行编译</span><br>javac -encoding [utf-8/gbk] xxx.java<br><span class="hljs-comment"># 运行</span><br>java xxx<br></code></pre></td></tr></table></figure>
-
-<h2 id="maven项目配置"><a href="#maven项目配置" class="headerlink" title="maven项目配置"></a>maven项目配置</h2><p>maven官网：<a target="_blank" rel="noopener" href="https://maven.apache.org/%EF%BC%8C%E7%82%B9%E5%87%BB%E5%B7%A6%E4%BE%A7%E7%9A%84download%EF%BC%8C%E4%B8%8B%E8%BD%BDBinary">https://maven.apache.org/</a> ，点击左侧的download，下载Binary zip archive并解压</p>
-<p>打开windows的高级系统设置，环境变量，双击系统变量中的Path进行编辑，点击新建，填入maven的bin目录的绝对路径，如D:\maven\apache-maven-3.9.2\bin，点击编辑环境变量和环境变量窗口的确定</p>
-<p>win+R输入cmd，打开命令行窗口，输入mvn -v可以输出maven的信息，说明已配置好</p>
-<p>打开vscode设置，搜索Maven.Executable.Path，填入maven的bin目录下的mvn.cmd的绝对路径，如D:\maven\apache-maven-3.9.2\bin\mvn.cmd</p>
-<p>创建maven项目时，可以选择archetype原型来创建，创建好后，explorer栏的最下方有maven插件可以管理项目</p>
-<p>添加依赖时，可以去maven官网<a target="_blank" rel="noopener" href="https://mvnrepository.com/%EF%BC%8C%E6%90%9C%E7%B4%A2%E9%9C%80%E8%A6%81%E7%9A%84%E5%8C%85%EF%BC%8C%E9%80%89%E6%8B%A9%E5%AF%B9%E5%BA%94%E7%9A%84%E7%89%88%E6%9C%AC%EF%BC%8C%E5%8F%AF%E4%BB%A5%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%A4%8D%E5%88%B6%E4%BB%A3%E7%A0%81">https://mvnrepository.com/，搜索需要的包，选择对应的版本，可以下载和复制代码</a></p>
-<p><img src="/blog/posts/b893e3bf/maven%E4%BE%9D%E8%B5%96.png" srcset="/blog/img/loading.gif" lazyload></p>
-<h2 id="关于java中文乱码"><a href="#关于java中文乱码" class="headerlink" title="关于java中文乱码"></a>关于java中文乱码</h2><p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_74075298/article/details/128607966">Java中文乱码浅析及解决方案_浩绪的博客-CSDN博客</a></p>
-<p>java中文乱码与以下几个编码格式的设置有关：</p>
+                <h1 id="Python运行方式"><a href="#Python运行方式" class="headerlink" title="Python运行方式"></a>Python运行方式</h1><p>运行python有四种方式：</p>
 <ol>
-<li><p>java编译器自动选择的编码格式</p>
+<li><p>脚本运行：<code>python xxx.py</code></p>
 </li>
-<li><p>输出终端的编码格式</p>
+<li><p>库模块作为脚本运行：<code>python -m xxx</code></p>
 </li>
-<li><p>代码文件的编码格式</p>
+<li><p>代码运行：<code>python -c &quot;code&quot;</code></p>
 </li>
-<li><p>（如果Gradle开发）Gradle项目配置中的编码格式</p>
+<li><p>交互式解释器模式（Read-Eval-Print Loop, REPL）下运行</p>
 </li>
 </ol>
-<p>这些设置如果不一致，或者不同但没有合适的转换，就会导致中文乱码</p>
-<h3 id="java编译器自动选择的编码格式"><a href="#java编译器自动选择的编码格式" class="headerlink" title="java编译器自动选择的编码格式"></a>java编译器自动选择的编码格式</h3><p>取决于操作系统和地区语言设置，无法自行改变，win11中文版为gbk编码</p>
-<h3 id="输出终端的编码格式"><a href="#输出终端的编码格式" class="headerlink" title="输出终端的编码格式"></a>输出终端的编码格式</h3><p>cmd中输入chcp可以查看编码格式</p>
-<p>65001为utf-8编码</p>
-<p>936为gbk编码</p>
-<p>该编码格式应与java编译器的编码格式一致，可以使用<code>chcp xxx</code>改变</p>
-<h3 id="代码文件的编码格式"><a href="#代码文件的编码格式" class="headerlink" title="代码文件的编码格式"></a>代码文件的编码格式</h3><p>通常为utf-8，开发工具的下方都有显示</p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p><strong>源文件UTF-8+编译指定UTF-8+Java编译器GBK（固定）+输出终端GBK</strong></p>
-<ol>
-<li><p>编译时指定的源文件字符编码应与源文件编码格式一致</p>
+<p>四种方式的区别在于sys.path不同</p>
+<h2 id="sys-path"><a href="#sys-path" class="headerlink" title="sys.path"></a>sys.path</h2><p>sys.path是指定模块搜索路径的字符串列表。从环境变量PYTHONPATH初始化，加上安装依赖的默认值。</p>
+<p>默认情况下，sys.path列表的第一项将根据运行方式的不同而不同</p>
+<h3 id="脚本运行"><a href="#脚本运行" class="headerlink" title="脚本运行"></a>脚本运行</h3><p>sys.path[0]为脚本所在的目录</p>
+<h3 id="库模块作为脚本运行"><a href="#库模块作为脚本运行" class="headerlink" title="库模块作为脚本运行"></a>库模块作为脚本运行</h3><p>sys.path[0]为当前的目录</p>
+<h3 id="代码运行-REPL运行"><a href="#代码运行-REPL运行" class="headerlink" title="代码运行/REPL运行"></a>代码运行/REPL运行</h3><p>sys.path[0]为空字符串</p>
+<p><img src="/blog/posts/d10a47fc/syspath.png" srcset="/blog/img/loading.gif" lazyload></p>
+<h2 id="运行方式选择"><a href="#运行方式选择" class="headerlink" title="运行方式选择"></a>运行方式选择</h2><p>没有编译器，在命令行的情况下需要选择合适的运行方式：</p>
+<ul>
+<li><p>当程序不依赖自定义的模块时，使用脚本运行方式<code>python xxx.py</code></p>
 </li>
-<li><p>输出终端的编码格式应与java编译器的编码格式一致</p>
+<li><p>当程序依赖自定义的模块时，使用库模块作为脚本运行方式<code>python -m pkg.xxx</code>（需要在所有使用的模块目录下新建__init__.py，python才能将该目录识别为包，并且需要在所有包的根目录下运行）</p>
 </li>
-</ol>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-comment"># 指定源文件使用的字符编码为utf-8，然后进行编译</span><br><span class="hljs-keyword">javac </span>-encoding utf<span class="hljs-number">-8</span> xxx.<span class="hljs-keyword">java</span><br><span class="hljs-keyword"></span><span class="hljs-comment"># 由于java编译器自动选择gbk编码格式，因此将输出终端的编码格式也改为gbk（以cmd为例）</span><br>chcp <span class="hljs-number">936</span><br><span class="hljs-comment"># 运行java文件</span><br><span class="hljs-keyword">java </span>xxx <br></code></pre></td></tr></table></figure>
+</ul>
 
                 
               </div>
@@ -382,8 +368,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>VSCode搭建Java环境</div>
-      <div>https://wangaaayu.github.io/blog/posts/b893e3bf/</div>
+      <div>Python运行方式</div>
+      <div>https://wangaaayu.github.io/blog/posts/d10a47fc/</div>
     </div>
     <div class="license-meta">
       
@@ -395,13 +381,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月13日</div>
+          <div>2023年8月3日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年8月3日</div>
+          <div>2023年9月2日</div>
         </div>
       
       
@@ -432,9 +418,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/posts/75e39d48/" title="雪花算法（SnowFlake）">
+                      <a href="/blog/posts/7055cfc/" title="C盘扩容">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">雪花算法（SnowFlake）</span>
+                        <span class="hidden-mobile">C盘扩容</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -442,8 +428,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/posts/545a2897/" title="Socket聊天程序（Java）">
-                        <span class="hidden-mobile">Socket聊天程序（Java）</span>
+                      <a href="/blog/posts/977e27a9/" title="Vue+Django开发过程问题整合">
+                        <span class="hidden-mobile">Vue+Django开发过程问题整合</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
