@@ -16,27 +16,33 @@
   <meta name="author" content="WangAaayu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="C盘扩容C盘满了，但C盘所在的磁盘仍有多余的空间，可以对C盘扩容 一般情况下，通过磁盘管理即可扩容，当C盘分区右侧存在无法删除的分区时，可使用DiskGenius移动分区再进行扩容 磁盘管理 Win+R输入diskmgmt.msc确定，出现磁盘管理窗口  通过删除卷或压缩卷在C盘分区右侧得到未分配分区（操作前先备份数据）  使用扩展卷将未分配分区归入到C盘分区    该方法仅在C盘分区紧邻右侧有未">
+    <meta name="description" content="基于Kubernetes的微服务应用部署与管理实验内容 学习并理解微服务架构的概念、原理以及与传统架构的不同之处；  学习并掌握 Docker 容器化技术的基本概念、使⽤⽅法以及与虚拟机技术的区别；  使⽤ Spring Boot 框架编写⼀个简单的微服务应⽤程序（内容自定，比如自然语言处理服务中的分词等，用户发送文本处理请求，并获取处理后的结果），该应⽤程序可以提供⼀些基本的 RESTful A">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C盘扩容">
-<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/7055cfc/index.html">
+<meta property="og:title" content="基于Kubernetes的微服务应用部署与管理">
+<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/d44735db/index.html">
 <meta property="og:site_name" content="WangAaayu">
-<meta property="og:description" content="C盘扩容C盘满了，但C盘所在的磁盘仍有多余的空间，可以对C盘扩容 一般情况下，通过磁盘管理即可扩容，当C盘分区右侧存在无法删除的分区时，可使用DiskGenius移动分区再进行扩容 磁盘管理 Win+R输入diskmgmt.msc确定，出现磁盘管理窗口  通过删除卷或压缩卷在C盘分区右侧得到未分配分区（操作前先备份数据）  使用扩展卷将未分配分区归入到C盘分区    该方法仅在C盘分区紧邻右侧有未">
+<meta property="og:description" content="基于Kubernetes的微服务应用部署与管理实验内容 学习并理解微服务架构的概念、原理以及与传统架构的不同之处；  学习并掌握 Docker 容器化技术的基本概念、使⽤⽅法以及与虚拟机技术的区别；  使⽤ Spring Boot 框架编写⼀个简单的微服务应⽤程序（内容自定，比如自然语言处理服务中的分词等，用户发送文本处理请求，并获取处理后的结果），该应⽤程序可以提供⼀些基本的 RESTful A">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/7055cfc/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86.png">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/7055cfc/diskgenius.png">
-<meta property="article:published_time" content="2023-09-02T12:13:15.000Z">
-<meta property="article:modified_time" content="2023-09-02T12:47:46.693Z">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/d44735db/1%E5%AE%89%E8%A3%85.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/d44735db/2%E5%BE%AE%E7%A8%8B%E5%BA%8F.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/d44735db/3%E6%89%93%E5%8C%85.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/d44735db/4dockerfile.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/d44735db/5%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/d44735db/6%E5%88%9B%E5%BB%BAk8s%E9%83%A8%E7%BD%B2%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/d44735db/7%E9%83%A8%E7%BD%B2%E9%95%9C%E5%83%8F%E5%88%B0k8s.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/d44735db/8%E6%9F%A5%E7%9C%8B.png">
+<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/d44735db/9%E6%B5%8B%E8%AF%95.png">
+<meta property="article:published_time" content="2023-09-23T01:42:01.000Z">
+<meta property="article:modified_time" content="2023-10-08T12:18:52.129Z">
 <meta property="article:author" content="WangAaayu">
-<meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangaaayu.github.io/blog/posts/7055cfc/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86.png">
+<meta name="twitter:image" content="https://wangaaayu.github.io/blog/posts/d44735db/1%E5%AE%89%E8%A3%85.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>C盘扩容 - WangAaayu</title>
+  <title>基于Kubernetes的微服务应用部署与管理 - WangAaayu</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +207,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="C盘扩容"></span>
+            <span id="subtitle" data-typed-text="基于Kubernetes的微服务应用部署与管理"></span>
           
         </div>
 
@@ -212,8 +218,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-02 20:13" pubdate>
-          2023年9月2日 晚上
+        <time datetime="2023-09-23 09:42" pubdate>
+          2023年9月23日 上午
         </time>
       </span>
     
@@ -224,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          396 字
+          1.2k 字
         
       </span>
     
@@ -235,7 +241,7 @@
         
         
         
-          4 分钟
+          10 分钟
         
       </span>
     
@@ -258,7 +264,7 @@
       <span class="post-meta ">
         
           
-            本文最后更新于：2023年9月2日 晚上
+            本文最后更新于：2023年10月8日 晚上
           
         
       </span>
@@ -294,35 +300,62 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">C盘扩容</h1>
+            <h1 style="display: none">基于Kubernetes的微服务应用部署与管理</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="C盘扩容"><a href="#C盘扩容" class="headerlink" title="C盘扩容"></a>C盘扩容</h1><p>C盘满了，但C盘所在的磁盘仍有多余的空间，可以对C盘扩容</p>
-<p>一般情况下，通过磁盘管理即可扩容，当C盘分区右侧存在无法删除的分区时，可使用DiskGenius移动分区再进行扩容</p>
-<h2 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h2><ol>
-<li><p>Win+R输入diskmgmt.msc确定，出现磁盘管理窗口</p>
+                <h1 id="基于Kubernetes的微服务应用部署与管理"><a href="#基于Kubernetes的微服务应用部署与管理" class="headerlink" title="基于Kubernetes的微服务应用部署与管理"></a>基于Kubernetes的微服务应用部署与管理</h1><h2 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h2><ul>
+<li><p>学习并理解微服务架构的概念、原理以及与传统架构的不同之处；</p>
 </li>
-<li><p>通过删除卷或压缩卷在C盘分区右侧得到未分配分区（操作前先备份数据）</p>
+<li><p>学习并掌握 Docker 容器化技术的基本概念、使⽤⽅法以及与虚拟机技术的区别；</p>
 </li>
-<li><p>使用扩展卷将未分配分区归入到C盘分区</p>
+<li><p>使⽤ Spring Boot 框架编写⼀个简单的微服务应⽤程序（内容自定，比如自然语言处理服务中的分词等，用户发送文本处理请求，并获取处理后的结果），该应⽤程序可以提供⼀些基本的 RESTful API；</p>
+</li>
+<li><p>使⽤ Docker 将该应⽤程序容器化，构建 Docker 镜像； 使⽤ Kubernetes 部署并管理该微服务应⽤程序的容器集群；</p>
+</li>
+<li><p>学习并实践 Kubernetes 的基本操作，如容器集群的创建、扩容、缩容、升级等；</p>
+</li>
+<li><p>进⼀步学习 Kubernetes 的⾼级特性，如服务发现、负载均衡、容错恢复等。基于Kubernetes的微服务应⽤部署与管理。</p>
+</li>
+</ul>
+<h2 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h2><ol>
+<li><p>安装Docker和Kubernetes</p>
+<p><img src="/blog/posts/d44735db/1%E5%AE%89%E8%A3%85.png" srcset="/blog/img/loading.gif" lazyload></p>
+</li>
+<li><p>使用java的Spring Boot框架编写一个简单的微服务应用程序，该程序可实现自然语言处理中的分词</p>
+<p><img src="/blog/posts/d44735db/2%E5%BE%AE%E7%A8%8B%E5%BA%8F.png" srcset="/blog/img/loading.gif" lazyload></p>
+</li>
+<li><p>使用Maven的install命令将该应用程序打包</p>
+<p><img src="/blog/posts/d44735db/3%E6%89%93%E5%8C%85.png" srcset="/blog/img/loading.gif" lazyload></p>
+</li>
+<li><p>编写Dockerfile文件</p>
+<p><img src="/blog/posts/d44735db/4dockerfile.png" srcset="/blog/img/loading.gif" lazyload></p>
+</li>
+<li><p>通过Dockerfile在kubernetes容器中创建demo镜像</p>
+<p><img src="/blog/posts/d44735db/5%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F.png" srcset="/blog/img/loading.gif" lazyload></p>
+</li>
+<li><p>创建Kubernetes部署文件demo.yaml，其中包括deployment和service</p>
+<p><img src="/blog/posts/d44735db/6%E5%88%9B%E5%BB%BAk8s%E9%83%A8%E7%BD%B2%E6%96%87%E4%BB%B6.png" srcset="/blog/img/loading.gif" lazyload></p>
+</li>
+<li><p>部署Docker镜像到kubernetes中</p>
+<p><img src="/blog/posts/d44735db/7%E9%83%A8%E7%BD%B2%E9%95%9C%E5%83%8F%E5%88%B0k8s.png" srcset="/blog/img/loading.gif" lazyload></p>
+</li>
+<li><p>查看pod，deployment和service</p>
+<p><img src="/blog/posts/d44735db/8%E6%9F%A5%E7%9C%8B.png" srcset="/blog/img/loading.gif" lazyload></p>
+</li>
+<li><p>在kubernetes中测试部署的应用程序</p>
+<p><img src="/blog/posts/d44735db/9%E6%B5%8B%E8%AF%95.png" srcset="/blog/img/loading.gif" lazyload></p>
 </li>
 </ol>
-<p><img src="/blog/posts/7055cfc/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86.png" srcset="/blog/img/loading.gif" lazyload></p>
-<p>该方法仅在C盘分区紧邻右侧有未分配分区才能使用，当C盘分区紧邻右侧有已经分配的无法删除的分区时，需要使用管理软件</p>
-<p>该问题有些管理软件需要升级才能解决，使用DiskGenius可以免费解决</p>
-<h2 id="DiskGenius"><a href="#DiskGenius" class="headerlink" title="DiskGenius"></a>DiskGenius</h2><p><a target="_blank" rel="noopener" href="https://www.diskgenius.cn/">https://www.diskgenius.cn/</a></p>
-<ol>
-<li><p>右键C盘紧邻右侧的已分配无法删除的分区，选择调整分区大小</p>
+<h2 id="实验总结"><a href="#实验总结" class="headerlink" title="实验总结"></a>实验总结</h2><ol>
+<li><p>微服务架构是一种面向服务的架构风格，它将应用程序拆分成一组小的、独立的服务单元，每个服务单元都运行在自己的进程中，并使用轻量级通信机制相互协作，以实现系统的业务功能。与传统的单体应用程序相比，微服务架构的主要优点是易于扩展、部署和维护，同时可以提高开发和部署的灵活性。</p>
 </li>
-<li><p>通过鼠标拖动该分区的边界，将该分区移动到另外一侧，点击开始</p>
+<li><p>Docker是一种开源的容器化技术，可以将应用程序和其依赖项打包到一个可移植的容器中，以便在不同的计算机上运行。Docker的使用方法包括编写Dockerfile、构建镜像、运行容器、管理容器。与传统的虚拟机技术相比，Docker占用资源更少、启动更快、移植部署和管理更容易。</p>
 </li>
-<li><p>扩容C盘</p>
+<li><p>Kubernetes 的核心技术有Pod、Deployment、Service 等，通过 Kubernetes 命令行工具或 Kubernetes Dashboard 可以创建、管理容器集群。Pod是k8s系统中可以创建和管理的最小单元，是资源对象模型中由用户创建或部署的最小资源对象模型，也是在k8s上运行容器化应用的资源对象，其他的资源对象都是用来支撑或者扩展Pod对象功能的。Deployment可以进行应用程序的部署，并设置合适的副本数、资源限制等配置。Service可以实现服务的访问和负载均衡，以及通过Health Checks 和 Rolling Updates 等机制实现容错恢复。</p>
 </li>
 </ol>
-<p><img src="/blog/posts/7055cfc/diskgenius.png" srcset="/blog/img/loading.gif" lazyload></p>
-<p>DiskGenius的功能很强大，或许有更加正式的方法可以移动分区</p>
 
                 
               </div>
@@ -331,34 +364,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/blog/categories/%E5%85%B6%E4%BB%96/" class="category-chain-item">其他</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/blog/tags/%E6%95%99%E7%A8%8B/">#教程</a>
-      
-    </div>
   
 </div>
 
@@ -368,8 +373,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>C盘扩容</div>
-      <div>https://wangaaayu.github.io/blog/posts/7055cfc/</div>
+      <div>基于Kubernetes的微服务应用部署与管理</div>
+      <div>https://wangaaayu.github.io/blog/posts/d44735db/</div>
     </div>
     <div class="license-meta">
       
@@ -381,13 +386,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年9月2日</div>
+          <div>2023年9月23日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年9月2日</div>
+          <div>2023年10月8日</div>
         </div>
       
       
@@ -418,18 +423,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/posts/a34278f2/" title="pandas新手教程">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">pandas新手教程</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/posts/d10a47fc/" title="Python运行方式">
-                        <span class="hidden-mobile">Python运行方式</span>
+                      <a href="/blog/posts/a34278f2/" title="pandas新手教程">
+                        <span class="hidden-mobile">pandas新手教程</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
