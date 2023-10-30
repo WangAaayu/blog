@@ -24,7 +24,7 @@
 <meta property="og:description" content="深度学习实验可复现设置Pytorch设置随机种子12345678910111213141516# 为pytorch, numpy, python.random设置随机种子def set_seed(seed, workers):    os.environ[&amp;#x27;PYTHONHASHSEED&amp;#x27;] &#x3D; str(seed)    random.seed(seed)    np.rando">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-10-28T03:06:42.000Z">
-<meta property="article:modified_time" content="2023-10-28T08:06:35.575Z">
+<meta property="article:modified_time" content="2023-10-30T08:02:31.548Z">
 <meta property="article:author" content="WangAaayu">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary_large_image">
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          1.5k 字
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          11 分钟
+          13 分钟
         
       </span>
     
@@ -255,7 +255,7 @@
       <span class="post-meta ">
         
           
-            本文最后更新于：2023年10月28日 下午
+            本文最后更新于：2023年10月30日 下午
           
         
       </span>
@@ -312,6 +312,9 @@
 <h3 id="避免不确定的算法"><a href="#避免不确定的算法" class="headerlink" title="避免不确定的算法"></a>避免不确定的算法</h3><p>配置PyTorch使其在可用的情况下使用确定性算法，而不是非确定性算法，并在已知操作是非确定性的（并且没有确定性替代方案）时抛出错误</p>
 <p>该方法包括了<code>torch.backends.cudnn.deterministic = True</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.use_deterministic_algorithms(<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+
+<p>使用该方法时，如果代码中使用了CUDA的张量，并且CUDA版本在10.2及以上，需要设置环境变量<code>CUBLAS_WORKSPACE_CONFIG</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">os.environ[<span class="hljs-string">&#x27;CUBLAS_WORKSPACE_CONFIG&#x27;</span>] = <span class="hljs-string">&#x27;:4096:8&#x27;</span>  <span class="hljs-comment"># 将会增加24M的GPU显存</span><br>os.environ[<span class="hljs-string">&#x27;CUBLAS_WORKSPACE_CONFIG&#x27;</span>] = <span class="hljs-string">&#x27;:16:8&#x27;</span>  <span class="hljs-comment"># 可能会限制整体性能</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="Tensorflow"><a href="#Tensorflow" class="headerlink" title="Tensorflow"></a>Tensorflow</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/400769460/answer/2327500825">为什么我用相同的模型，数据，超参，随机种子，在两台服务器会得到不同的结果？ - TabChen的回答 - 知乎</a></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/notes/randomness.html">Reproducibility &mdash; PyTorch 2.1 documentation</a></p>
@@ -382,7 +385,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年10月28日</div>
+          <div>2023年10月30日</div>
         </div>
       
       
