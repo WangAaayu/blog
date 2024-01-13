@@ -16,26 +16,24 @@
   <meta name="author" content="WangAaayu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Windows下Nginx代理Django项目django部署到本机网络上后，出现了音频无法快进，进度条无法拖动的问题。原因是前端请求音频文件不是通过后端的api，而是直接用require方法，这样做后端的响应没有包含 Content-Range 或者 Accept-Ranges Header。解决方法有两种：  让django响应静态文件请求时有响应头（即前端通过api请求静态文件，该方法要修改">
+    <meta name="description" content="深度学习实验可复现设置Pytorch设置随机种子12345678910111213141516# 为pytorch, numpy, python.random设置随机种子def set_seed(seed, workers):    os.environ[&amp;#x27;PYTHONHASHSEED&amp;#x27;] &#x3D; str(seed)    random.seed(seed)    np.rando">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows下Nginx代理Django项目">
-<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/f0bd5174/index.html">
+<meta property="og:title" content="深度学习实验可复现设置">
+<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/89953fb9/index.html">
 <meta property="og:site_name" content="WangAaayu">
-<meta property="og:description" content="Windows下Nginx代理Django项目django部署到本机网络上后，出现了音频无法快进，进度条无法拖动的问题。原因是前端请求音频文件不是通过后端的api，而是直接用require方法，这样做后端的响应没有包含 Content-Range 或者 Accept-Ranges Header。解决方法有两种：  让django响应静态文件请求时有响应头（即前端通过api请求静态文件，该方法要修改">
+<meta property="og:description" content="深度学习实验可复现设置Pytorch设置随机种子12345678910111213141516# 为pytorch, numpy, python.random设置随机种子def set_seed(seed, workers):    os.environ[&amp;#x27;PYTHONHASHSEED&amp;#x27;] &#x3D; str(seed)    random.seed(seed)    np.rando">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/f0bd5174/%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82.png">
-<meta property="article:published_time" content="2023-05-13T07:31:37.000Z">
-<meta property="article:modified_time" content="2023-06-06T11:55:47.594Z">
+<meta property="article:published_time" content="2023-10-28T03:06:42.000Z">
+<meta property="article:modified_time" content="2024-01-13T13:38:46.462Z">
 <meta property="article:author" content="WangAaayu">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangaaayu.github.io/blog/posts/f0bd5174/%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Windows下Nginx代理Django项目 - WangAaayu</title>
+  <title>深度学习实验可复现设置 - WangAaayu</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Windows下Nginx代理Django项目"></span>
+            <span id="subtitle" data-typed-text="深度学习实验可复现设置"></span>
           
         </div>
 
@@ -211,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-13 15:31" pubdate>
-          2023年5月13日 下午
+        <time datetime="2023-10-28 11:06" pubdate>
+          2023年10月28日 上午
         </time>
       </span>
     
@@ -223,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          1.5k 字
         
       </span>
     
@@ -234,7 +232,7 @@
         
         
         
-          16 分钟
+          13 分钟
         
       </span>
     
@@ -257,7 +255,7 @@
       <span class="post-meta ">
         
           
-            本文最后更新于：2023年6月6日 晚上
+            本文最后更新于：2024年1月13日 晚上
           
         
       </span>
@@ -293,56 +291,36 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Windows下Nginx代理Django项目</h1>
+            <h1 style="display: none">深度学习实验可复现设置</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Windows下Nginx代理Django项目"><a href="#Windows下Nginx代理Django项目" class="headerlink" title="Windows下Nginx代理Django项目"></a>Windows下Nginx代理Django项目</h1><p>django部署到本机网络上后，出现了音频无法快进，进度条无法拖动的问题。原因是前端请求音频文件不是通过后端的api，而是直接用require方法，这样做后端的响应没有包含 Content-Range 或者 Accept-Ranges Header。解决方法有两种：</p>
-<ol>
-<li><p>让django响应静态文件请求时有响应头（即前端通过api请求静态文件，该方法要修改前端，还要在后端单独写方法处理请求）。</p>
-</li>
-<li><p>用nginx服务器处理静态文件。</p>
-</li>
-</ol>
-<p>考虑将来部署到linux服务器上也需要用nginx，以及实现的难度，我采用第二种方法，即在windows下用nginx处理django项目的静态文件请求。</p>
-<p>值得一提的是，大多数django项目部署都需要用到uwsgi和nginx，然而在windows环境下，uwsgi无法下载（或者说使用的代价太大），因此windows下还是简单部署为好，实际项目使用还是需要在linux下。</p>
-<h2 id="nginx目的"><a href="#nginx目的" class="headerlink" title="nginx目的"></a>nginx目的</h2><p>我们使用nginx的目的是帮助django处理静态文件，nginx起到代理的作用。因此，我们要做的是：</p>
-<ol>
-<li><p>对于静态文件请求，nginx直接处理，无需交与django</p>
-</li>
-<li><p>对于后端api接口请求，nginx交与django处理</p>
-</li>
-</ol>
-<p><strong>重点：nginx监听的端口和django部署的端口不能是同一个端口</strong></p>
-<p>两个程序不能监听同一个端口，这样做会出现有的静态文件通过nginx而有的则通过django的问题。</p>
-<p>因此，我们访问项目也不再是django项目部署的端口，而是nginx监听的端口，前端同样是向nginx监听的端口发送api接口请求。</p>
-<h2 id="nginx下载"><a href="#nginx下载" class="headerlink" title="nginx下载"></a>nginx下载</h2><p><a target="_blank" rel="noopener" href="https://nginx.org/en/download.html">nginx: download</a>官网下载stable version的windows版本并解压。</p>
-<h2 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a>nginx配置</h2><p>在解压后的conf文件夹中，修改nginx.conf文件，主要修改http中的server：</p>
-<ol>
-<li><p>listen端口号改为浏览器访问项目的端口号；</p>
-</li>
-<li><p>server_name改为django项目部署的ipv4地址；</p>
-</li>
-<li><p>添加location /app（注册的app名称）将前端发送的api请求转发给后端；</p>
-</li>
-<li><p>添加location /static/处理前端的静态文件请求。</p>
-</li>
-</ol>
-<p><strong>注意：路径一定要正确，用 “/” 而不是 “\” 。</strong></p>
-<p>有关location的root、alias、路径末尾是否加 “/” 的问题，参考<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/d9Kh-7CQhMIhEpcaZ3Em_A">Nginx之location详解</a></p>
-<p>前端的api请求应转发给后端，因为nginx是不允许静态资源请求使用POST方法的，若通过nginx处理POST请求会报错，解决方法较复杂。</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span>       <span class="hljs-number">8000</span>;  <span class="hljs-comment"># nginx监听端口号，即实际访问项目的端口号</span><br>    <span class="hljs-attribute">server_name</span>  x.x.x.x;  <span class="hljs-comment"># django项目部署的ipv4地址</span><br>    <span class="hljs-comment">#charset koi8-r;</span><br><br>    <span class="hljs-comment"># location / &#123;</span><br>    <span class="hljs-comment">#     root django项目根目录（manage.py所在目录）在电脑上的绝对路径（末尾需加/）;</span><br>    <span class="hljs-comment">#     index /templates/index.html;</span><br>    <span class="hljs-comment"># &#125;</span><br><br>    <span class="hljs-section">location</span> /app &#123;<br>        <span class="hljs-attribute">proxy_pass</span> http://x.x.x.x:8001;  <span class="hljs-comment"># django项目部署的ipv4地址与端口号（前面需加上http://）</span><br>    &#125;<br><br>    <span class="hljs-section">location</span> /static/ &#123;<br>        <span class="hljs-attribute">root</span> django项目根目录（manage.py所在目录）在电脑上的绝对路径（末尾需加/）;<br>    &#125;<br><br>    <span class="hljs-attribute">error_page</span>   <span class="hljs-number">500</span> <span class="hljs-number">502</span> <span class="hljs-number">503</span> <span class="hljs-number">504</span>  /50x.html;<br>    <span class="hljs-section">location</span> = /50x.html &#123;<br>        <span class="hljs-attribute">root</span>   html;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="深度学习实验可复现设置"><a href="#深度学习实验可复现设置" class="headerlink" title="深度学习实验可复现设置"></a>深度学习实验可复现设置</h1><h2 id="Pytorch"><a href="#Pytorch" class="headerlink" title="Pytorch"></a>Pytorch</h2><h3 id="设置随机种子"><a href="#设置随机种子" class="headerlink" title="设置随机种子"></a>设置随机种子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 为pytorch, numpy, python.random设置随机种子</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">set_seed</span>(<span class="hljs-params">seed, workers</span>):<br>    os.environ[<span class="hljs-string">&#x27;PYTHONHASHSEED&#x27;</span>] = <span class="hljs-built_in">str</span>(seed)<br>    random.seed(seed)<br>    np.random.seed(seed)<br>    torch.manual_seed(seed)<br>    torch.cuda.manual_seed_all(seed)<br>    <span class="hljs-comment"># torch.backends.cudnn.benchmark = False</span><br>    <span class="hljs-comment"># torch.backends.cudnn.deterministic = True</span><br><br><span class="hljs-comment"># 若dataloader设置了num_workers，则需为线程设置随机种子</span><br>seed = <span class="hljs-number">123</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">seed_worker</span>(<span class="hljs-params">worker_id</span>):<br>    np.random.seed(seed + worker_id)<br>    random.seed(seed + worker_id)<br>dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=<span class="hljs-literal">True</span>, num_workers=num_workers, worker_init_fn=seed_worker)<br></code></pre></td></tr></table></figure>
 
-<h2 id="nginx命令"><a href="#nginx命令" class="headerlink" title="nginx命令"></a>nginx命令</h2><p>nginx常用的命令如下。</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 在nginx根目录下cmd</span><br><span class="hljs-comment"># 启动</span><br>start nginx<br><span class="hljs-comment"># 检查配置文件</span><br>nginx.exe -t<br><span class="hljs-comment"># 安全停止</span><br>nginx.exe -s <span class="hljs-keyword">quit</span><br><span class="hljs-comment"># 立即停止，可能不保存相关信息</span><br>nginx.exe -s stop<br><span class="hljs-comment"># 指定配置文件启动（？）</span><br>nginx.exe -c <span class="hljs-string">./conf/nginx.conf</span><br><span class="hljs-comment"># 启动后，重新加载配置</span><br>nginx.exe -s <span class="hljs-keyword">reload</span><br></code></pre></td></tr></table></figure>
+<p>若使用pytorch lightning，则使用seed_everything即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> lightning.pytorch <span class="hljs-keyword">as</span> pl<br><br>pl.seed_everything(cfg.seed, workers=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
 
-<p><em>指定配置文件启动命令似乎不行，使用后cmd卡死。</em></p>
-<p><em>当nginx启动失败或报错后，需要手动在任务管理器关闭进程，此时使用命令并不能真正关闭进程。</em></p>
-<h2 id="启动nginx运行django"><a href="#启动nginx运行django" class="headerlink" title="启动nginx运行django"></a>启动nginx运行django</h2><p>先启动nginx，启动成功后，运行django。</p>
-<p>访问项目时浏览器地址输入的端口号为nginx监听的端口号。</p>
-<p>在浏览器开发者工具的网络里可以查看前端发送的请求，其中server为nginx。</p>
-<p><img src="/blog/posts/f0bd5174/%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82.png" srcset="/blog/img/loading.gif" lazyload></p>
+<h3 id="设置CUDA卷积基准测试"><a href="#设置CUDA卷积基准测试" class="headerlink" title="设置CUDA卷积基准测试"></a>设置CUDA卷积基准测试</h3><p>CUDA卷积运算使用cuDNN库，可能导致不确定性</p>
+<p>禁用基准测试功能可以解决该问题，但会严重降低计算效率</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.backends.cudnn.benchmark = <span class="hljs-literal">False</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="设置CUDA卷积确定算法"><a href="#设置CUDA卷积确定算法" class="headerlink" title="设置CUDA卷积确定算法"></a>设置CUDA卷积确定算法</h3><p>虽然禁用CUDA卷积基准测试可以确保CUDA每次运行应用程序时都选择相同的算法，但算法本身可能是不确定的</p>
+<p>启用确定算法可以解决该问题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.backends.cudnn.deterministic = <span class="hljs-literal">True</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="避免不确定的算法"><a href="#避免不确定的算法" class="headerlink" title="避免不确定的算法"></a>避免不确定的算法</h3><p>配置PyTorch使其在可用的情况下使用确定性算法，而不是非确定性算法，并在已知操作是非确定性的（并且没有确定性替代方案）时抛出错误</p>
+<p>该方法包括了<code>torch.backends.cudnn.deterministic = True</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.use_deterministic_algorithms(<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+
+<p>使用该方法时，如果代码中使用了CUDA的张量，并且CUDA版本在10.2及以上，需要设置环境变量<code>CUBLAS_WORKSPACE_CONFIG</code>为<code>:4096:8</code>或<code>:16:8</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">os.environ[<span class="hljs-string">&#x27;CUBLAS_WORKSPACE_CONFIG&#x27;</span>] = <span class="hljs-string">&#x27;:4096:8&#x27;</span>  <span class="hljs-comment"># 将会增加24M的GPU显存</span><br>os.environ[<span class="hljs-string">&#x27;CUBLAS_WORKSPACE_CONFIG&#x27;</span>] = <span class="hljs-string">&#x27;:16:8&#x27;</span>  <span class="hljs-comment"># 可能会限制整体性能</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="Tensorflow"><a href="#Tensorflow" class="headerlink" title="Tensorflow"></a>Tensorflow</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/400769460/answer/2327500825">为什么我用相同的模型，数据，超参，随机种子，在两台服务器会得到不同的结果？ - TabChen的回答 - 知乎</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/notes/randomness.html">Reproducibility &mdash; PyTorch 2.1 documentation</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.nvidia.com/cuda/cublas/index.html#results-reproducibility">2.1.4. Results Reproducibility — cuBLAS 12.3 documentation</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/john_bh/article/details/107731443">PyTorch固定随机数种子-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://chenglu.me/blogs/real-seed-everything">Seed Everything - 可复现的 PyTorch（一） | Chenglu’s Log</a></p>
 
                 
               </div>
@@ -361,7 +339,7 @@
     
       <span class="category-chain">
         
-  <a href="/blog/categories/%E5%BC%80%E5%8F%91/" class="category-chain-item">开发</a>
+  <a href="/blog/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
   
   
 
@@ -388,8 +366,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Windows下Nginx代理Django项目</div>
-      <div>https://wangaaayu.github.io/blog/posts/f0bd5174/</div>
+      <div>深度学习实验可复现设置</div>
+      <div>https://wangaaayu.github.io/blog/posts/89953fb9/</div>
     </div>
     <div class="license-meta">
       
@@ -401,13 +379,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月13日</div>
+          <div>2023年10月28日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年6月6日</div>
+          <div>2024年1月13日</div>
         </div>
       
       
@@ -438,9 +416,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/posts/61a84e4c/" title="Vue+Django部署Ubuntu服务器">
+                      <a href="/blog/posts/f5d8529f/" title="Python程序配置框架——Hydra（基于OmegaConf）">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Vue+Django部署Ubuntu服务器</span>
+                        <span class="hidden-mobile">Python程序配置框架——Hydra（基于OmegaConf）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -448,8 +426,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/posts/da6f56bd/" title="Vue+Django简单部署本地Windows">
-                        <span class="hidden-mobile">Vue+Django简单部署本地Windows</span>
+                      <a href="/blog/posts/d44735db/" title="基于Kubernetes的微服务应用部署与管理">
+                        <span class="hidden-mobile">基于Kubernetes的微服务应用部署与管理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

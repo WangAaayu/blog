@@ -16,26 +16,24 @@
   <meta name="author" content="WangAaayu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Windows下Nginx代理Django项目django部署到本机网络上后，出现了音频无法快进，进度条无法拖动的问题。原因是前端请求音频文件不是通过后端的api，而是直接用require方法，这样做后端的响应没有包含 Content-Range 或者 Accept-Ranges Header。解决方法有两种：  让django响应静态文件请求时有响应头（即前端通过api请求静态文件，该方法要修改">
+    <meta name="description" content="Python程序配置框架——Hydra（基于OmegaConf）OmegaConf是基于YAML的分层配置系统，Hydra在其基础上提供了更便于开发的功能 https:&#x2F;&#x2F;omegaconf.readthedocs.io&#x2F;en&#x2F;latest&#x2F;index.html Hydra | Hydra YAML示例123456789101112A:  a: a  b: 0.0  c: false  d: nu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows下Nginx代理Django项目">
-<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/f0bd5174/index.html">
+<meta property="og:title" content="Python程序配置框架——Hydra（基于OmegaConf）">
+<meta property="og:url" content="https://wangaaayu.github.io/blog/posts/f5d8529f/index.html">
 <meta property="og:site_name" content="WangAaayu">
-<meta property="og:description" content="Windows下Nginx代理Django项目django部署到本机网络上后，出现了音频无法快进，进度条无法拖动的问题。原因是前端请求音频文件不是通过后端的api，而是直接用require方法，这样做后端的响应没有包含 Content-Range 或者 Accept-Ranges Header。解决方法有两种：  让django响应静态文件请求时有响应头（即前端通过api请求静态文件，该方法要修改">
+<meta property="og:description" content="Python程序配置框架——Hydra（基于OmegaConf）OmegaConf是基于YAML的分层配置系统，Hydra在其基础上提供了更便于开发的功能 https:&#x2F;&#x2F;omegaconf.readthedocs.io&#x2F;en&#x2F;latest&#x2F;index.html Hydra | Hydra YAML示例123456789101112A:  a: a  b: 0.0  c: false  d: nu">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wangaaayu.github.io/blog/posts/f0bd5174/%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82.png">
-<meta property="article:published_time" content="2023-05-13T07:31:37.000Z">
-<meta property="article:modified_time" content="2023-06-06T11:55:47.594Z">
+<meta property="article:published_time" content="2024-01-10T12:30:25.000Z">
+<meta property="article:modified_time" content="2024-01-13T13:53:12.045Z">
 <meta property="article:author" content="WangAaayu">
 <meta property="article:tag" content="教程">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangaaayu.github.io/blog/posts/f0bd5174/%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Windows下Nginx代理Django项目 - WangAaayu</title>
+  <title>Python程序配置框架——Hydra（基于OmegaConf） - WangAaayu</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Windows下Nginx代理Django项目"></span>
+            <span id="subtitle" data-typed-text="Python程序配置框架——Hydra（基于OmegaConf）"></span>
           
         </div>
 
@@ -211,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-13 15:31" pubdate>
-          2023年5月13日 下午
+        <time datetime="2024-01-10 20:30" pubdate>
+          2024年1月10日 晚上
         </time>
       </span>
     
@@ -223,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          2.2k 字
         
       </span>
     
@@ -234,7 +232,7 @@
         
         
         
-          16 分钟
+          19 分钟
         
       </span>
     
@@ -257,7 +255,7 @@
       <span class="post-meta ">
         
           
-            本文最后更新于：2023年6月6日 晚上
+            本文最后更新于：2024年1月13日 晚上
           
         
       </span>
@@ -293,56 +291,48 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Windows下Nginx代理Django项目</h1>
+            <h1 style="display: none">Python程序配置框架——Hydra（基于OmegaConf）</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Windows下Nginx代理Django项目"><a href="#Windows下Nginx代理Django项目" class="headerlink" title="Windows下Nginx代理Django项目"></a>Windows下Nginx代理Django项目</h1><p>django部署到本机网络上后，出现了音频无法快进，进度条无法拖动的问题。原因是前端请求音频文件不是通过后端的api，而是直接用require方法，这样做后端的响应没有包含 Content-Range 或者 Accept-Ranges Header。解决方法有两种：</p>
-<ol>
-<li><p>让django响应静态文件请求时有响应头（即前端通过api请求静态文件，该方法要修改前端，还要在后端单独写方法处理请求）。</p>
-</li>
-<li><p>用nginx服务器处理静态文件。</p>
-</li>
-</ol>
-<p>考虑将来部署到linux服务器上也需要用nginx，以及实现的难度，我采用第二种方法，即在windows下用nginx处理django项目的静态文件请求。</p>
-<p>值得一提的是，大多数django项目部署都需要用到uwsgi和nginx，然而在windows环境下，uwsgi无法下载（或者说使用的代价太大），因此windows下还是简单部署为好，实际项目使用还是需要在linux下。</p>
-<h2 id="nginx目的"><a href="#nginx目的" class="headerlink" title="nginx目的"></a>nginx目的</h2><p>我们使用nginx的目的是帮助django处理静态文件，nginx起到代理的作用。因此，我们要做的是：</p>
-<ol>
-<li><p>对于静态文件请求，nginx直接处理，无需交与django</p>
-</li>
-<li><p>对于后端api接口请求，nginx交与django处理</p>
-</li>
-</ol>
-<p><strong>重点：nginx监听的端口和django部署的端口不能是同一个端口</strong></p>
-<p>两个程序不能监听同一个端口，这样做会出现有的静态文件通过nginx而有的则通过django的问题。</p>
-<p>因此，我们访问项目也不再是django项目部署的端口，而是nginx监听的端口，前端同样是向nginx监听的端口发送api接口请求。</p>
-<h2 id="nginx下载"><a href="#nginx下载" class="headerlink" title="nginx下载"></a>nginx下载</h2><p><a target="_blank" rel="noopener" href="https://nginx.org/en/download.html">nginx: download</a>官网下载stable version的windows版本并解压。</p>
-<h2 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a>nginx配置</h2><p>在解压后的conf文件夹中，修改nginx.conf文件，主要修改http中的server：</p>
-<ol>
-<li><p>listen端口号改为浏览器访问项目的端口号；</p>
-</li>
-<li><p>server_name改为django项目部署的ipv4地址；</p>
-</li>
-<li><p>添加location /app（注册的app名称）将前端发送的api请求转发给后端；</p>
-</li>
-<li><p>添加location /static/处理前端的静态文件请求。</p>
-</li>
-</ol>
-<p><strong>注意：路径一定要正确，用 “/” 而不是 “\” 。</strong></p>
-<p>有关location的root、alias、路径末尾是否加 “/” 的问题，参考<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/d9Kh-7CQhMIhEpcaZ3Em_A">Nginx之location详解</a></p>
-<p>前端的api请求应转发给后端，因为nginx是不允许静态资源请求使用POST方法的，若通过nginx处理POST请求会报错，解决方法较复杂。</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span>       <span class="hljs-number">8000</span>;  <span class="hljs-comment"># nginx监听端口号，即实际访问项目的端口号</span><br>    <span class="hljs-attribute">server_name</span>  x.x.x.x;  <span class="hljs-comment"># django项目部署的ipv4地址</span><br>    <span class="hljs-comment">#charset koi8-r;</span><br><br>    <span class="hljs-comment"># location / &#123;</span><br>    <span class="hljs-comment">#     root django项目根目录（manage.py所在目录）在电脑上的绝对路径（末尾需加/）;</span><br>    <span class="hljs-comment">#     index /templates/index.html;</span><br>    <span class="hljs-comment"># &#125;</span><br><br>    <span class="hljs-section">location</span> /app &#123;<br>        <span class="hljs-attribute">proxy_pass</span> http://x.x.x.x:8001;  <span class="hljs-comment"># django项目部署的ipv4地址与端口号（前面需加上http://）</span><br>    &#125;<br><br>    <span class="hljs-section">location</span> /static/ &#123;<br>        <span class="hljs-attribute">root</span> django项目根目录（manage.py所在目录）在电脑上的绝对路径（末尾需加/）;<br>    &#125;<br><br>    <span class="hljs-attribute">error_page</span>   <span class="hljs-number">500</span> <span class="hljs-number">502</span> <span class="hljs-number">503</span> <span class="hljs-number">504</span>  /50x.html;<br>    <span class="hljs-section">location</span> = /50x.html &#123;<br>        <span class="hljs-attribute">root</span>   html;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+                <h1 id="Python程序配置框架——Hydra（基于OmegaConf）"><a href="#Python程序配置框架——Hydra（基于OmegaConf）" class="headerlink" title="Python程序配置框架——Hydra（基于OmegaConf）"></a>Python程序配置框架——Hydra（基于OmegaConf）</h1><p>OmegaConf是基于YAML的分层配置系统，Hydra在其基础上提供了更便于开发的功能</p>
+<p><a target="_blank" rel="noopener" href="https://omegaconf.readthedocs.io/en/latest/index.html">https://omegaconf.readthedocs.io/en/latest/index.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://hydra.cc/">Hydra | Hydra</a></p>
+<h2 id="YAML示例"><a href="#YAML示例" class="headerlink" title="YAML示例"></a>YAML示例</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">A:</span><br>  <span class="hljs-attr">a:</span> <span class="hljs-string">a</span><br>  <span class="hljs-attr">b:</span> <span class="hljs-number">0.0</span><br>  <span class="hljs-attr">c:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">d:</span> <span class="hljs-literal">null</span><br>  <span class="hljs-attr">e:</span> <span class="hljs-string">???</span><br>  <span class="hljs-attr">f:</span><br>    <span class="hljs-attr">g:</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]<br>    <span class="hljs-attr">h:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">hh</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">hhh</span><br>    <span class="hljs-attr">i:</span> &#123;<span class="hljs-attr">j:</span> <span class="hljs-number">3</span>, <span class="hljs-attr">k:</span> <span class="hljs-string">k</span>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="nginx命令"><a href="#nginx命令" class="headerlink" title="nginx命令"></a>nginx命令</h2><p>nginx常用的命令如下。</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 在nginx根目录下cmd</span><br><span class="hljs-comment"># 启动</span><br>start nginx<br><span class="hljs-comment"># 检查配置文件</span><br>nginx.exe -t<br><span class="hljs-comment"># 安全停止</span><br>nginx.exe -s <span class="hljs-keyword">quit</span><br><span class="hljs-comment"># 立即停止，可能不保存相关信息</span><br>nginx.exe -s stop<br><span class="hljs-comment"># 指定配置文件启动（？）</span><br>nginx.exe -c <span class="hljs-string">./conf/nginx.conf</span><br><span class="hljs-comment"># 启动后，重新加载配置</span><br>nginx.exe -s <span class="hljs-keyword">reload</span><br></code></pre></td></tr></table></figure>
+<h2 id="OmegaConf"><a href="#OmegaConf" class="headerlink" title="OmegaConf"></a>OmegaConf</h2><p>OmegaConf作为配置对象，提供了创建、访问、操作配置的功能</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install omegaconf<br></code></pre></td></tr></table></figure>
 
-<p><em>指定配置文件启动命令似乎不行，使用后cmd卡死。</em></p>
-<p><em>当nginx启动失败或报错后，需要手动在任务管理器关闭进程，此时使用命令并不能真正关闭进程。</em></p>
-<h2 id="启动nginx运行django"><a href="#启动nginx运行django" class="headerlink" title="启动nginx运行django"></a>启动nginx运行django</h2><p>先启动nginx，启动成功后，运行django。</p>
-<p>访问项目时浏览器地址输入的端口号为nginx监听的端口号。</p>
-<p>在浏览器开发者工具的网络里可以查看前端发送的请求，其中server为nginx。</p>
-<p><img src="/blog/posts/f0bd5174/%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82.png" srcset="/blog/img/loading.gif" lazyload></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> omegaconf <span class="hljs-keyword">import</span> OmegaConf<br></code></pre></td></tr></table></figure>
+
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 可不传入数据，也可以传入字典、列表、YAML字符串</span><br>conf = OmegaConf.create(/<span class="hljs-built_in">dict</span>/<span class="hljs-built_in">list</span>/string)<br><span class="hljs-comment"># YAML文件路径</span><br>conf = OmegaConf.load(yaml_path)<br><span class="hljs-comment"># 由若干格式为类似key1.key2.key3=value的字符串组成的列表</span><br>conf = OmegaConf.from_dotlist(dot_list)<br><span class="hljs-comment"># 命令行参数</span><br>conf = OmegaConf.from_cli()<br><span class="hljs-comment"># 结构化配置类或对象</span><br>conf = OmegaConf.structured(ConfigClass)<br></code></pre></td></tr></table></figure>
+
+<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">conf.key1.key1_1<br>conf[<span class="hljs-string">&#x27;key2&#x27;</span>][<span class="hljs-string">&#x27;key2_2&#x27;</span>]<br>conf.key3[<span class="hljs-number">0</span>]  <span class="hljs-comment"># key3值为列表，[0]访问列表第一项</span><br>conf.get(<span class="hljs-string">&#x27;missing_key&#x27;</span>, <span class="hljs-string">&#x27;a default value&#x27;</span>)  <span class="hljs-comment"># 获取不到missing_key时范围默认值</span><br></code></pre></td></tr></table></figure>
+
+<p>用值<code>???</code>表示访问前需要设置的配置，如<code>key: ???</code>，访问key时会报错</p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 改变或添加配置，值可以是数字、字符串、字典、列表等</span><br>conf.key = value<br></code></pre></td></tr></table></figure>
+
+<h2 id="Hydra"><a href="#Hydra" class="headerlink" title="Hydra"></a>Hydra</h2><p>Hydra的使用主要涉及四部分内容：文件结构、配置文件、程序、命令行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install hydra-core --upgrade<br></code></pre></td></tr></table></figure>
+
+<h3 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h3><p>将所有配置文件放在configs文件夹下，在configs文件夹下一般有一个总配置文件config.yaml供程序读取，同时还有若干个文件夹，每个文件夹作为一个配置组，里面包含同类型的配置文件</p>
+<blockquote>
+<p>├── configs<br>│   ├── config.yaml<br>│   ├── db<br>│   │   ├── mysql.yaml<br>│   │   └── postgresql.yaml<br>│   ├── schema<br>│   │   ├── school.yaml<br>│   │   ├── support.yaml<br>│   │   └── warehouse.yaml<br>│   └── ui<br>│       ├── full.yaml<br>│       └── view.yaml<br>└── my_app.py</p>
+</blockquote>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><h4 id="简单写法"><a href="#简单写法" class="headerlink" title="简单写法"></a>简单写法</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">db:</span> <br>  <span class="hljs-attr">driver:</span> <span class="hljs-string">mysql</span><br>  <span class="hljs-attr">user:</span> <span class="hljs-string">omry</span><br>  <span class="hljs-attr">password:</span> <span class="hljs-string">secret</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="使用配置对象"><a href="#使用配置对象" class="headerlink" title="使用配置对象"></a>使用配置对象</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">node:</span>                         <span class="hljs-comment"># Config is hierarchical</span><br>  <span class="hljs-attr">loompa:</span> <span class="hljs-number">10</span>                  <span class="hljs-comment"># Simple value</span><br>  <span class="hljs-attr">zippity:</span> <span class="hljs-string">$&#123;node.loompa&#125;</span>     <span class="hljs-comment"># Value interpolation</span><br>  <span class="hljs-attr">do:</span> <span class="hljs-string">&quot;oompa $&#123;node.loompa&#125;&quot;</span>  <span class="hljs-comment"># String interpolation</span><br>  <span class="hljs-attr">waldo:</span> <span class="hljs-string">???</span>                  <span class="hljs-comment"># Missing value, must be populated prior to access</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="使用默认列表"><a href="#使用默认列表" class="headerlink" title="使用默认列表"></a>使用默认列表</h4><p>默认列表中如果添加了_self_则可以包含自身配置</p>
+<p>注意配置的顺序，后面的配置覆盖前面的配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">defaults:</span><br> <span class="hljs-bullet">-</span> <span class="hljs-string">_self_</span><br> <span class="hljs-bullet">-</span> <span class="hljs-attr">db:</span> <span class="hljs-string">mysql</span><br> <span class="hljs-bullet">-</span> <span class="hljs-attr">db/mysql/engine:</span> <span class="hljs-string">innodb</span><br> <span class="hljs-bullet">-</span> <span class="hljs-attr">schema:</span> <span class="hljs-string">school</span><br> <span class="hljs-bullet">-</span> <span class="hljs-attr">ui:</span> <span class="hljs-string">full</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h3><p>通过<code>@hydra.main</code>读取配置作为一个DictConfig对象传给所注释的函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> omegaconf <span class="hljs-keyword">import</span> DictConfig, OmegaConf<br><span class="hljs-keyword">import</span> hydra<br><br><span class="hljs-meta">@hydra.main(<span class="hljs-params">version_base=<span class="hljs-string">&quot;1.3&quot;</span>, config_path=<span class="hljs-string">&quot;程序到配置文件的相对路径&quot;</span>, config_name=<span class="hljs-string">&quot;配置文件名&quot;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">my_app</span>(<span class="hljs-params">cfg: DictConfig</span>) -&gt; <span class="hljs-literal">None</span>:<br>    <span class="hljs-built_in">print</span>(OmegaConf.to_yaml(cfg))<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    my_app()<br></code></pre></td></tr></table></figure>
+
+<h3 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h3><p>通过命令行可以对配置灵活操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 添加配置</span><br>python my_app.py +db.mysql.user=root<br><span class="hljs-comment"># 修改配置</span><br>python my_app.py db.mysql.password=123<br><span class="hljs-comment"># 不存在则添加，存在则修改</span><br>python my_app.py ++db.mysql.password=1234<br><span class="hljs-comment"># 添加配置组</span><br>python my_app.py +db=postgresql<br><span class="hljs-comment"># 修改配置组</span><br>python my_app.py db=postgresql<br><span class="hljs-comment"># 删除配置组</span><br>python my_app.py ~db<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -361,7 +351,7 @@
     
       <span class="category-chain">
         
-  <a href="/blog/categories/%E5%BC%80%E5%8F%91/" class="category-chain-item">开发</a>
+  <a href="/blog/categories/%E7%BC%96%E7%A8%8B/" class="category-chain-item">编程</a>
   
   
 
@@ -388,8 +378,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Windows下Nginx代理Django项目</div>
-      <div>https://wangaaayu.github.io/blog/posts/f0bd5174/</div>
+      <div>Python程序配置框架——Hydra（基于OmegaConf）</div>
+      <div>https://wangaaayu.github.io/blog/posts/f5d8529f/</div>
     </div>
     <div class="license-meta">
       
@@ -401,13 +391,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月13日</div>
+          <div>2024年1月10日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年6月6日</div>
+          <div>2024年1月13日</div>
         </div>
       
       
@@ -438,18 +428,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/blog/posts/61a84e4c/" title="Vue+Django部署Ubuntu服务器">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Vue+Django部署Ubuntu服务器</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/blog/posts/da6f56bd/" title="Vue+Django简单部署本地Windows">
-                        <span class="hidden-mobile">Vue+Django简单部署本地Windows</span>
+                      <a href="/blog/posts/89953fb9/" title="深度学习实验可复现设置">
+                        <span class="hidden-mobile">深度学习实验可复现设置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
